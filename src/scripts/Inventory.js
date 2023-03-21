@@ -1,10 +1,19 @@
+import lvl1Items from "./lvl1-items";
+
 export default class Inventory {
     constructor(){
         this.items = [];
     }
 
     addItem(currentItem){
-        this.items.push({ name : currentItem, id: this.items.length + 1, status: 'inactive' })
+        for(let item in lvl1Items){
+            if(currentItem == lvl1Items[item].name){
+                // Revoir le pb d'incrémentation de toutes les instances de l'id d'un même objet
+                let addedItem = lvl1Items[item];
+                addedItem.id = this.items.length + 1;
+                this.items.push(addedItem);
+            }
+        }
     }
 
     removeItem(currentItem){

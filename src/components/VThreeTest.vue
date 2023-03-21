@@ -15,6 +15,7 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
 import VHover from './VHover.vue'
 import lvl1Dialog from '../scripts/lvl1-dialog.js'
+import lvl1Items from '../scripts/lvl1-items.js'
 
 const props = defineProps({
     dialogVisible: {
@@ -207,6 +208,7 @@ populate() {
 
     // Add to inventory    
     this.canvas.addEventListener('click', () => {
+        this.currentIntersect = this.intersects[0];
             if(this.currentIntersect && !props.dialogVisible){
                 inventory.value.addItem(this.currentIntersect.object.name);
                 emit('openTextBox', this.currentIntersect.object.name);

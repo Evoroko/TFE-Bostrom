@@ -115,6 +115,16 @@ export default [
         ]
     },
     {
+        name: 'bench',
+        text: [
+            {
+                sprite: 'engel',
+                name: 'Engel',
+                text: 'C\'est un banc.'
+            }
+        ]
+    },
+    {
         name: 'interaction-trashbin',
         object: 'bench',
         text: [
