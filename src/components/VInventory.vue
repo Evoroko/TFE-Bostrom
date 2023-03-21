@@ -12,23 +12,20 @@
 import { ref, inject } from 'vue';
 
 const inventory = inject('inventory');
-// import Inventory from '../scripts/Inventory.js'
-
-// const inventory = new Inventory();
-inventory.value.addItem('light bulb');
-inventory.value.removeItem('code sheet');
-inventory.value.removeItem('example');
-inventory.value.addItem('1');
-inventory.value.addItem('2');
-inventory.value.addItem('3');
+const emit = defineEmits(['inventoryActive']);
 
 const activeIndex = ref(undefined);
 
 function setActiveIndex(index) {
     if(activeIndex.value == index){
         activeIndex.value = undefined;
+        inventory.value.setAllInactive(inventory.value.items[index].name);
+        emit('inventoryActive', undefined);
     }else{
         activeIndex.value = index;
+        inventory.value.setAllInactive(inventory.value.items[index].name);
+        inventory.value.setActive(inventory.value.items[index].id);
+        emit('inventoryActive', inventory.value.items[index].name);
     }
 }
 

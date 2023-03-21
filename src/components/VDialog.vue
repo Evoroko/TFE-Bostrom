@@ -45,31 +45,38 @@ if(bg == undefined && previousBg){
 
 watch(i, (newVal, oldVal) => {
     if (newVal !== oldVal) {
-    if (newVal < texts.value[currentDialogIndex.value].text.length) {
-        setTimeout(() => {
-        i.value++;
-        }, 10);
-    } else {
-        i.value = texts.value[currentDialogIndex.value].text.length;
-    }
+        if (newVal < texts.value[currentDialogIndex.value].text.length) {
+            setTimeout(() => {
+            i.value++;
+            }, 10);
+        } else {
+            i.value = texts.value[currentDialogIndex.value].text.length;
+        }
     }
 },
 { immediate: true }
 );
 
-const nextText = () => {
-if (i.value === texts.value[currentDialogIndex.value].text.length) {
-    currentDialogIndex.value++;
-    i.value = 0;
-} else {
-    i.value = texts.value[currentDialogIndex.value].text.length;
-}
+window.addEventListener('keydown', (e) => {
+    if(e.keyCode === 13){
+        nextText();
+    }
+})
 
-if (currentDialogIndex.value >= texts.value.length) {
-    emit('conversation-ended');
-    currentDialogIndex.value = 0;
-    // Insérer un indicateur que ce dialogue est terminé et ne doit plus s'afficher
-}
+const nextText = () => {
+    if (i.value === texts.value[currentDialogIndex.value].text.length) {
+        currentDialogIndex.value++;
+        i.value = 0;
+    } else {
+        i.value = texts.value[currentDialogIndex.value].text.length;
+    }
+
+    if (currentDialogIndex.value >= texts.value.length) {
+        setTimeout(() => {
+            emit('conversation-ended');
+        }, 1) // Délai car sinon le dernier clic qui ferme le dialogue en déclenche un autre immédiatement / cause des conflits
+        currentDialogIndex.value = 0;
+    }
 };
 
 </script>

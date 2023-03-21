@@ -1,5 +1,8 @@
 <template>
     <div class="wrapper" ref="wrapper">
+        <VHover v-if="currentlyHovered">
+            {{ currentlyHovered }}
+        </VHover>
         <canvas class="canvas"></canvas>
     </div>
 </template>
@@ -7,17 +10,23 @@
 <script setup>
 import { ref, onMounted, inject } from 'vue';
 import * as THREE from 'three';
-import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockControls';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
+import VHover from './VHover.vue'
+import lvl1Dialog from '../scripts/lvl1-dialog.js'
 
+const props = defineProps({
+    dialogVisible: {
+        type: Boolean,
+        required: false
+    }
+})
 const emit = defineEmits(['openTextBox']);
-
 const inventory = inject('inventory');
+const currentlyHovered = ref('');
 
 // Random
-
 function RandomNum(min, max){
     const n = min + (Math.random() * ((max + 1) - min));
     return n;
@@ -66,7 +75,7 @@ const textureGlitch = textureLoader.load('./3d/textures/glitch.png');
 const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 
-var keyState = {};    
+var keyState = {};
 window.addEventListener('keydown',function(e){
     keyState[e.keyCode || e.which] = true;
 },true);    
@@ -128,27 +137,6 @@ setRenderer(sizes) {
     this.camera = new THREE.PerspectiveCamera(30, sizes.w / sizes.h, 1, 10000);
     this.camera.position.z = 10.64;
 
-    // window.addEventListener('keydown', (e) => {
-    //     if(e.keyCode == 81 && this.camera.position.x > -0.85){
-    //         this.camera.position.x -= 0.05;
-    //     }else if(e.keyCode == 68 && this.camera.position.x < 1){
-    //         this.camera.position.x += 0.05;
-    //     }
-    // })
-
-
-    this.controls = new PointerLockControls(this.camera, this.canvas);
-
-    // this.controls = new OrbitControls(this.camera, this.canvas);
-    // this.controls.enablePan = false;
-    // this.controls.enableZoom = false;
-    // this.controls.rotateSpeed = 0.1;
-    // this.controls.minAzimuthAngle = - (Math.PI * 0.1);
-    // this.controls.maxAzimuthAngle = (Math.PI * 0.1);
-    // this.controls.minPolarAngle = (Math.PI * 0.3);
-    // this.controls.maxPolarAngle = (Math.PI * 0.7);
-
-
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color('#ffffff');
     this.scene.add(this.camera);
@@ -181,11 +169,11 @@ populate() {
     // Model loader
     const gltfLoader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
-    const sceneElements = [];
-    dracoLoader.setDecoderPath('/draco/');
+    this.sceneElements = [];
+    dracoLoader.setDecoderPath('./draco/');
     gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load(
-        '/3d/level-1-texture-2d-parallax-lvl1.glb',
+        './3d/level-1-texture-2d-parallax-lvl1.glb',
         (gltf) =>
         {
             const children = [...gltf.scene.children]
@@ -193,9 +181,8 @@ populate() {
             {
                 child.position.z = child.position.z + 8
                 this.scene.add(child)
-                sceneElements.push(child);
+                this.sceneElements.push(child);
             }
-            console.log(sceneElements);
         }
     )
 
@@ -219,8 +206,8 @@ populate() {
     this.lastHovered = null;
 
     // Add to inventory    
-    window.addEventListener('click', () => {
-            if(this.currentIntersect){
+    this.canvas.addEventListener('click', () => {
+            if(this.currentIntersect && !props.dialogVisible){
                 inventory.value.addItem(this.currentIntersect.object.name);
                 emit('openTextBox', this.currentIntersect.object.name);
             }
@@ -244,25 +231,37 @@ render() {
         this.mouse.y = - (e.clientY / sizes.h) * 2 + 1;
     })
     this.raycaster.setFromCamera(this.mouse, this.camera)
-    this.intersects = this.raycaster.intersectObjects([this.cube, this.cube2])
+    this.intersects = this.raycaster.intersectObjects(this.sceneElements)
 
-    if(this.intersects.length !== 0){
+    if(this.intersects.length !== 0 && this.lastHovered !== this.intersects[0].object){
         if(this.currentIntersect == null){
-            this.intersects[0].object.material.color.set('#ffffff')
+            // this.intersects[0].object.material.color.set('#ffffff')
             this.lastHovered = this.intersects[0].object;
         }
         this.currentIntersect = this.intersects[0];
+        currentlyHovered.value = this.intersects[0].object.name;
+        let isExisting = false;
+        for(let dialog of lvl1Dialog){
+            if(this.intersects[0].object.name === dialog.name){
+                currentlyHovered.value = this.intersects[0].object.name;
+                isExisting = true;
+            }
+        }
+        if(isExisting == false){
+            currentlyHovered.value = '';
+        }
+        // console.log(this.currentIntersect.object.name)
     }else{
         if(this.currentIntersect !== null){
-            this.lastHovered.material.color.set('#ff0000');
+            // this.lastHovered.material.color.set('#ff0000');
         }
         this.currentIntersect = null;
     }
 
-    if (keyState[81] && this.camera.position.x > -0.85){
+    if (keyState[81] && this.camera.position.x > -0.85 && !props.dialogVisible){
         this.camera.position.x -= 0.01;
     }    
-    if (keyState[68] && this.camera.position.x < 1){
+    if (keyState[68] && this.camera.position.x < 1 && !props.dialogVisible){
         this.camera.position.x += 0.01;
     }
 

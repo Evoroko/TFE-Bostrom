@@ -1,8 +1,10 @@
 <template>
 
     <div class="textbox">
-        <div class="textbox__name">{{ name }}</div>
-        <p>{{ text }}</p>
+        <div class="textbox__name">
+            <p>{{ name }}</p>
+        </div>
+        <p class="textbox__text">{{ text }}</p>
     </div>
 
 </template>
@@ -22,7 +24,7 @@ const props = defineProps({
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .textbox{
     width: 100%;
@@ -36,6 +38,7 @@ const props = defineProps({
     padding: 32px;
     box-sizing: border-box;
     z-index: 100;
+    user-select: none;
 
     &__name{
         position: absolute;

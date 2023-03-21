@@ -1,34 +1,13 @@
 export default class Inventory {
     constructor(){
-        this.items = [{
-            name: "cone",
-            id: 1
-        },
-        {
-            name: "code sheet",
-            id: 2
-        },
-        {
-            name: "example",
-            id: 3
-        },
-        {
-            name: "test",
-            id: 4
-        }
-    ];
+        this.items = [];
     }
 
     addItem(currentItem){
-        // console.log('Vous avez ajouté : ' + currentItem);
-        this.items.push({ name : currentItem, id: this.items.length + 1 })
-        
-        // console.log('Items actuels :');
-        // console.table(this.items);
+        this.items.push({ name : currentItem, id: this.items.length + 1, status: 'inactive' })
     }
 
     removeItem(currentItem){
-        // console.log('Vous avez retiré : ' + currentItem);
         let index = 0;
         let currentIdValue = 0;
 
@@ -47,12 +26,19 @@ export default class Inventory {
                 item.id = item.id - 1;
             }
         }
-
-        // console.log('Items actuels :');
-        // console.table(this.items);
     }
 
-    removeFromItemsList(toRemove){
+    setActive(currentItem){
+        for(let item of this.items){
+            if(currentItem == item.id){
+                item.status = 'active';
+            }
+        }
+    }
 
+    setAllInactive(){
+        for(let item of this.items){
+            item.status = 'inactive';
+        }
     }
 }
