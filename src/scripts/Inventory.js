@@ -6,14 +6,22 @@ export default class Inventory {
     }
 
     addItem(currentItem){
-        for(let item in lvl1Items){
-            if(currentItem == lvl1Items[item].name){
-                // Revoir le pb d'incrémentation de toutes les instances de l'id d'un même objet
-                let addedItem = lvl1Items[item];
-                addedItem.id = this.items.length + 1;
-                this.items.push(addedItem);
+        let haveItem = false;
+        for(let heldItem of this.items){
+            if(currentItem == heldItem.name){
+                haveItem = true;
             }
         }
+        if(haveItem == false){
+            for(let item in lvl1Items){
+                if(currentItem == lvl1Items[item].name){
+                    // Revoir le pb d'incrémentation de toutes les instances de l'id d'un même objet
+                    let addedItem = lvl1Items[item];
+                    addedItem.id = this.items.length + 1;
+                    this.items.push(addedItem);
+                }
+            }
+        }        
     }
 
     removeItem(currentItem){

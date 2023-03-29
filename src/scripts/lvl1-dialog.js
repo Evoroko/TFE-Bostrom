@@ -1,49 +1,50 @@
 export default [
     {
         name: 'bus',
+        title: 'Arrêt de bus',
         text: [
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "C’est le seul truc qui a l’air un peu normal ici…"
             },
             {
-                sprite: 'helen',
+                sprite: 'roxy',
                 name: 'Roxy',
                 text: "Tu crois que si on attend un peu un bus va venir nous chercher ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "Regarde la route. Elle s’arrête quelques mètres plus loin. Il n’irait pas bien loin."
             },
             {
-                sprite: 'engel',
+                sprite: 'roxy',
                 name: 'Roxy',
                 text: "Et alors ? Il n’a qu’à rouler sur le trottoir ! Il n’y a que ça après !"
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "C’est bien ça le problème… On n’en voit pas le bout. Comme s’il n’y avait rien à l’horizon."
             },
             {
-                sprite: 'engel',
+                sprite: 'roxy',
                 name: 'Roxy',
                 text: "Ouais mais un bus ça va super vite. On pourra aller loin."
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "Tu as vu d’autres gens aux alentours ? Moi non. Tu vas l’attendre longtemps ton chauffeur de bus."
             },
             {
-                sprite: 'engel',
+                sprite: 'roxy',
                 name: 'Roxy',
                 text: "C’était juste une idée ! Et si des alliés parmi les rebelles qui s’opposent au gouvernement tyrannique viennent nous chercher ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "(Elle me fatigue...)"
             }
@@ -51,76 +52,156 @@ export default [
     },
     {
         name: 'board',
+        title: 'Panneau d\'affichage',
         text: [
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "C’est comme si l’affichage avait planté…"
             },
             {
-                sprite: 'helen',
+                sprite: 'roxy',
                 name: 'Roxy',
                 text: "Peut-être qu’on a été attaquées par une arme EMP en fait&nbsp;!"
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: "Une arme EMP ?"
+                text: "Une arme EMP&nbsp;?"
             },
             {
-                sprite: 'engel',
+                sprite: 'roxy',
                 name: 'Roxy',
-                text: "C’est une sorte de bombe qui peut paralyser un pays entier ! Encore un coup du gouvernement…"
+                text: "C’est une sorte de bombe qui peut paralyser un pays entier&nbsp;! Encore un coup du gouvernement…"
             },
             {
-                sprite: 'engel',
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "En gros, ça n’explose pas vraiment comme une bombe normale, ça envoie des ondes électromagnétiques qui peuvent détruire presque tous les appareils électroniques et couper les communications."
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "S’ils ont utilisé ça, ça explique tout&nbsp;!"
+            },
+            {
+                sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: "C’est bien ça le problème… On n’en voit pas le bout. Comme s’il n’y avait rien à l’horizon."
-            } // À compléter
+                text: "Ça explique totalement les bâtiments qui volent. Et le fait que l’écran s’allume encore. Et les objets qui se tordent. Et-"
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "Mais qu’est-ce que tu racontes&nbsp;? Ça n’explique rien de tout ça."
+            },
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: "…Tu as déjà entendu parler du sarcasme&nbsp;?"
+            }
         ]
     },
     {
         name: 'fountain',
+        title: 'Fontaine',
         text: [
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: "C’est… la fontaine du parc ?"
+                text: "C’est… la fontaine du parc&nbsp;?"
             },
             {
-                sprite: 'helen',
+                sprite: 'roxy',
                 name: 'Roxy',
-                text: "Hmm, on dirait bien… Mais pourquoi l’eau monte dans les airs et est figée comme ça ?"
+                text: "Hmm, on dirait bien… Mais pourquoi l’eau monte dans les airs et est figée comme ça&nbsp;?"
             },
             {
-                sprite: 'engel',
+                sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: "Ce n’est pas toi qui es censée avoir la réponse à toute les questions ?"
+                text: "Ce n’est pas toi qui es censée avoir la réponse à toute les questions&nbsp;?"
             }
         ]
     },
     {
         name: 'trashbin',
+        title: 'Poubelle',
         text: [
             {
-                sprite: 'engel',
-                name: 'Engel',
-                text: 'C\'est une poubelle.'
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: 'Anaëlle&nbsp;!! Regarde ce que j’ai trouvé&nbsp;!'
             },
             {
-                sprite: 'helen',
-                name: 'Helen',
-                text: 'Oui.'
+                sprite: 'none',
+                name: 'none',
+                text: 'Obtenu : Cône de circulation sale.',
+                inventory: 'add',
+                itemAdded: 'cone-dirty'
+            },
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: "Ugh, c’est répugnant. Il est plein de boue. Où est-ce que tu as trouvé ça ?"
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "Là. Dans la poubelle."
+            },
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: "Mais pourquoi tu me donnes ça&nbsp;? On ne t’a jamais appris à faire des cadeaux&nbsp;?"
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "J’en sais rien moi&nbsp;! Je me disais que ce serait utile&nbsp;!"
+            },
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: "Bon sang…"
             }
         ]
     },
     {
         name: 'bench',
+        title: 'Banc flottant',
         text: [
             {
-                sprite: 'engel',
-                name: 'Engel',
+                sprite: 'anaelle',
+                name: 'Anaëlle',
                 text: 'C\'est un banc.'
+            },
+            {
+                sprite: 'none',
+                name: 'none',
+                text: 'Obtenu : Banc.',
+                inventory: 'add',
+                itemAdded: 'bench'
+            }
+        ]
+    },
+    {
+        name: 'door',
+        title: 'Porte',
+        text: [
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: "On dirait qu'on peut entrer un code..."
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: 'Tu veux essayer ?'
+            },
+            {
+                sprite: 'none',
+                name: 'none',
+                text: 'Entrez le code de la porte. (3 chiffres)',
+                specialAction: 'code'
             }
         ]
     },
@@ -129,9 +210,30 @@ export default [
         object: 'bench',
         text: [
             {
-                sprite: 'engel',
-                name: 'Engel',
+                sprite: 'anaelle',
+                name: 'Anaëlle',
                 text: 'J\'utilise le banc sur la poubelle.'
+            }
+        ]
+    },
+    {
+        name: 'interaction-fountain',
+        object: 'cone-dirty',
+        text: [
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: 'Si seulement le code était plus abouti...! Ce serait la bonne solution de tremper le cône sale dans l\'eau pour le nettoyer...'
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: 'Hein ? Quoi ?'
+            },
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: 'Feur.'
             }
         ]
     },
@@ -140,8 +242,8 @@ export default [
         object: '/',
         text: [
             {
-                sprite: 'engel',
-                name: 'Engel',
+                sprite: 'anaelle',
+                name: 'Anaëlle',
                 text: 'Je ne peux pas utiliser ça là-dessus...'
             }
         ]

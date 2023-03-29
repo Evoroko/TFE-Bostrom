@@ -24,7 +24,7 @@ onMounted(() => {
 <style lang="scss">
 .canvas__indicator{
     height: 30px;
-    width: 80px;
+    width: max-content;
     background-color: black;
     position: fixed;
     touch-action: none;

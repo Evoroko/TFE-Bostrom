@@ -1,18 +1,26 @@
 export default [
     {
-        title: 'Poteaux électriques',
-        name : 'poles',
-        status: 'inactive'
-    },
-    {
-        title: 'Poubelle',
-        name : 'trashbin',
-        status: 'inactive'
-    },
-    {
         title: 'Banc',
         name : 'bench',
-        description: 'C\'est un banc. Je ne sais pas trop comment je parviens à le transporter...',
+        description: [
+            {
+                sprite: 'none',
+                name: 'none',
+                text: '(C\'est un banc. Je ne sais pas trop comment je le garde dans ma poche, là...)'
+            }
+        ],
         status: 'inactive'
     },
+    {
+        title: 'Cône de circulation sale',
+        name : 'cone-dirty',
+        description: [
+            {
+                sprite: 'none',
+                name: 'none',
+                text: '(C\'est un cône de circulation orange. Il est très sale et couvert de boue. Peut-être que si on avait un moyen de le nettoyer...)'
+            }
+        ],
+        status: 'inactive'
+    }
 ]

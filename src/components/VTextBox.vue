@@ -1,10 +1,10 @@
 <template>
 
     <div class="textbox">
-        <div class="textbox__name">
+        <div class="textbox__name" v-if="name !== 'none'">
             <p>{{ name }}</p>
         </div>
-        <p class="textbox__text">{{ text }}</p>
+        <p class="textbox__text" v-html="text"></p>
     </div>
 
 </template>

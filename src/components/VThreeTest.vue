@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" ref="wrapper">
-        <VHover v-if="currentlyHovered">
+        <VHover v-if="currentlyHovered && !props.dialogVisible">
             {{ currentlyHovered }}
         </VHover>
         <canvas class="canvas"></canvas>
@@ -15,7 +15,6 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
 import VHover from './VHover.vue'
 import lvl1Dialog from '../scripts/lvl1-dialog.js'
-import lvl1Items from '../scripts/lvl1-items.js'
 
 const props = defineProps({
     dialogVisible: {
@@ -72,7 +71,7 @@ onMounted(() => {
 
 
 const textureLoader = new THREE.TextureLoader();
-const textureGlitch = textureLoader.load('./3d/textures/glitch.png');
+const textureGlitch = textureLoader.load('/3d/textures/glitch.png');
 const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 
@@ -171,10 +170,10 @@ populate() {
     const gltfLoader = new GLTFLoader();
     const dracoLoader = new DRACOLoader();
     this.sceneElements = [];
-    dracoLoader.setDecoderPath('./draco/');
+    dracoLoader.setDecoderPath('/draco/');
     gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load(
-        './3d/level-1-texture-2d-parallax-lvl1.glb',
+        '/3d/level-1-texture-2d-parallax-lvl1.glb',
         (gltf) =>
         {
             const children = [...gltf.scene.children]
@@ -210,7 +209,7 @@ populate() {
     this.canvas.addEventListener('click', () => {
         this.currentIntersect = this.intersects[0];
             if(this.currentIntersect && !props.dialogVisible){
-                inventory.value.addItem(this.currentIntersect.object.name);
+                // inventory.value.addItem(this.currentIntersect.object.name);
                 emit('openTextBox', this.currentIntersect.object.name);
             }
         }
@@ -245,7 +244,7 @@ render() {
         let isExisting = false;
         for(let dialog of lvl1Dialog){
             if(this.intersects[0].object.name === dialog.name){
-                currentlyHovered.value = this.intersects[0].object.name;
+                currentlyHovered.value = dialog.title;
                 isExisting = true;
             }
         }

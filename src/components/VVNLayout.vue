@@ -1,13 +1,13 @@
 <template>
     <div class="vnlayout">
-        <img v-if="background != undefined" class="vnlayout__bg" :src="'./img/backgrounds/' + background + '.jpg'" alt="">
+        <img v-if="background != undefined" class="vnlayout__bg" :src="'/img/backgrounds/' + background + '.jpg'" alt="">
 
         <VTextBox
         :name="name"
         :text="text"
         />
         
-        <img class="vnlayout__sprite" :src="'./img/sprites/' + sprite + '.png'" alt="">
+        <img v-if="sprite !== 'none'" class="vnlayout__sprite" :src="'/img/sprites/' + sprite + '.webp'" alt="">
         
     </div>
     
@@ -51,9 +51,11 @@ const computed = {
     height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: flex-end;
+    user-select: none;
 
     &__sprite{
-        width: 600px;
+        height: 80vh;
         object-fit: cover;
         object-position: top;
         animation: slidein 0.3s ease-in-out;

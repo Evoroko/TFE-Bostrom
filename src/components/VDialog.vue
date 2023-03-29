@@ -9,8 +9,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, inject } from 'vue';
 import VVNLayout from './VVNLayout.vue'
+
+const inventory = inject('inventory');
 
 const props = defineProps({
     script: {
@@ -18,14 +20,14 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['conversation-ended']);
+const emit = defineEmits(['conversation-ended', 'inputCode']);
 
 const texts = ref(props.script);
 
 const currentDialogIndex = ref(0);
 const i = ref(0);
 const typedText = computed(() =>
-texts.value[currentDialogIndex.value].text.slice(0, i.value + 1)
+    texts.value[currentDialogIndex.value].text.slice(0, i.value + 1)
 );
 const currentName = computed(() => texts.value[currentDialogIndex.value].name);
 const currentSprite = computed(() => texts.value[currentDialogIndex.value].sprite);
@@ -63,8 +65,16 @@ window.addEventListener('keydown', (e) => {
     }
 })
 
+let isItACode = false;
+
 const nextText = () => {
     if (i.value === texts.value[currentDialogIndex.value].text.length) {
+        if(texts.value[currentDialogIndex.value].specialAction){
+            if(texts.value[currentDialogIndex.value].specialAction == 'code'){
+                isItACode = true;
+            }
+        }
+
         currentDialogIndex.value++;
         i.value = 0;
     } else {
@@ -73,10 +83,20 @@ const nextText = () => {
 
     if (currentDialogIndex.value >= texts.value.length) {
         setTimeout(() => {
+            if(isItACode == true){
+                emit('inputCode');
+            }
             emit('conversation-ended');
         }, 1) // Délai car sinon le dernier clic qui ferme le dialogue en déclenche un autre immédiatement / cause des conflits
         currentDialogIndex.value = 0;
     }
+
+    if(texts.value[currentDialogIndex.value].inventory){
+        if(texts.value[currentDialogIndex.value].inventory == 'add'){
+            inventory.value.addItem(texts.value[currentDialogIndex.value].itemAdded);
+        }
+    }
+
 };
 
 </script>

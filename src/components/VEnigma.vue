@@ -1,10 +1,12 @@
 <template>
+    <VCodeInput v-if="canEnterCode == true" @code-attempt="verifyCode()"/>
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
       @conversation-ended="selectedObject = null"
+      @input-code="inputCode()"
       class="dialog"/>
-    <VInventory @inventory-active="inventoryActive = $event"/>
+    <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem"/>
     <VThreeTest
       @open-text-box="selectedObject = $event"
       :dialogVisible="!!selectedObject"/>
@@ -14,9 +16,11 @@
 import VThreeTest from './VThreeTest.vue';
 import VInventory from './VInventory.vue';
 import VDialog from './VDialog.vue';
+import VCodeInput from './VCodeInput.vue';
 import { ref, provide, computed, watch } from 'vue';
 import Inventory from '../scripts/Inventory.js'
 import lvl1Dialog from '../scripts/lvl1-dialog.js'
+import lvl1Items from '../scripts/lvl1-items.js'
 
 const inventory = ref(new Inventory());
 provide('inventory', inventory);
@@ -25,6 +29,7 @@ const selectedObject = ref(null);
 const isExisting = ref(false);
 const inventoryActive = ref(undefined);
 const specialInteraction = ref(undefined);
+const canEnterCode = ref(false);
 
 let defaultSpecialInteraction = [];
 
@@ -55,10 +60,17 @@ watch(selectedObject, (newVal, oldVal) => {
               }
             }
           }
+          
           // S'il n'y a pas d'interaction spéciale entre l'objet sélectionné et l'item actif :
           if(isSpecialDialog == false){
             specialInteraction.value = defaultSpecialInteraction;
           }
+        }
+      }
+
+      if(selectedObject.value){
+        if(selectedObject.value.includes('description-')){
+          isExisting.value = true;
         }
       }
 
@@ -75,11 +87,31 @@ const script = computed(() => {
     if(selectedObject.value === dialog.name && inventoryActive.value == undefined){
       return dialog.text;
     }else if(selectedObject.value === dialog.name && inventoryActive.value){
-      console.log('test')
       return specialInteraction.value;
     }
   }
+
+  if(selectedObject.value.includes('description-')){
+    let selectedObjectInspect = selectedObject.value.replace('description-', '');
+    for(let item of lvl1Items){
+      if(selectedObjectInspect == item.name){
+        return item.description;
+      }
+    }
+  }
 });
+
+const inspectItem = () => {
+  selectedObject.value = 'description-' + inventoryActive.value;
+}
+
+const inputCode = () => {
+  canEnterCode.value = true;
+}
+
+const verifyCode = () => {
+  canEnterCode.value = false;
+}
 </script>
 
 <style lang="scss">

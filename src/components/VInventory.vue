@@ -2,7 +2,7 @@
 
 <div class="inventory">
     <h2>Inventaire</h2>
-    <button class="inventory__inspect" :class="{'inventory__inspect--inactive': activeIndex == undefined }">Inspecter</button>
+    <button class="inventory__inspect" :class="{'inventory__inspect--inactive': activeIndex == undefined }" @click="clickInspect()">Inspecter</button>
     <ul class="inventory__items">
         <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)"> {{ item.title }}</li>
     </ul>
@@ -11,13 +11,18 @@
 </template>
 
 <script setup>
-import { ref, inject, onMounted } from 'vue';
+import { ref, inject } from 'vue';
 
 const inventory = inject('inventory');
-const emit = defineEmits(['inventoryActive']);
+const emit = defineEmits(['inventoryActive', 'clickInspect']);
 
 const activeIndex = ref(undefined);
 
+function clickInspect(){
+    if(activeIndex.value !== undefined){
+        emit('clickInspect');
+    }
+}
 
 function setActiveIndex(index) {
     if(activeIndex.value == index){
@@ -49,11 +54,12 @@ function setActiveIndex(index) {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    user-select: none;
 
     &__items{
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 8px;
         height: 100%;
     }
 
@@ -72,7 +78,7 @@ function setActiveIndex(index) {
     &__inspect{
         padding: 8px;
         width: max-content;
-        margin: 8px 0;
+        margin: 16px 0;
 
         &--inactive{
             opacity: 0.5;
