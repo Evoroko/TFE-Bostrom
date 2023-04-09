@@ -9,10 +9,12 @@ import { onMounted } from 'vue';
 
 onMounted(() => {
     const mouseFollow = document.getElementById('popup');
+
     document.addEventListener('mousemove', (e) => {
         mouseFollow.style.cssText = `
             left: ${e.clientX}px;
             top:  ${e.clientY - 31}px;
+            display: block;
         `;
     });
 });
@@ -29,5 +31,6 @@ onMounted(() => {
     position: fixed;
     touch-action: none;
     user-select: none;
+    display: none;
 }
 </style>

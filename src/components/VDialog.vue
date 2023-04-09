@@ -93,7 +93,9 @@ const nextText = () => {
 
     if(texts.value[currentDialogIndex.value].inventory){
         if(texts.value[currentDialogIndex.value].inventory == 'add'){
-            inventory.value.addItem(texts.value[currentDialogIndex.value].itemAdded);
+            inventory.value.addItem(texts.value[currentDialogIndex.value].targetItem);
+        }else if(texts.value[currentDialogIndex.value].inventory == 'remove'){
+            inventory.value.removeItem(texts.value[currentDialogIndex.value].targetItem);
         }
     }
 

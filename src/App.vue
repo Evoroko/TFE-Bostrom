@@ -14,7 +14,7 @@ onMounted(() => {
 
 <template>
   <p v-if="isDeviceMobile == true">L'expérience sur téléphone ou tablette n'est pas optimale. Veuillez utiliser un ordinateur pour accéder à cette page. (ou actualiser si vous avez réduit la taille de la fenêtre ou du viewport)</p>
-  <VTuto v-if="isDeviceMobile == false"/>
+  <!-- <VTuto v-if="isDeviceMobile == false"/> -->
   <VEnigma v-if="isDeviceMobile == false"/>
 </template>
 

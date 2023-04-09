@@ -136,7 +136,7 @@ export default [
                 name: 'none',
                 text: 'Obtenu : Cône de circulation sale.',
                 inventory: 'add',
-                itemAdded: 'cone-dirty'
+                targetItem: 'cone-dirty'
             },
             {
                 sprite: 'anaelle',
@@ -179,7 +179,7 @@ export default [
                 name: 'none',
                 text: 'Obtenu : Banc.',
                 inventory: 'add',
-                itemAdded: 'bench'
+                targetItem: 'bench'
             }
         ]
     },
@@ -223,18 +223,28 @@ export default [
             {
                 sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: 'Si seulement le code était plus abouti...! Ce serait la bonne solution de tremper le cône sale dans l\'eau pour le nettoyer...'
+                text: '...! Peut-être que si je le trempe dans l\'eau...'
             },
             {
-                sprite: 'roxy',
-                name: 'Roxy',
-                text: 'Hein ? Quoi ?'
+                sprite: 'none',
+                name: 'none',
+                text: 'Utilisé : Cône de circulation sale.',
+                inventory: 'remove',
+                targetItem: 'cone-dirty'
+            },
+            {
+                sprite: 'none',
+                name: 'none',
+                text: 'Obtenu : Cône de circulation.',
+                inventory: 'add',
+                targetItem: 'cone'
             },
             {
                 sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: 'Feur.'
+                text: 'Mh&nbsp;? On dirait qu\'il y a quelque chose dessus.'
             }
+            
         ]
     },
     {
@@ -245,6 +255,31 @@ export default [
                 sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: 'Je ne peux pas utiliser ça là-dessus...'
+            }
+        ]
+    },
+    {
+        name: 'code-false',
+        text: [
+            {
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: 'On dirait que ce n\'est pas le bon code...'
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: 'Réessayons quand on aura un peu plus fouillé&nbsp;!'
+            }
+        ]
+    },
+    {
+        name: 'code-true',
+        text: [
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: 'WOUHHHH BRAVO ANAËLLE&nbsp;!!!!'
             }
         ]
     }

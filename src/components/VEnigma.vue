@@ -1,12 +1,12 @@
 <template>
-    <VCodeInput v-if="canEnterCode == true" @code-attempt="verifyCode()"/>
+    <VCodeInput v-if="canEnterCode == true" @code-attempt=" {attemptedCode = $event; verifyCode()}"/>
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
       @conversation-ended="selectedObject = null"
       @input-code="inputCode()"
       class="dialog"/>
-    <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem"/>
+    <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem" @click-use="useSelectedItem()"/>
     <VThreeTest
       @open-text-box="selectedObject = $event"
       :dialogVisible="!!selectedObject"/>
@@ -30,6 +30,12 @@ const isExisting = ref(false);
 const inventoryActive = ref(undefined);
 const specialInteraction = ref(undefined);
 const canEnterCode = ref(false);
+const attemptedCode = ref(undefined);
+const isUsingItem = ref(false);
+
+const useSelectedItem = () => {
+  isUsingItem.value = true;
+}
 
 let defaultSpecialInteraction = [];
 
@@ -46,9 +52,9 @@ watch(selectedObject, (newVal, oldVal) => {
       let isSpecialDialog = false;
       
       for(let dialog of lvl1Dialog){
-        if(selectedObject.value === dialog.name && inventoryActive.value == undefined){
+        if(selectedObject.value === dialog.name && isUsingItem.value == false){
           isExisting.value = true;
-        }else if(selectedObject.value === dialog.name && inventoryActive.value != undefined){ // si objet possède un dialogue quelconque et que qqch est actif dans l'inventaire
+        }else if(selectedObject.value === dialog.name && isUsingItem.value == true){ // si objet possède un dialogue quelconque et que qqch est actif dans l'inventaire
           isExisting.value = true;
           for(let specialDialog of lvl1Dialog){
             if(('interaction-' + selectedObject.value) == specialDialog.name){ // s'il existe une interaction spéciale avec l'objet sélectionné
@@ -84,9 +90,11 @@ watch(selectedObject, (newVal, oldVal) => {
 
 const script = computed(() => {
   for(let dialog of lvl1Dialog){
-    if(selectedObject.value === dialog.name && inventoryActive.value == undefined){
+    if(selectedObject.value === dialog.name && isUsingItem.value == false){
       return dialog.text;
-    }else if(selectedObject.value === dialog.name && inventoryActive.value){
+    }else if(selectedObject.value === dialog.name && isUsingItem.value == true){
+      inventory.value.setAllInactive();
+      isUsingItem.value = false;
       return specialInteraction.value;
     }
   }
@@ -111,6 +119,13 @@ const inputCode = () => {
 
 const verifyCode = () => {
   canEnterCode.value = false;
+  if(attemptedCode.value == true){
+    console.log("Bravo !");
+    selectedObject.value = 'code-true'
+  }else{
+    console.log("Tu pues.")
+    selectedObject.value = 'code-false'
+  }
 }
 </script>
 
