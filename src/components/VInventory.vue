@@ -1,24 +1,48 @@
 <template>
 
-<div class="inventory inventory--close">
-    <h2>Inventaire</h2>
+<div v-if="isUsingItem == false" class="inventory inventory--close">
+    <div class="inventory__icon">
+        <h2 class="title title--medium">Sacoche</h2>
+    </div>
     <div v-if="openInventory" class="inventory__content">
         <ul class="inventory__items">
-            <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)"> {{ item.title }}</li>
+            <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)">
+                <div class="item">
+                    <!-- {{ item.title }} -->
+                    <img class="item__img" src="/img/items/cone.png" :alt="item.title">
+                </div>
+                
+            </li>
         </ul>
-        <button class="inventory__button--inspect" :class="{'inventory__button--inactive': activeIndex == undefined }" @click="clickInspect()">Inspecter</button>
-        <button class="inventory__button--use" :class="{'inventory__button--inactive': activeIndex == undefined }" @click="clickUse()">Utiliser</button>
+        <ul class="inventory__buttons">
+            <li class="inventory__button">
+                <VButton
+                    :class="{'inventory__button--inactive': activeIndex == undefined }"
+                    @click="clickInspect()"
+                >Inspecter</VButton>
+            </li>
+            <li class="inventory__button">
+                <VButton
+                    :class="{'inventory__button--inactive': activeIndex == undefined }"
+                    @click="clickUse()"
+                >Utiliser</VButton>
+            </li>
+        </ul>
+        
+        
     </div>
-    <button @click="toggleInventory" class="inventory__toggle">></button>
+    <button @click="toggleInventory" class="inventory__toggle"></button>
 </div>
 
 <div v-if="activeIndex !== undefined && isUsingItem == true" class="useBanner">
     <p>Sur quoi souhaitez-vous utiliser «&nbsp;{{ inventory.items[activeIndex].title }}&nbsp;» ?</p>
+    <VButton @click="isUsingItem = false">Annuler</VButton>
 </div>
 
 </template>
 
 <script setup>
+import VButton from './VButton.vue'
 import { ref, inject, watch } from 'vue';
 
 const inventory = inject('inventory');
@@ -68,7 +92,6 @@ watch(inventory.value, (newVal, oldVal) => {
             activeIndex.value = undefined;
             emit('inventoryActive', undefined);
         }
-        console.log(inventory.value.items);
     },
     { immediate: true }
 );
@@ -76,10 +99,10 @@ watch(inventory.value, (newVal, oldVal) => {
 function toggleInventory(e){
     openInventory.value = !openInventory.value;
     if(openInventory.value == true){
-        e.target.innerHTML = '<';
+        e.target.classList.add('inventory__toggle--open');
     }else{
         inventory.value.setAllInactive();
-        e.target.innerHTML = '>';
+        e.target.classList.remove('inventory__toggle--open');
     }
 }
 
@@ -93,49 +116,112 @@ function toggleInventory(e){
     left: 0;
     width: max-content;
     height: 100%;
-    background-color: rgba(43, 43, 43, 0.519);
+    background-color: var(--transparent-black-80);
     z-index: 100;
     padding: 16px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    gap: 24px;
+    align-items: center;
+    gap: 32px;
     user-select: none;
 
     &__content{
         display: flex;
-        gap: 8px;
+        gap: 16px;
+        align-items: center;
     }
 
     &__items{
         display: flex;
-        gap: 8px;
+        gap: 12px;
         align-items: center;
     }
 
     &__item{
         background-color: rgb(0, 0, 0);
-        width: 100%;
-        height: 32px;
+        width: 48px;
+        height: 48px;
         cursor: pointer;
-        border: 2px solid transparent;
+        border: 1px solid white;
+        transform: rotate(45deg);
+        margin: 0 8px;
+        position: relative;
 
         &--active{
-            border: 2px solid white;
+
+            &::after{
+                content: "";
+                position: absolute;
+                width: 52px;
+                height: 52px;
+                border: 2px solid white;
+                top: -4px;
+                left: -4px;
+            }
         }
     }
 
+    &__buttons{
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
     &__button{
-        padding: 8px;
-        width: max-content;
+        width: 100%;
+        height: 32px;
+        display: block;
+
+        .button{
+            width: 129px;
+        }
 
         &--inactive{
             opacity: 0.5;
+
+            &.button{
+                cursor: default;
+
+                &:hover{
+                    filter: none;
+                }
+            }
         }
     }
 
     &--close{
         height: auto;
+    }
+
+    &__icon{
+        background-image: url(/img/items/bag.png);
+        background-size: 70%;
+        background-repeat: no-repeat;
+        background-position: center top;
+        height: 96px;
+        width: 96px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        @media(-webkit-device-pixel-ratio: 2){
+            background-image: url(/img/items/bag@2x.png);
+        }
+    }
+
+    &__toggle{
+        width: 24px;
+        height: 24px;
+        background-color: transparent;
+        background-image: url(/assets/arrow-right.svg);
+        background-size: contain;
+        border: none;
+        cursor: pointer;
+
+        &--open{
+            background-image: url(/assets/arrow-left.svg)
+        }
     }
 }
 
@@ -143,10 +229,24 @@ function toggleInventory(e){
     width: 100%;
     background-color: black;
     position: fixed;
-    bottom: 0;
+    top: 0;
     z-index: 1000;
     padding: 16px 0;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.item{
+    display: flex;
+
+    &__img{
+        width: 80%;
+        height: 80%;
+        transform: rotate(-45deg) translateY(2px);
+    }
 }
 
 </style>

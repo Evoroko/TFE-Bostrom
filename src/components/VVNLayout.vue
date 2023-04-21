@@ -1,13 +1,15 @@
 <template>
     <div class="vnlayout">
-        <img v-if="background != undefined" class="vnlayout__bg" :src="'/img/backgrounds/' + background + '.jpg'" alt="">
+        <img v-if="background != undefined && background != 'none'" class="vnlayout__bg" :src="'/img/backgrounds/' + background + '.jpg'" alt="">
 
         <VTextBox
         :name="name"
         :text="text"
+        :is-dialog-full="isDialogFull"
         />
         
         <img v-if="sprite !== 'none'" class="vnlayout__sprite" :src="'/img/sprites/' + sprite + '.webp'" alt="">
+        <img v-if="spriteProta !== 'none'" class="vnlayout__prota" :src="'/img/sprites/' + spriteProta + '.webp'" alt="">
         
     </div>
     
@@ -28,20 +30,19 @@ const props = defineProps({
         type: String,
         required: false
     },
+    spriteProta: {
+        type: String,
+        required: false
+    },
     background: {
         type: String,
         required: false
+    },
+    isDialogFull: {
+        type: Boolean,
+        required: false
     }
 })
-
-
-const computed = {
-  backgroundImage() {
-    return {
-      "background-image": `url('./img/sprites/${this.sprite}.png')`,
-    };
-  },
-};
 
 </script>
 
@@ -67,6 +68,14 @@ const computed = {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    &__prota{
+      height: 40vh;
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      z-index: 101;
     }
 }
 

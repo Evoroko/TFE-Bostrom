@@ -48,6 +48,11 @@ export default [
                 name: 'Anaëlle',
                 text: "(Elle me fatigue...)"
             }
+        ],
+        defaultText: [
+            {
+                text: "(C'est un arrêt de bus. Je ne pense pas que ça soit utile d'attendre qu'il y en ait un qui passe...)"
+            }
         ]
     },
     {
@@ -55,7 +60,7 @@ export default [
         title: 'Panneau d\'affichage',
         text: [
             {
-                sprite: 'anaelle',
+                spriteProta: 'anaelle',
                 name: 'Anaëlle',
                 text: "C’est comme si l’affichage avait planté…"
             },
@@ -65,17 +70,17 @@ export default [
                 text: "Peut-être qu’on a été attaquées par une arme EMP en fait&nbsp;!"
             },
             {
-                sprite: 'anaelle',
+                spriteProta: 'anaelle',
                 name: 'Anaëlle',
                 text: "Une arme EMP&nbsp;?"
             },
             {
-                sprite: 'roxy',
+                sprite: 'roxy',                
+                spriteProta: 'none',
                 name: 'Roxy',
                 text: "C’est une sorte de bombe qui peut paralyser un pays entier&nbsp;! Encore un coup du gouvernement…"
             },
             {
-                sprite: 'roxy',
                 name: 'Roxy',
                 text: "En gros, ça n’explose pas vraiment comme une bombe normale, ça envoie des ondes électromagnétiques qui peuvent détruire presque tous les appareils électroniques et couper les communications."
             },
@@ -99,6 +104,11 @@ export default [
                 name: 'Anaëlle',
                 text: "…Tu as déjà entendu parler du sarcasme&nbsp;?"
             }
+        ],
+        defaultText: [
+            {
+                text: "(C'est un panneau d'affichage avec un écran qui semble avoir planté. L'informatique de nos jours…)"
+            }
         ]
     },
     {
@@ -119,6 +129,11 @@ export default [
                 sprite: 'anaelle',
                 name: 'Anaëlle',
                 text: "Ce n’est pas toi qui es censée avoir la réponse à toute les questions&nbsp;?"
+            }
+        ],
+        defaultText: [
+            {
+                text: "(Une fontaine dont l'eau semble couler vers le ciel. Je me demande si elle est potable.)"
             }
         ]
     },
@@ -163,6 +178,11 @@ export default [
                 name: 'Anaëlle',
                 text: "Bon sang…"
             }
+        ],
+        defaultText: [
+            {
+                text: "(Une poubelle tout ce qu'il y a de plus normal. Si l'on oublie les morceaux qui semblent se détacher et flotter dans les airs, bien sûr.)"
+            }
         ]
     },
     {
@@ -180,6 +200,11 @@ export default [
                 text: 'Obtenu : Banc.',
                 inventory: 'add',
                 targetItem: 'bench'
+            }
+        ],
+        defaultText: [
+            {
+                text: "Un banc qui flotte dans les airs."   
             }
         ]
     },
@@ -201,6 +226,12 @@ export default [
                 sprite: 'none',
                 name: 'none',
                 text: 'Entrez le code de la porte. (3 chiffres)',
+                specialAction: 'code'
+            }
+        ],
+        defaultText: [
+            {
+                text: "(Je pourrais essayer d'entrer un code…)",
                 specialAction: 'code'
             }
         ]
@@ -270,6 +301,11 @@ export default [
                 sprite: 'roxy',
                 name: 'Roxy',
                 text: 'Réessayons quand on aura un peu plus fouillé&nbsp;!'
+            }
+        ],
+        defaultText: [
+            {
+                text: "(Ce n'est pas le bon code…)"
             }
         ]
     },

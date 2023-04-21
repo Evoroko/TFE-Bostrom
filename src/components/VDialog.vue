@@ -4,7 +4,9 @@
       :name="currentName"
       :text="typedText"
       :sprite="currentSprite"
+      :spriteProta="currentSpriteProta"
       :background="currentBg"
+      :is-dialog-full="isDialogFull"
     />
 </template>
 
@@ -23,6 +25,7 @@ const props = defineProps({
 const emit = defineEmits(['conversation-ended', 'inputCode']);
 
 const texts = ref(props.script);
+const isDialogFull = ref(false);
 
 const currentDialogIndex = ref(0);
 const i = ref(0);
@@ -30,19 +33,36 @@ const typedText = computed(() =>
     texts.value[currentDialogIndex.value].text.slice(0, i.value + 1)
 );
 const currentName = computed(() => texts.value[currentDialogIndex.value].name);
-const currentSprite = computed(() => texts.value[currentDialogIndex.value].sprite);
 
-let previousBg = '';
+const previousSprite = ref('');
+const currentSprite = computed(() => {
+    return testExisting(texts.value[currentDialogIndex.value].sprite, previousSprite);
+});
+
+const previousSpriteProta = ref('');
+const currentSpriteProta = computed(() => {
+    return testExisting(texts.value[currentDialogIndex.value].spriteProta, previousSpriteProta);
+});
+
+const previousBg = ref('');
 const currentBg = computed(() => {
-let bg = texts.value[currentDialogIndex.value].background;
-if(bg == undefined && previousBg){
-    bg = previousBg;
-    return bg;
-}else{
-    previousBg = bg;
-    return bg;
-}
+    return testExisting(texts.value[currentDialogIndex.value].background, previousBg);
 })
+
+
+function testExisting(tested, previous) {
+    let test = tested;
+    if(test == undefined && previous.value){
+        test = previous.value;
+        return test;
+    }else if(test == undefined && !previous.value){
+        test = 'none';
+        return test;
+    }else{
+        previous.value = test;
+        return test;
+    }
+}
 
 
 watch(i, (newVal, oldVal) => {
@@ -53,6 +73,7 @@ watch(i, (newVal, oldVal) => {
             }, 10);
         } else {
             i.value = texts.value[currentDialogIndex.value].text.length;
+            isDialogFull.value = true;
         }
     }
 },
@@ -74,7 +95,7 @@ const nextText = () => {
                 isItACode = true;
             }
         }
-
+        isDialogFull.value = false;
         currentDialogIndex.value++;
         i.value = 0;
     } else {

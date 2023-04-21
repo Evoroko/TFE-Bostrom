@@ -1,16 +1,21 @@
 <template>
 
     <div class="textbox">
-        <div class="textbox__name" v-if="name !== 'none'">
+        <div class="textbox__name" v-if="name !== 'none' && name">
             <p>{{ name }}</p>
         </div>
-        <p class="textbox__text" v-html="text"></p>
+        <div class="textbox__content">
+            <div class="textbox__text">
+                <p v-html="text"></p>
+                <VJumpText v-if="isDialogFull"/>
+            </div>
+        </div>
     </div>
 
 </template>
 
 <script setup>
-
+import VJumpText from './VJumpText.vue'
 const props = defineProps({
     name: {
         type: String,
@@ -18,6 +23,10 @@ const props = defineProps({
     },
     text: {
         type: String,
+        required: false
+    },
+    isDialogFull: {
+        type: Boolean,
         required: false
     }
 })
@@ -28,24 +37,66 @@ const props = defineProps({
 
 .textbox{
     width: 100%;
-    max-width: 800px;
     height: 144px;
-    background-color: black;
     position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 32px;
-    box-sizing: border-box;
+    bottom: 0;
+    left: 0;
     z-index: 100;
     user-select: none;
 
+    &__content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 160px;
+        background-color: var(--transparent-black-80);
+        padding: 32px;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
     &__name{
         position: absolute;
-        top: -16px;
-        left: 16px;
-        background-color: rgb(18, 18, 18);
-        padding: 8px 16px;
+        height: 48px;
+        top: -64px;
+        left: 0;
+        background-color: var(--transparent-black-80);
+        padding: 8px 16px 8px 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        font: var(--exo-20px-bold);
+
+        &::before{
+            content: "";
+            height: 48px;
+            width: calc((100vw - 800px) / 2);
+        }
+    }
+
+    &__text{
+        width: 800px;
+        height: 90px;
+        display: block;
+        position: relative;
+
+        &::after{
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 170px;
+            left: -320px;
+            top: 0;
+            rotate: 20deg;
+            background-image: url(/assets/plexus.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        p{
+            display: inline;
+        }
     }
 
 }

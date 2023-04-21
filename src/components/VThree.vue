@@ -1,6 +1,10 @@
 <template>
     <div class="wrapper" ref="wrapper">
-        <VHover v-if="currentlyHovered && !props.dialogVisible">
+        <VHover
+            v-if="currentlyHovered && !props.dialogVisible"
+            :mouse-x="mouseX"
+            :mouse-y="mouseY"
+            >
             {{ currentlyHovered }}
         </VHover>
         <canvas class="canvas"></canvas>
@@ -14,17 +18,25 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
 import VHover from './VHover.vue'
-import lvl1Dialog from '../scripts/lvl1-dialog.js'
 
 const props = defineProps({
     dialogVisible: {
         type: Boolean,
+        required: false
+    },
+    dialogList:{
+        type: Array,
+        required: false
+    },
+    background:{
+        type: String,
         required: false
     }
 })
 const emit = defineEmits(['openTextBox']);
 const inventory = inject('inventory');
 const currentlyHovered = ref('');
+let loopCounter = 0;
 
 // Random
 function RandomNum(min, max){
@@ -51,6 +63,8 @@ function RandomNumRound(min, max){
 
 const wrapper = ref(null);
 const canvas = ref(null);
+const mouseX = ref(null);
+const mouseY = ref(null);
 const sizes = {
     w: 0,
     h: 0,
@@ -63,6 +77,11 @@ onMounted(() => {
     sizes.w = window.innerWidth;
     sizes.h = window.innerHeight;
 
+    document.addEventListener('mousemove', (e) => {
+        mouseX.value = e.clientX;
+        mouseY.value = e.clientY;
+    })
+
     // Create our 3D viewer
     const myViewer = new Viewer(canvas.value, sizes);
     myViewer.populate();
@@ -72,7 +91,11 @@ onMounted(() => {
 
 const textureLoader = new THREE.TextureLoader();
 const textureGlitch = textureLoader.load('/3d/textures/glitch.png');
+const protaStill = textureLoader.load('/img/sprite-anim/0.png');
+const protaRunning = [textureLoader.load('/img/sprite-anim/1.png'), textureLoader.load('/img/sprite-anim/2.png'), textureLoader.load('/img/sprite-anim/3.png'), textureLoader.load('/img/sprite-anim/4.png')]
 const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
+const textureProtaStill = new THREE.MeshBasicMaterial({ map: protaStill, transparent: true });
+const textureProtaRunning = [new THREE.MeshBasicMaterial({ map: protaRunning[0], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[1], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[2], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[3], transparent: true })];
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 
 var keyState = {};
@@ -173,7 +196,7 @@ populate() {
     dracoLoader.setDecoderPath('/draco/');
     gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load(
-        '/3d/level-1-texture-2d-parallax-lvl1.glb',
+        props.background,
         (gltf) =>
         {
             const children = [...gltf.scene.children]
@@ -199,17 +222,31 @@ populate() {
     //   this.scene.add(this.glitch);
     // }
 
+    // Model running
+    this.prota = new THREE.Mesh(
+            new THREE.PlaneGeometry(0.2, 0.35),
+            textureProtaStill
+        )
+
+    this.prota.position.set(0, -0.1, 9.2);
+    this.currentProtaSprite = {
+        running: false,
+        status: 0,
+        previousSpriteFinished: false
+    };
+
+    this.scene.add(this.prota);
+
 
     // Raycaster
     this.raycaster = new THREE.Raycaster()
     this.currentIntersect = null;
-    this.lastHovered = null;
+    // this.lastHovered = null;
 
     // Add to inventory    
     this.canvas.addEventListener('click', () => {
         this.currentIntersect = this.intersects[0];
             if(this.currentIntersect && !props.dialogVisible){
-                // inventory.value.addItem(this.currentIntersect.object.name);
                 emit('openTextBox', this.currentIntersect.object.name);
             }
         }
@@ -225,45 +262,76 @@ animate() {
     } );
 }
 
+animateSprite() {
+    if(this.currentProtaSprite.running == false){
+        this.currentProtaSprite.running = true;
+        this.prota.material = textureProtaRunning[0];
+    }
+
+    if(loopCounter == 0){
+        if(this.currentProtaSprite.running = true && this.currentProtaSprite.status < 4){
+            this.prota.material = textureProtaRunning[this.currentProtaSprite.status];
+            this.currentProtaSprite.status += 1;
+        }else if(this.currentProtaSprite.running = true && this.currentProtaSprite.status == 4){
+            this.currentProtaSprite.status = 0;
+        }
+    }
+}
+
 render() {
 
+    if(loopCounter < 3){
+        loopCounter += 1;
+    }else{
+        loopCounter = 0;
+    }
+
     window.addEventListener('mousemove', (e) => {
-        this.mouse.x = e.clientX / sizes.w * 2 - 1
-        this.mouse.y = - (e.clientY / sizes.h) * 2 + 1;
+        this.mouse.x = mouseX.value / sizes.w * 2 - 1
+        this.mouse.y = - (mouseY.value / sizes.h) * 2 + 1;
     })
     this.raycaster.setFromCamera(this.mouse, this.camera)
     this.intersects = this.raycaster.intersectObjects(this.sceneElements)
 
-    if(this.intersects.length !== 0 && this.lastHovered !== this.intersects[0].object){
-        if(this.currentIntersect == null){
-            // this.intersects[0].object.material.color.set('#ffffff')
-            this.lastHovered = this.intersects[0].object;
-        }
+    if(this.intersects.length !== 0){ // removed "&& this.lastHovered !== this.intersects[0].object" because if it missed the object then it never showed on mouse hover
+        // if(this.currentIntersect == null){
+        //     this.lastHovered = this.intersects[0].object;
+        // }
         this.currentIntersect = this.intersects[0];
         currentlyHovered.value = this.intersects[0].object.name;
         let isExisting = false;
-        for(let dialog of lvl1Dialog){
+        for(let dialog of props.dialogList){
             if(this.intersects[0].object.name === dialog.name){
                 currentlyHovered.value = dialog.title;
                 isExisting = true;
+                this.canvas.style.cursor = 'pointer';
             }
         }
         if(isExisting == false){
             currentlyHovered.value = '';
+            this.canvas.style.cursor = 'auto';
         }
         // console.log(this.currentIntersect.object.name)
     }else{
-        if(this.currentIntersect !== null){
-            // this.lastHovered.material.color.set('#ff0000');
-        }
+        // if(this.currentIntersect !== null){
+        //     // this.lastHovered.material.color.set('#ff0000');
+        // }
         this.currentIntersect = null;
     }
 
     if (keyState[81] && this.camera.position.x > -0.85 && !props.dialogVisible){
         this.camera.position.x -= 0.01;
+        this.prota.position.x -= 0.01;
     }    
     if (keyState[68] && this.camera.position.x < 1 && !props.dialogVisible){
         this.camera.position.x += 0.01;
+        this.prota.position.x += 0.01;
+        this.animateSprite();
+    }
+
+    if(!keyState[68] && !keyState[81] && this.prota.material !== textureProtaStill){
+        this.prota.material = textureProtaStill;
+        this.currentProtaSprite.running = false;
     }
 
     

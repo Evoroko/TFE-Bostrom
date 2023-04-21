@@ -7,13 +7,15 @@
       @input-code="inputCode()"
       class="dialog"/>
     <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem" @click-use="useSelectedItem()"/>
-    <VThreeTest
+    <VThree
       @open-text-box="selectedObject = $event"
-      :dialogVisible="!!selectedObject"/>
+      :dialogVisible="!!selectedObject"
+      :dialogList="lvl1Dialog"
+      :background="'/3d/level-1-texture-2d-parallax-lvl1.glb'"/>
 </template>
 
 <script setup>
-import VThreeTest from './VThreeTest.vue';
+import VThree from './VThree.vue';
 import VInventory from './VInventory.vue';
 import VDialog from './VDialog.vue';
 import VCodeInput from './VCodeInput.vue';
@@ -91,6 +93,10 @@ watch(selectedObject, (newVal, oldVal) => {
 const script = computed(() => {
   for(let dialog of lvl1Dialog){
     if(selectedObject.value === dialog.name && isUsingItem.value == false){
+      if(dialog.checked == true){
+        return dialog.defaultText;
+      }
+      dialog.checked = true;
       return dialog.text;
     }else if(selectedObject.value === dialog.name && isUsingItem.value == true){
       inventory.value.setAllInactive();
@@ -120,10 +126,8 @@ const inputCode = () => {
 const verifyCode = () => {
   canEnterCode.value = false;
   if(attemptedCode.value == true){
-    console.log("Bravo !");
     selectedObject.value = 'code-true'
   }else{
-    console.log("Tu pues.")
     selectedObject.value = 'code-false'
   }
 }
