@@ -2,16 +2,15 @@
 
 <div v-if="isUsingItem == false" class="inventory inventory--close">
     <div class="inventory__icon">
-        <h2 class="title title--medium">Sacoche</h2>
+        <h2 class="title title--small">Sacoche</h2>
     </div>
     <div v-if="openInventory" class="inventory__content">
         <ul class="inventory__items">
             <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)">
                 <div class="item">
                     <!-- {{ item.title }} -->
-                    <img class="item__img" src="/img/items/cone.png" :alt="item.title">
+                    <img class="item__img" :src="'/img/items/' + item.name + '.png'" :alt="item.title">
                 </div>
-                
             </li>
         </ul>
         <ul class="inventory__buttons">
@@ -31,12 +30,12 @@
         
         
     </div>
-    <button @click="toggleInventory" class="inventory__toggle"></button>
+    <button @click="toggleInventory" class="inventory__toggle" :class="{ 'inventory__toggle--open': openInventory === true }"></button>
 </div>
 
 <div v-if="activeIndex !== undefined && isUsingItem == true" class="useBanner">
     <p>Sur quoi souhaitez-vous utiliser «&nbsp;{{ inventory.items[activeIndex].title }}&nbsp;» ?</p>
-    <VButton @click="isUsingItem = false">Annuler</VButton>
+    <VButton @click="isUsingItem = false; inventory.setAllUnused()">Annuler</VButton>
 </div>
 
 </template>
@@ -44,6 +43,7 @@
 <script setup>
 import VButton from './VButton.vue'
 import { ref, inject, watch } from 'vue';
+import Inventory from '../scripts/Inventory.js'
 
 const inventory = inject('inventory');
 const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse']);
@@ -98,12 +98,6 @@ watch(inventory.value, (newVal, oldVal) => {
 
 function toggleInventory(e){
     openInventory.value = !openInventory.value;
-    if(openInventory.value == true){
-        e.target.classList.add('inventory__toggle--open');
-    }else{
-        inventory.value.setAllInactive();
-        e.target.classList.remove('inventory__toggle--open');
-    }
 }
 
 </script>

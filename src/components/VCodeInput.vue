@@ -5,27 +5,19 @@
 
             <input type="number" id="code" name="code" min="0" max="999" v-model="code" maxlength="3">
 
-            <div class="keyboard">
-                <ul class="keyboard__row">
-                    <li @click="enterKey" class="keyboard__key">1</li>
-                    <li @click="enterKey" class="keyboard__key">2</li>
-                    <li @click="enterKey" class="keyboard__key">3</li>
-                </ul>
-                <ul class="keyboard__row">
-                    <li @click="enterKey" class="keyboard__key">4</li>
-                    <li @click="enterKey" class="keyboard__key">5</li>
-                    <li @click="enterKey" class="keyboard__key">6</li>
-                </ul>
-                <ul class="keyboard__row">
-                    <li @click="enterKey" class="keyboard__key">7</li>
-                    <li @click="enterKey" class="keyboard__key">8</li>
-                    <li @click="enterKey" class="keyboard__key">9</li>
-                </ul>
-                <ul class="keyboard__row">
-                    <li @click="enterKey" class="keyboard__key">0</li>
-                    <li @click="enterKey" class="keyboard__key keyboard__key--small">←</li>
-                </ul>
-            </div>
+            <ul class="keyboard">
+                <li @click="enterKey" class="keyboard__key">1</li>
+                <li @click="enterKey" class="keyboard__key">2</li>
+                <li @click="enterKey" class="keyboard__key">3</li>
+                <li @click="enterKey" class="keyboard__key">4</li>
+                <li @click="enterKey" class="keyboard__key">5</li>
+                <li @click="enterKey" class="keyboard__key">6</li>
+                <li @click="enterKey" class="keyboard__key">7</li>
+                <li @click="enterKey" class="keyboard__key">8</li>
+                <li @click="enterKey" class="keyboard__key">9</li>
+                <li @click="enterKey" class="keyboard__key">0</li>
+                <li @click="enterKey" class="keyboard__key keyboard__key--back">←</li>
+            </ul>
 
             <button type="submit">Valider</button>
         </form>
@@ -59,7 +51,7 @@ const enterKey = (e) => {
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .code{
     position: fixed;
@@ -75,24 +67,40 @@ const enterKey = (e) => {
 }
 
 .keyboard{
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     width: 100%;
-    gap: 8px;
+    gap: 4px;
 
-    &__row{
-        display: flex;
-        gap: 8px;        
+    &--4columns{
+        grid-template-columns: repeat(4, 1fr);
     }
 
     &__key{
-        flex-grow: 1;
         cursor: pointer;
         background-color: white;
         color: black;
+        padding: 4px;
+        width: 100%;
+        height: 32px;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-        &--small{
-            flex-grow: .5;
+
+        &--back{
+            grid-column: span 2;
+        }
+
+        &--full{
+            grid-column-start: 1;
+            grid-column-end: -1;
+        }
+
+        &--notxt{
+            color: transparent;
+            user-select: none;
         }
     }
 }

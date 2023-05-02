@@ -42,6 +42,7 @@
   --exo-39px-medium: 500 2.4375rem/1.2 Exo;
   --exo-48px-medium: 500 3rem/1.2 Exo;
   --exo-61px-medium: 500 3.8125rem/1.2 Exo; 
+  --exo-61px-medium: 500 3.8125rem/1.2 Exo; 
   --icons-16px-regular: 400 1rem Font Awesome 6 Free; 
   --icons-20px-regular: 400 1.25rem Font Awesome 6 Free; 
   --icons-16px-solid: solid 1rem Font Awesome 6 Free; 
@@ -76,5 +77,9 @@ body{
 
   &--medium{
     font: var(--exo-20px-medium);
+  }
+
+  &--small{
+    font: var(--exo-16px-medium);
   }
 }

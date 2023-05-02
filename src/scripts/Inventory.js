@@ -1,4 +1,4 @@
-import lvl1Items from "./lvl1-items";
+import itemsList from "./items";
 
 export default class Inventory {
     constructor(){
@@ -13,11 +13,12 @@ export default class Inventory {
             }
         }
         if(haveItem == false){
-            for(let item in lvl1Items){
-                if(currentItem == lvl1Items[item].name){
+            for(let item in itemsList){
+                if(currentItem == itemsList[item].name){
                     // Revoir le pb d'incrémentation de toutes les instances de l'id d'un même objet
-                    let addedItem = lvl1Items[item];
+                    let addedItem = itemsList[item];
                     addedItem.id = this.items.length + 1;
+                    addedItem.isUsed = false;
                     this.items.push(addedItem);
                 }
             }
@@ -56,6 +57,21 @@ export default class Inventory {
     setAllInactive(){
         for(let item of this.items){
             item.status = 'inactive';
+            item.isUsed = false;
+        }
+    }
+
+    setAllUnused(){
+        for(let item of this.items){
+            item.isUsed = false;
+        }
+    }
+
+    isUsing(){
+        for(let item of this.items){
+            if(item.status == 'active'){
+                item.isUsed = true;
+            }
         }
     }
 }

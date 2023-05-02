@@ -1,11 +1,33 @@
 <template>
     <main>
-        <VEnigma/>
+        <VEnigma
+            :background3d="levelBackground"
+            :level-dialogs="levelDialogs"
+            :currentLevel="currentIndex"
+            @change-level="currentLevelChange = $event; changeLevel()"
+        />
     </main>
 </template>
 
 <script setup>
-import VEnigma from 'VEnigma.vue'
+import VEnigma from './VEnigma.vue'
+import structure from '../scripts/structure'
+import { ref, computed } from 'vue'
+
+const currentIndex = ref(0);
+const currentLevelChange = ref(0);
+
+const changeLevel = () => {
+    currentIndex.value = Number(currentLevelChange.value);
+}
+
+const levelBackground = computed(() => {
+    return structure[currentIndex.value].background;
+})
+
+const levelDialogs = computed(() => {
+    return structure[currentIndex.value].dialogs;
+})
 
 </script>
 

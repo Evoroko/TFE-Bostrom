@@ -1,4 +1,9 @@
 <template>
+
+    <VLoading
+        :class="{ 'loading--hide': loadingFinished == false }"
+        :percentage="loadingPercentage"
+    />
     <div class="wrapper" ref="wrapper">
         <VHover
             v-if="currentlyHovered && !props.dialogVisible"
@@ -12,12 +17,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject } from 'vue';
+import { ref, onMounted, inject, watch } from 'vue';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from "gsap";
 import VHover from './VHover.vue'
+import VLoading from './VLoading.vue'
 
 const props = defineProps({
     dialogVisible: {
@@ -36,27 +42,14 @@ const props = defineProps({
 const emit = defineEmits(['openTextBox']);
 const inventory = inject('inventory');
 const currentlyHovered = ref('');
+const loadingFinished = ref(false);
+const loadingPercentage = ref(0);
 let loopCounter = 0;
 
 // Random
 function RandomNum(min, max){
     const n = min + (Math.random() * ((max + 1) - min));
     return n;
-}
-
-function RandomNumNoCenter(min, max){
-    let n = min + (Math.random() * ((max + 1) - min));
-    const average = (max + min) / 2;
-    const minMiddleRange = average - 3;
-    const maxMiddleRange = average + 3;
-    while(n < maxMiddleRange && n > minMiddleRange){
-        n = min + (Math.random() * ((max + 1) - min));
-    }
-    return n;
-}
-
-function RandomNumRound(min, max){
-  return Math.floor(RandomNum(min, max));
 }
 
 // Three.js
@@ -86,16 +79,62 @@ onMounted(() => {
     const myViewer = new Viewer(canvas.value, sizes);
     myViewer.populate();
     myViewer.animate();
+
+    
+
+    watch(() => props.background, (first, second) => {
+        myViewer.replaceAll();
+    })
+    
 });
+/**
+ * Loading
+ * */
+const loadingManager = new THREE.LoadingManager(
+    // Loaded
+    () => {
+        loadingFinished.value = true;
+    },
+
+    // Progress
+    (itemUrl, itemsLoaded, itemsTotal) => {
+        loadingPercentage.value = Math.round(itemsLoaded / itemsTotal * 100);
+    }
+);
 
 
-const textureLoader = new THREE.TextureLoader();
+
+
+
+const gltfLoader = new GLTFLoader(loadingManager);
+const dracoLoader = new DRACOLoader(loadingManager);
+const textureLoader = new THREE.TextureLoader(loadingManager);
 const textureGlitch = textureLoader.load('/3d/textures/glitch.png');
 const protaStill = textureLoader.load('/img/sprite-anim/0.png');
-const protaRunning = [textureLoader.load('/img/sprite-anim/1.png'), textureLoader.load('/img/sprite-anim/2.png'), textureLoader.load('/img/sprite-anim/3.png'), textureLoader.load('/img/sprite-anim/4.png')]
+const protaRunning = 
+    [
+        textureLoader.load('/img/sprite-anim/1.png'),
+        textureLoader.load('/img/sprite-anim/2.png'),
+        textureLoader.load('/img/sprite-anim/3.png'), 
+        textureLoader.load('/img/sprite-anim/4.png'),
+        textureLoader.load('/img/sprite-anim/5.png'),
+        textureLoader.load('/img/sprite-anim/6.png'),
+        textureLoader.load('/img/sprite-anim/7.png'),
+        textureLoader.load('/img/sprite-anim/8.png')
+    ]
 const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
-const textureProtaStill = new THREE.MeshBasicMaterial({ map: protaStill, transparent: true });
-const textureProtaRunning = [new THREE.MeshBasicMaterial({ map: protaRunning[0], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[1], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[2], transparent: true }), new THREE.MeshBasicMaterial({ map: protaRunning[3], transparent: true })];
+const textureProtaStill = new THREE.MeshBasicMaterial({ map: protaStill, transparent: true, side: THREE.DoubleSide });
+const textureProtaRunning = 
+    [
+        new THREE.MeshBasicMaterial({ map: protaRunning[0], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[1], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[2], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[3], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[4], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[5], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[6], transparent: true, side: THREE.DoubleSide }),
+        new THREE.MeshBasicMaterial({ map: protaRunning[7], transparent: true, side: THREE.DoubleSide })
+    ];
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
 
 var keyState = {};
@@ -190,8 +229,6 @@ populate() {
 
 
     // Model loader
-    const gltfLoader = new GLTFLoader();
-    const dracoLoader = new DRACOLoader();
     this.sceneElements = [];
     dracoLoader.setDecoderPath('/draco/');
     gltfLoader.setDRACOLoader(dracoLoader);
@@ -262,20 +299,32 @@ animate() {
     } );
 }
 
-animateSprite() {
+animateSprite(direction) {
     if(this.currentProtaSprite.running == false){
         this.currentProtaSprite.running = true;
         this.prota.material = textureProtaRunning[0];
     }
 
     if(loopCounter == 0){
-        if(this.currentProtaSprite.running = true && this.currentProtaSprite.status < 4){
+        if(this.currentProtaSprite.running = true && this.currentProtaSprite.status < textureProtaRunning.length){
             this.prota.material = textureProtaRunning[this.currentProtaSprite.status];
             this.currentProtaSprite.status += 1;
-        }else if(this.currentProtaSprite.running = true && this.currentProtaSprite.status == 4){
+        }else if(this.currentProtaSprite.running = true && this.currentProtaSprite.status == textureProtaRunning.length){
             this.currentProtaSprite.status = 0;
         }
     }
+}
+
+replaceAll() {
+    loadingPercentage.value = 0;
+    loadingFinished.value = false;
+    setTimeout(() => {
+        while (this.scene.children.length)
+        {
+            this.scene.remove(this.scene.children[0]);
+        }
+        this.populate();
+    }, 300)
 }
 
 render() {
@@ -322,11 +371,14 @@ render() {
     if (keyState[81] && this.camera.position.x > -0.85 && !props.dialogVisible){
         this.camera.position.x -= 0.01;
         this.prota.position.x -= 0.01;
+        this.prota.rotation.y = Math.PI;
+        this.animateSprite("right");
     }    
     if (keyState[68] && this.camera.position.x < 1 && !props.dialogVisible){
         this.camera.position.x += 0.01;
         this.prota.position.x += 0.01;
-        this.animateSprite();
+        this.prota.rotation.y = 0;
+        this.animateSprite("left");
     }
 
     if(!keyState[68] && !keyState[81] && this.prota.material !== textureProtaStill){

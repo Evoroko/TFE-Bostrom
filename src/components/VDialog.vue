@@ -22,16 +22,21 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['conversation-ended', 'inputCode']);
+const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel']);
 
 const texts = ref(props.script);
 const isDialogFull = ref(false);
 
 const currentDialogIndex = ref(0);
 const i = ref(0);
-const typedText = computed(() =>
-    texts.value[currentDialogIndex.value].text.slice(0, i.value + 1)
-);
+const typedText = computed(() => {
+    const currentText = texts.value[currentDialogIndex.value];
+    if (currentText && currentText.text) {
+      return currentText.text.slice(0, i.value + 1);
+    } else {
+      return '';
+    }
+});
 const currentName = computed(() => texts.value[currentDialogIndex.value].name);
 
 const previousSprite = ref('');
@@ -66,7 +71,7 @@ function testExisting(tested, previous) {
 
 
 watch(i, (newVal, oldVal) => {
-    if (newVal !== oldVal) {
+    if (newVal !== oldVal && texts.value[currentDialogIndex.value].text) {
         if (newVal < texts.value[currentDialogIndex.value].text.length) {
             setTimeout(() => {
             i.value++;
@@ -89,18 +94,24 @@ window.addEventListener('keydown', (e) => {
 let isItACode = false;
 
 const nextText = () => {
-    if (i.value === texts.value[currentDialogIndex.value].text.length) {
-        if(texts.value[currentDialogIndex.value].specialAction){
-            if(texts.value[currentDialogIndex.value].specialAction == 'code'){
-                isItACode = true;
+    if(texts.value[currentDialogIndex.value].text){
+        if (i.value === texts.value[currentDialogIndex.value].text.length) {
+            if(texts.value[currentDialogIndex.value].specialAction){
+                if(texts.value[currentDialogIndex.value].specialAction == 'code'){
+                    isItACode = true;
+                }
             }
+            isDialogFull.value = false;
+            currentDialogIndex.value++;
+            i.value = 0;
+        } else {
+            i.value = texts.value[currentDialogIndex.value].text.length;
         }
+    }else{
         isDialogFull.value = false;
         currentDialogIndex.value++;
-        i.value = 0;
-    } else {
-        i.value = texts.value[currentDialogIndex.value].text.length;
     }
+    
 
     if (currentDialogIndex.value >= texts.value.length) {
         setTimeout(() => {
@@ -118,6 +129,11 @@ const nextText = () => {
         }else if(texts.value[currentDialogIndex.value].inventory == 'remove'){
             inventory.value.removeItem(texts.value[currentDialogIndex.value].targetItem);
         }
+    }
+
+    if(texts.value[currentDialogIndex.value].jump){
+        emit('changeLevel', texts.value[currentDialogIndex.value].jump);
+        nextText();
     }
 
 };

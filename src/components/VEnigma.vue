@@ -1,17 +1,19 @@
 <template>
+    <VCodeOrder/>
     <VCodeInput v-if="canEnterCode == true" @code-attempt=" {attemptedCode = $event; verifyCode()}"/>
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
       @conversation-ended="selectedObject = null"
       @input-code="inputCode()"
+      @changeLevel="changeLevelIndex = $event; changeLevel()"
       class="dialog"/>
     <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem" @click-use="useSelectedItem()"/>
     <VThree
       @open-text-box="selectedObject = $event"
       :dialogVisible="!!selectedObject"
-      :dialogList="lvl1Dialog"
-      :background="'/3d/level-1-texture-2d-parallax-lvl1.glb'"/>
+      :dialogList="levelDialogs"
+      :background="background3d"/>
 </template>
 
 <script setup>
@@ -19,13 +21,28 @@ import VThree from './VThree.vue';
 import VInventory from './VInventory.vue';
 import VDialog from './VDialog.vue';
 import VCodeInput from './VCodeInput.vue';
-import { ref, provide, computed, watch } from 'vue';
-import Inventory from '../scripts/Inventory.js'
-import lvl1Dialog from '../scripts/lvl1-dialog.js'
-import lvl1Items from '../scripts/lvl1-items.js'
+import VCodeOrder from './VCodeOrder.vue';
+import { ref, inject, computed, watch } from 'vue';
+import itemsList from '../scripts/items.js'
 
-const inventory = ref(new Inventory());
-provide('inventory', inventory);
+const props = defineProps({
+  background3d: {
+    type: String,
+    required: false
+  },
+  levelDialogs: {
+    type: Array,
+     required: false
+  },
+  currentLevel: {
+    type: Number,
+     required: false
+  }
+})
+
+
+const inventory = inject('inventory');
+const emit = defineEmits(['changeLevel']);
 
 const selectedObject = ref(null);
 const isExisting = ref(false);
@@ -33,19 +50,27 @@ const inventoryActive = ref(undefined);
 const specialInteraction = ref(undefined);
 const canEnterCode = ref(false);
 const attemptedCode = ref(undefined);
+const changeLevelIndex = ref(undefined);
 const isUsingItem = ref(false);
 
 const useSelectedItem = () => {
   isUsingItem.value = true;
+  inventory.value.isUsing();
 }
 
 let defaultSpecialInteraction = [];
 
-for(let dialog of lvl1Dialog){
-  if(dialog.name == 'interaction-default'){
-    defaultSpecialInteraction = dialog.text;
+const loadDefaultInteraction = () => {
+  for(let dialog of props.levelDialogs){
+    if(dialog.name == 'interaction-default'){
+      defaultSpecialInteraction = dialog.text;
+    }
   }
 }
+
+loadDefaultInteraction();
+
+
 
 watch(selectedObject, (newVal, oldVal) => {
     if (newVal !== oldVal) {
@@ -53,12 +78,12 @@ watch(selectedObject, (newVal, oldVal) => {
       isExisting.value = false;
       let isSpecialDialog = false;
       
-      for(let dialog of lvl1Dialog){
+      for(let dialog of props.levelDialogs){
         if(selectedObject.value === dialog.name && isUsingItem.value == false){
           isExisting.value = true;
         }else if(selectedObject.value === dialog.name && isUsingItem.value == true){ // si objet possède un dialogue quelconque et que qqch est actif dans l'inventaire
           isExisting.value = true;
-          for(let specialDialog of lvl1Dialog){
+          for(let specialDialog of props.levelDialogs){
             if(('interaction-' + selectedObject.value) == specialDialog.name){ // s'il existe une interaction spéciale avec l'objet sélectionné
               isSpecialDialog = true;
               if(specialDialog.object == inventoryActive.value){ // si l'interaction se fait avec l'objet actif
@@ -91,7 +116,7 @@ watch(selectedObject, (newVal, oldVal) => {
 );
 
 const script = computed(() => {
-  for(let dialog of lvl1Dialog){
+  for(let dialog of props.levelDialogs){
     if(selectedObject.value === dialog.name && isUsingItem.value == false){
       if(dialog.checked == true){
         return dialog.defaultText;
@@ -101,13 +126,15 @@ const script = computed(() => {
     }else if(selectedObject.value === dialog.name && isUsingItem.value == true){
       inventory.value.setAllInactive();
       isUsingItem.value = false;
+      console.log("valeur specialInteraction avant d'être renvoyé comme dialogue :") // Pb ici, quand j'ai 2 niveaux, specialInteraction est vide
+      console.log(specialInteraction.value) // Pb ici, quand j'ai 2 niveaux, specialInteraction est vide
       return specialInteraction.value;
     }
   }
 
   if(selectedObject.value.includes('description-')){
     let selectedObjectInspect = selectedObject.value.replace('description-', '');
-    for(let item of lvl1Items){
+    for(let item of itemsList){
       if(selectedObjectInspect == item.name){
         return item.description;
       }
@@ -131,6 +158,14 @@ const verifyCode = () => {
     selectedObject.value = 'code-false'
   }
 }
+
+const changeLevel = () => {
+  emit('changeLevel', changeLevelIndex.value);
+}
+
+watch(() => props.levelDialogs, () => {
+  loadDefaultInteraction();
+})
 </script>
 
 <style lang="scss">

@@ -3,12 +3,39 @@
         <div class="cursor">
             <div class="cursor__effect cursor__effect--anim"></div>
         </div>
+        <div v-if="itemUsed" class="inventory__item cursor__img">
+                <div class="item">
+                    <img class="item__img" :src="'/img/items/' + itemUsed.name + '.png'" :alt="itemUsed.title">
+                </div>
+                
+        </div>
     </div>
 
 </template>
 
 <script setup>
-import { onUnmounted, onMounted, ref } from 'vue';
+import { onUnmounted, onMounted, ref, inject, watch } from 'vue';
+
+const itemUsed = ref(undefined);
+
+const inventory = inject('inventory');
+
+watch(inventory.value, (newVal, oldVal) => {
+  let isItemUsed = false;
+    if(inventory.value){
+      for(let item of inventory.value.items){
+        if(item.isUsed == true){
+          itemUsed.value = item;
+          isItemUsed = true
+        }
+      }
+    }
+
+    if(isItemUsed == false){
+      itemUsed.value = undefined;
+    }
+    
+});
 
 const mouseX = ref(0)
 const mouseY = ref(0)
@@ -116,6 +143,13 @@ onMounted(() => {
 
   &--pointer{
     animation: cursorPointer .2s forwards;
+  }
+
+  &__img{
+    transform: rotate(45deg) scale(0.7);
+    position: absolute;
+    right: 0px;
+    bottom: 8px;
   }
 }
 
