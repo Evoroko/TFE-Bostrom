@@ -1,19 +1,43 @@
 <template>
-    <VCodeOrder/>
-    <VCodeInput v-if="canEnterCode == true" @code-attempt=" {attemptedCode = $event; verifyCode()}"/>
+    <VMusicControl :music="playedMusic"/>
+    <VCodeOrder
+      v-if="canEnterCodeOrder == true"
+      @closeCode="canEnterCodeOrder = false"
+      :valid-code="[10, 16, 3, 7]"
+      @code-correct="verifyCodeOrder"
+    />
+    <VCodeInput
+      v-if="canEnterCode == true"
+      @closeCode="canEnterCode = false"
+      @code-attempt="{attemptedCode = $event; verifyCode()}"
+      :keyboardKeys="codeData.keyboardKeys"
+      :answer="codeData.answer"
+    />
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
       @conversation-ended="selectedObject = null"
-      @input-code="inputCode()"
+      @input-code="codeData = $event; inputCode()"
+      @input-code-order="inputCodeOrder()"
       @changeLevel="changeLevelIndex = $event; changeLevel()"
-      class="dialog"/>
-    <VInventory @inventory-active="inventoryActive = $event" @click-inspect="inspectItem" @click-use="useSelectedItem()"/>
+      @change-music="playedMusic = $event;"
+      @activate-switch="currentlyAddedSwitch = $event;activateSwitch();"
+      class="dialog"
+    />
+    <VInventory
+      @inventory-active="inventoryActive = $event"
+      @click-inspect="inspectItem"
+      @click-use="useSelectedItem()"
+      @clickCancel="isUsingItem = false"
+    />
     <VThree
+      v-if="background3d"
       @open-text-box="selectedObject = $event"
       :dialogVisible="!!selectedObject"
       :dialogList="levelDialogs"
-      :background="background3d"/>
+      :background="background3d"
+      @loadingFinished="loadIntro()"
+    />
 </template>
 
 <script setup>
@@ -22,6 +46,7 @@ import VInventory from './VInventory.vue';
 import VDialog from './VDialog.vue';
 import VCodeInput from './VCodeInput.vue';
 import VCodeOrder from './VCodeOrder.vue';
+import VMusicControl from './VMusicControl.vue';
 import { ref, inject, computed, watch } from 'vue';
 import itemsList from '../scripts/items.js'
 
@@ -49,9 +74,15 @@ const isExisting = ref(false);
 const inventoryActive = ref(undefined);
 const specialInteraction = ref(undefined);
 const canEnterCode = ref(false);
+const canEnterCodeOrder = ref(false);
 const attemptedCode = ref(undefined);
 const changeLevelIndex = ref(undefined);
 const isUsingItem = ref(false);
+const isCancelled = ref(false);
+const playedMusic = ref('no_music');
+const codeData = ref({});
+const activatedSwitches = ref([]);
+const currentlyAddedSwitch = ref();
 
 const useSelectedItem = () => {
   isUsingItem.value = true;
@@ -59,6 +90,7 @@ const useSelectedItem = () => {
 }
 
 let defaultSpecialInteraction = [];
+let introDialog = [];
 
 const loadDefaultInteraction = () => {
   for(let dialog of props.levelDialogs){
@@ -67,8 +99,18 @@ const loadDefaultInteraction = () => {
     }
   }
 }
+const loadIntro = () => {
+  for(let dialog of props.levelDialogs){
+    if(dialog.name == 'intro'){
+      dialog.checked = false;
+    }
+  }
+  selectedObject.value = 'intro';
+}
 
 loadDefaultInteraction();
+loadIntro();
+
 
 
 
@@ -86,8 +128,26 @@ watch(selectedObject, (newVal, oldVal) => {
           for(let specialDialog of props.levelDialogs){
             if(('interaction-' + selectedObject.value) == specialDialog.name){ // s'il existe une interaction spéciale avec l'objet sélectionné
               isSpecialDialog = true;
-              if(specialDialog.object == inventoryActive.value){ // si l'interaction se fait avec l'objet actif
-                specialInteraction.value = specialDialog.text;
+              if(specialDialog.object == inventoryActive.value){ // si l'interaction spéciale se fait bien avec l'objet actif
+                if(specialDialog.conditions){ // Y a-t-il un dialogue différent si on a déjà interagi avec certaines choses ?
+                  let conditionsMet = 0;
+                  for(let condition of specialDialog.conditions.requires){ // Pour chaque condition d'activation, vérifie ce qui a été activé ou non
+                    if(activatedSwitches.value[0]){
+                      for(let activatedSwitch of activatedSwitches.value){
+                        if(activatedSwitch == condition){
+                          conditionsMet += 1;
+                        }
+                      }
+                    }
+                  }
+                  if(conditionsMet == specialDialog.conditions.requires.length){ // Si tout ce qui devait être activé pour le dialogue nécessitant des conditions, renvoie le dialogue approprié
+                    specialInteraction.value = specialDialog.conditions.text;
+                  }else{
+                    specialInteraction.value = specialDialog.text;
+                  }
+                }else{
+                  specialInteraction.value = specialDialog.text;
+                }
               }else{
                 specialInteraction.value = defaultSpecialInteraction;
               }
@@ -118,16 +178,42 @@ watch(selectedObject, (newVal, oldVal) => {
 const script = computed(() => {
   for(let dialog of props.levelDialogs){
     if(selectedObject.value === dialog.name && isUsingItem.value == false){
-      if(dialog.checked == true){
-        return dialog.defaultText;
+
+      const returnDialog = () => {
+        if(dialog.checked == true){
+          return dialog.defaultText;
+        }
+        dialog.checked = true;
+        return dialog.text;
       }
-      dialog.checked = true;
-      return dialog.text;
+
+      if(dialog.conditions){
+        let conditionsMet = 0;
+        for(let condition of dialog.conditions.requires){
+          if(activatedSwitches.value[0]){
+            for(let activatedSwitch of activatedSwitches.value){
+              if(condition == activatedSwitch){
+                conditionsMet += 1;
+              }
+            }
+          }
+        }
+        if(conditionsMet == dialog.conditions.requires.length){
+          if(dialog.conditions.checked == true){
+            return dialog.conditions.defaultText;
+          }
+          dialog.conditions.checked = true;
+          return dialog.conditions.text;
+        }else{
+          return returnDialog();
+        }
+      }else{
+        return returnDialog();
+      }
+
     }else if(selectedObject.value === dialog.name && isUsingItem.value == true){
       inventory.value.setAllInactive();
       isUsingItem.value = false;
-      console.log("valeur specialInteraction avant d'être renvoyé comme dialogue :") // Pb ici, quand j'ai 2 niveaux, specialInteraction est vide
-      console.log(specialInteraction.value) // Pb ici, quand j'ai 2 niveaux, specialInteraction est vide
       return specialInteraction.value;
     }
   }
@@ -150,21 +236,52 @@ const inputCode = () => {
   canEnterCode.value = true;
 }
 
+const inputCodeOrder = () => {
+  canEnterCodeOrder.value = true;
+}
+
 const verifyCode = () => {
   canEnterCode.value = false;
   if(attemptedCode.value == true){
-    selectedObject.value = 'code-true'
+    selectedObject.value = 'code-true-' + codeData.value.name;
   }else{
-    selectedObject.value = 'code-false'
+    selectedObject.value = 'code-false-' + codeData.value.name;
   }
+}
+
+const verifyCodeOrder = () => {
+  canEnterCodeOrder.value = false;
+  selectedObject.value = 'code-order-true'  
 }
 
 const changeLevel = () => {
   emit('changeLevel', changeLevelIndex.value);
 }
 
+const activateSwitch = () => {
+  let alreadyExists = false;
+  for(let activatedSwitch of activatedSwitches.value){
+    if(activatedSwitch == currentlyAddedSwitch.value){
+      alreadyExists = true;
+    }
+  }
+
+  if(alreadyExists == false){
+    activatedSwitches.value.push(currentlyAddedSwitch.value);
+  }
+  
+}
+
+
 watch(() => props.levelDialogs, () => {
+  console.log('change of dialogs')
   loadDefaultInteraction();
+  for(let dialog of props.levelDialogs){
+    dialog.checked = false;
+    if(dialog.conditions){
+      dialog.conditions.checked = false;
+    }
+  }
 })
 </script>
 

@@ -73,12 +73,4 @@ const showTuto = () => {
     }
 }
 
-.bg{
-    position: fixed;
-    height: 100vh;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.247);
-    z-index: 1000;
-}
-
 </style>

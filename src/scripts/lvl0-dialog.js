@@ -6,20 +6,17 @@ export default [
             {
                 sprite: 'anaelle',
                 name: 'Anaëlle',
-                text: "Ça marche !"
+                text: "Fin de la démo. Merci d'avoir joué !"
             },
-            // {
-            //     sprite: 'roxy',
-            //     name: 'Roxy',
-            //     text: "*clap clap*"
-            // },
             {
-                jump: '1'
+                sprite: 'anaelle',
+                name: 'Anaëlle',
+                text: " Ne vous en faites pas, en théorie, il devrait y avoir plus de contenu d'ici le 12 juin. C'était juste histoire de pouvoir tester les fonctionnalités !"
             }
         ],
         defaultText: [
             {
-                text: "(C'est un test.)"
+                text: "C'est fini, allez, ouste. Y'a rien à voir."
             }
         ]
     }

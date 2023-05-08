@@ -5,6 +5,7 @@
       :text="typedText"
       :sprite="currentSprite"
       :spriteProta="currentSpriteProta"
+      :displayedItem="displayedItem"
       :background="currentBg"
       :is-dialog-full="isDialogFull"
     />
@@ -22,7 +23,7 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel']);
+const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel', 'inputCodeOrder', 'changeMusic', 'activateSwitch']);
 
 const texts = ref(props.script);
 const isDialogFull = ref(false);
@@ -54,6 +55,9 @@ const currentBg = computed(() => {
     return testExisting(texts.value[currentDialogIndex.value].background, previousBg);
 })
 
+const displayedItem = computed(() => {
+    return texts.value[currentDialogIndex.value].displayedItem;
+})
 
 function testExisting(tested, previous) {
     let test = tested;
@@ -92,6 +96,8 @@ window.addEventListener('keydown', (e) => {
 })
 
 let isItACode = false;
+let isItACodeOrder = false;
+let codeData;
 
 const nextText = () => {
     if(texts.value[currentDialogIndex.value].text){
@@ -99,8 +105,17 @@ const nextText = () => {
             if(texts.value[currentDialogIndex.value].specialAction){
                 if(texts.value[currentDialogIndex.value].specialAction == 'code'){
                     isItACode = true;
+                    codeData = texts.value[currentDialogIndex.value].code;
+                }else if(texts.value[currentDialogIndex.value].specialAction == 'code-order'){
+                    isItACodeOrder = true;
                 }
             }
+            
+
+            if(texts.value[currentDialogIndex.value].music){
+                emit('changeMusic', texts.value[currentDialogIndex.value].music);
+            }
+            
             isDialogFull.value = false;
             currentDialogIndex.value++;
             i.value = 0;
@@ -116,7 +131,9 @@ const nextText = () => {
     if (currentDialogIndex.value >= texts.value.length) {
         setTimeout(() => {
             if(isItACode == true){
-                emit('inputCode');
+                emit('inputCode', codeData);
+            }else if(isItACodeOrder == true){
+                emit('inputCodeOrder');
             }
             emit('conversation-ended');
         }, 1) // Délai car sinon le dernier clic qui ferme le dialogue en déclenche un autre immédiatement / cause des conflits
@@ -134,6 +151,10 @@ const nextText = () => {
     if(texts.value[currentDialogIndex.value].jump){
         emit('changeLevel', texts.value[currentDialogIndex.value].jump);
         nextText();
+    }
+
+    if(texts.value[currentDialogIndex.value].activateSwitch){
+        emit('activateSwitch', texts.value[currentDialogIndex.value].activateSwitch);
     }
 
 };

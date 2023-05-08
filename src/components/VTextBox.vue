@@ -1,7 +1,7 @@
 <template>
 
     <div class="textbox">
-        <div class="textbox__name" v-if="name !== 'none' && name">
+        <div class="textbox__name" v-if="name !== 'none' && name && name != 'Anaëlle'">
             <p>{{ name }}</p>
         </div>
         <div class="textbox__content">
@@ -10,6 +10,10 @@
                 <VJumpText v-if="isDialogFull"/>
             </div>
         </div>
+    </div>
+
+    <div v-if="name !== 'none' && name && name == 'Anaëlle'" class="textbox__name textbox__name--prota">
+            <p>{{ name }}</p>
     </div>
 
 </template>
@@ -33,7 +37,7 @@ const props = defineProps({
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
 .textbox{
     width: 100%;
@@ -72,6 +76,26 @@ const props = defineProps({
             content: "";
             height: 48px;
             width: calc((100vw - 800px) / 2);
+        }
+
+        &--prota{
+            position: fixed;
+            right: 0;
+            bottom: 160px;
+            top: auto;
+            left: auto;
+            padding: 8px 0 8px 16px;
+            z-index: 102;
+
+            &::before{
+                content: none;
+            }
+
+            &::after{
+                content: "";
+                height: 48px;
+                width: calc((100vw - 800px) / 2);
+            }
         }
     }
 

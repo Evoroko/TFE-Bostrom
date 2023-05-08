@@ -19,7 +19,7 @@ provide('inventory', inventory);
 
 <template>
   <VCursor/>
-  <p v-if="isDeviceMobile == true">L'expérience sur téléphone ou tablette n'est pas optimale. Veuillez utiliser un ordinateur pour accéder à cette page. (ou actualiser si vous avez réduit la taille de la fenêtre ou du viewport)</p>
+  <p v-if="isDeviceMobile == true">L'expérience sur téléphone ou tablette n'est pas optimale. Si malgré tout vous tenez à essayer sur téléphone, passez en mode paysage et actualisez la page.</p>
   <!-- <VTuto v-if="isDeviceMobile == false"/> -->
   <VStructure v-if="isDeviceMobile == false"/>
   <!-- <VEnigma v-if="isDeviceMobile == false"/> -->

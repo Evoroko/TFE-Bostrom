@@ -39,8 +39,7 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['openTextBox']);
-const inventory = inject('inventory');
+const emit = defineEmits(['openTextBox', 'loadingFinished']);
 const currentlyHovered = ref('');
 const loadingFinished = ref(false);
 const loadingPercentage = ref(0);
@@ -94,6 +93,7 @@ const loadingManager = new THREE.LoadingManager(
     // Loaded
     () => {
         loadingFinished.value = true;
+        emit('loadingFinished');
     },
 
     // Progress
@@ -251,8 +251,6 @@ populate() {
     this.cube2 = new InteractiveObject('cube2');
     this.cube2.position.set(-1,-1, 0)
 
-    // this.scene.add(this.cube, this.cube2);
-
     // Glitches
     // for(let i = 0; i<30; i++){
     //   this.glitch = new Glitch();
@@ -278,7 +276,6 @@ populate() {
     // Raycaster
     this.raycaster = new THREE.Raycaster()
     this.currentIntersect = null;
-    // this.lastHovered = null;
 
     // Add to inventory    
     this.canvas.addEventListener('click', () => {
@@ -342,10 +339,7 @@ render() {
     this.raycaster.setFromCamera(this.mouse, this.camera)
     this.intersects = this.raycaster.intersectObjects(this.sceneElements)
 
-    if(this.intersects.length !== 0){ // removed "&& this.lastHovered !== this.intersects[0].object" because if it missed the object then it never showed on mouse hover
-        // if(this.currentIntersect == null){
-        //     this.lastHovered = this.intersects[0].object;
-        // }
+    if(this.intersects.length !== 0){
         this.currentIntersect = this.intersects[0];
         currentlyHovered.value = this.intersects[0].object.name;
         let isExisting = false;
@@ -356,15 +350,11 @@ render() {
                 this.canvas.style.cursor = 'pointer';
             }
         }
-        if(isExisting == false){
+        if(isExisting == false){ // Masquer ce bloc pour checker le nom des objets 3D
             currentlyHovered.value = '';
             this.canvas.style.cursor = 'auto';
         }
-        // console.log(this.currentIntersect.object.name)
     }else{
-        // if(this.currentIntersect !== null){
-        //     // this.lastHovered.material.color.set('#ff0000');
-        // }
         this.currentIntersect = null;
     }
 

@@ -2,11 +2,14 @@
     <div class="loading">
         <p>Chargement…</p>
         <p class="loading__percentage">{{ percentage }}%</p>
-        <div class="loadingBar">
-            <div class="loadingBar__progress--left"></div>
-            <div class="loadingBar__progress"></div>
-            <div class="loadingBar__progress--right"></div>
+        <div class="loadingBar__container">
+            <div class="loadingBar">
+                <div class="loadingBar__progress--left"></div>
+                <div class="loadingBar__progress"></div>
+                <div class="loadingBar__progress--right"></div>
+            </div>
         </div>
+
     </div>
 
 </template>
@@ -44,6 +47,12 @@ onMounted(() => {
     transition: .3s;
     z-index: 1000;
     font: var(--exo-31px-medium);
+    
+    & > * {
+        user-select: none;
+        touch-action: none;
+    }
+    
 
     display: flex;
     flex-direction: column;
@@ -72,29 +81,37 @@ onMounted(() => {
     &Bar{
         height: 20px;
         width: 400px;
-        border: 1px solid var(--c-txt);
+        // border: 1px solid var(--c-txt);
         border-left: none;
         border-right: none;
         background-color: var(--grey-1000);
         padding: 4px;
         position: relative;
         display: flex;
+
+        &__container{
+            filter: drop-shadow(0 1px 0 var(--c-txt)) drop-shadow(0 -1px 0 var(--c-txt)) drop-shadow(1px 0 0 var(--c-txt)) drop-shadow(-1px 0 0 var(--c-txt));
+        }
         
         &::after, &::before{
             content: "";
             position: absolute;
-            left: -10px;
-            top: 3.5px;
+            left: -32px;
+            top: 0;
             z-index: -1;
-            width: 20px;
-            height: 20px;
-            transform: rotate(45deg);
-            border: 1px solid var(--c-txt);
+            width: 32px;
+            height: 100%;
+            border-top: 1px solid var(--c-txt);
+            border-bottom: 1px solid var(--c-txt);
+            box-sizing: border-box;
+            background-color: var(--grey-1000);
+            clip-path: polygon(50% 50%, 100% 100%, 100% 0);
         }
 
         &::after{
             left: auto;
-            right: -10px;
+            right: -32px;
+            clip-path: polygon(50% 50%, 0 100%, 0 0);
         }
 
         &__progress{
@@ -107,18 +124,20 @@ onMounted(() => {
             &::after, &::before{
                 content: "";
                 position: absolute;
-                left: -7px;
-                top: 3.5px;
+                left: -16px;
+                top: 0;
                 z-index: -1;
-                width: 14px;
-                height: 14px;
-                transform: rotate(45deg);
+                height: 100%;
+                width: 16px;
+                // transform: rotate(45deg);
                 background-color: var(--c-txt);
+                clip-path: polygon(50% 50%, 100% 100%, 100% 0);
             }
 
             &::after{
                 left: auto;
-                right: -7px;
+                right: -16px;
+                clip-path: polygon(50% 50%, 0 100%, 0 0);
             }
         }
     }

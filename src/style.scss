@@ -24,7 +24,7 @@
   --main-yellow: #ffd900; 
   --gradient-white: linear-gradient(1deg, #ffffff 0%, #ffffff 46.15%, #ffffff 100%); 
   --transparent-black-80: rgb(13, 13, 13, .8); 
-  --transparent-black-60: #0d0d0d; 
+  --transparent-black-60: rgb(13, 13, 13, .6); 
   --agrandir-default: 300 1rem/1.5 PP Agrandir Variable;
   --agrandir-16px-bold: 700 1rem/1.5 PP Agrandir Variable; 
   --agrandir-20px-light: 300 1.25rem/1.5 PP Agrandir Variable; 
@@ -74,12 +74,42 @@ body{
 .title{
   font: var(--exo-31px-medium);
   text-transform: uppercase;
+  text-align: center;
 
   &--medium{
     font: var(--exo-20px-medium);
   }
 
+  &--big{
+    font: var(--exo-61px-medium);
+  }
+
   &--small{
     font: var(--exo-16px-medium);
+  }
+}
+
+
+
+.bg{
+  position: fixed;
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(13, 13, 13, 0.3);
+  z-index: 1000;
+
+  &--white{
+    background-color: #e7e7e783;
+  }
+}
+
+
+@keyframes fadeIn {
+  0%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
   }
 }

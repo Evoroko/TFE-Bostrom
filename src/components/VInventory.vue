@@ -35,7 +35,7 @@
 
 <div v-if="activeIndex !== undefined && isUsingItem == true" class="useBanner">
     <p>Sur quoi souhaitez-vous utiliser «&nbsp;{{ inventory.items[activeIndex].title }}&nbsp;» ?</p>
-    <VButton @click="isUsingItem = false; inventory.setAllUnused()">Annuler</VButton>
+    <VButton @click="cancelUse()">Annuler</VButton>
 </div>
 
 </template>
@@ -43,14 +43,19 @@
 <script setup>
 import VButton from './VButton.vue'
 import { ref, inject, watch } from 'vue';
-import Inventory from '../scripts/Inventory.js'
 
 const inventory = inject('inventory');
-const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse']);
+const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse', 'clickCancel']);
 
 const activeIndex = ref(undefined);
 const openInventory = ref(false);
 const isUsingItem = ref(false);
+
+function cancelUse(){
+    isUsingItem.value = false;
+    inventory.value.setAllUnused();
+    emit('clickCancel');
+}
 
 function clickInspect(){
     if(activeIndex.value !== undefined){
