@@ -17,11 +17,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted, inject, watch } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
-import { gsap } from "gsap";
+import { gsap, Power1 } from "gsap";
 import VHover from './VHover.vue'
 import VLoading from './VLoading.vue'
 
@@ -36,6 +36,10 @@ const props = defineProps({
     },
     background:{
         type: String,
+        required: false
+    },
+    activatedSwitches: {
+        type: Array,
         required: false
     }
 })
@@ -63,6 +67,10 @@ const sizes = {
     dpr: Math.min(window.devicePixelRatio, 2),
 };
 
+
+let animateTrafficCount = 1;
+let animatBoardCount = 0;
+
 onMounted(() => {
     // Get the DOM elements
     canvas.value = document.querySelector('.canvas');
@@ -78,13 +86,23 @@ onMounted(() => {
     const myViewer = new Viewer(canvas.value, sizes);
     myViewer.populate();
     myViewer.animate();
-
-    
+    myViewer.animateTraffic();
+    myViewer.animateBoard();
+    myViewer.animateBenches();
+    myViewer.animateFountain();
 
     watch(() => props.background, (first, second) => {
         myViewer.replaceAll();
     })
     
+    watch(() => props.activatedSwitches.length, () => {
+        for(let activatedSwitch of props.activatedSwitches){
+            if(activatedSwitch == 'streetlight-off'){
+                myViewer.updateStreetlight();
+            }
+        }
+    })
+
 });
 /**
  * Loading
@@ -94,6 +112,7 @@ const loadingManager = new THREE.LoadingManager(
     () => {
         loadingFinished.value = true;
         emit('loadingFinished');
+ 
     },
 
     // Progress
@@ -101,7 +120,6 @@ const loadingManager = new THREE.LoadingManager(
         loadingPercentage.value = Math.round(itemsLoaded / itemsTotal * 100);
     }
 );
-
 
 
 
@@ -136,6 +154,8 @@ const textureProtaRunning =
         new THREE.MeshBasicMaterial({ map: protaRunning[7], transparent: true, side: THREE.DoubleSide })
     ];
 const planeGeometry = new THREE.PlaneGeometry(1, 1);
+const particleFountainMesh = new THREE.SphereGeometry(0.02, 4, 4);
+const particleFountainMaterial = new THREE.MeshBasicMaterial( {color: 0xffffff} );
 
 var keyState = {};
 window.addEventListener('keydown',function(e){
@@ -167,16 +187,34 @@ class Glitch{
     }
 }
 
-class InteractiveObject{
-    constructor(name){
-        const object = new THREE.Mesh(
-            new THREE.BoxGeometry(1, 1, 1),
-            new THREE.MeshBasicMaterial( {color: 0x00ff00} )
-        )
-        object.name = name;
-        return object;
+class Particle{
+  constructor(animTime){
+    this.mesh = new THREE.Mesh(
+      particleFountainMesh,
+      particleFountainMaterial
+    );
+    this.mesh.position.set((RandomNum(-10, -2) / 30), -0.2, 8.6);
+    this.duration = animTime;
+    this.changePosition();
+    return this.mesh;
+  }
+    changePosition(){
+        gsap.to(this.mesh.position, {
+            y: this.mesh.position.y + RandomNum(2, 40) / 80,
+            ease: Power1.easeInOut,
+            duration: this.duration
+        });
+
+        gsap.to(this.mesh.scale, {
+            x: 0,
+            y: 0,
+            z: 0,
+            duration: this.duration
+        });
     }
 }
+
+
 
 
 class Viewer {
@@ -213,6 +251,13 @@ setRenderer(sizes) {
         this.camera.updateProjectionMatrix();
         this.renderer.render(this.scene, this.camera);
     })
+
+    
+
+    window.addEventListener('mousemove', (e) => {
+        this.mouse.x = mouseX.value / sizes.w * 2 - 1
+        this.mouse.y = - (mouseY.value / sizes.h) * 2 + 1;
+    })
 }
 
 populate() {
@@ -228,6 +273,13 @@ populate() {
     this.scene.fog = this.fog
 
 
+    // Animation data
+    this.trafficlights;
+    this.trafficLightsTextures = [];
+    this.board;
+    this.boardTextures = [];
+    this.benches = [];
+
     // Model loader
     this.sceneElements = [];
     dracoLoader.setDecoderPath('/draco/');
@@ -242,14 +294,32 @@ populate() {
                 child.position.z = child.position.z + 8
                 this.scene.add(child)
                 this.sceneElements.push(child);
+
+                if(child.name.includes('0')){
+                    child.name = child.name.substring(0, child.name.length - 3);
+                }
+
+                if(child.name == 'bench'){
+                    this.benches.push(child);
+                }
+                
+                if(child.name.includes('trafficlights')){
+                    this.trafficLightsTextures.push(child.material);
+                    if(child.name == 'trafficlights'){
+                        this.trafficlights = child;
+                    }
+                }
+                if(child.name == 'board'){
+                    this.board = child;
+                    this.boardTextures[0] = child.material;
+                }else if(child.name == 'board-2'){
+                    this.boardTextures[1] = child.material;
+                }
+                
             }
+            this.animateBenches();
         }
     )
-
-    // Test cube
-    this.cube = new InteractiveObject('cube');
-    this.cube2 = new InteractiveObject('cube2');
-    this.cube2.position.set(-1,-1, 0)
 
     // Glitches
     // for(let i = 0; i<30; i++){
@@ -257,12 +327,12 @@ populate() {
     //   this.scene.add(this.glitch);
     // }
 
+
     // Model running
     this.prota = new THREE.Mesh(
             new THREE.PlaneGeometry(0.2, 0.35),
             textureProtaStill
         )
-
     this.prota.position.set(0, -0.1, 9.2);
     this.currentProtaSprite = {
         running: false,
@@ -271,7 +341,6 @@ populate() {
     };
 
     this.scene.add(this.prota);
-
 
     // Raycaster
     this.raycaster = new THREE.Raycaster()
@@ -324,6 +393,114 @@ replaceAll() {
     }, 300)
 }
 
+updateStreetlight(){
+    let toReplace;
+    for(let child of this.scene.children){
+
+        if(child.name == 'streetlight-on'){
+            toReplace = child;
+        }
+    }
+    for(let child of this.scene.children){
+        if(child.name == 'streetlight-off'){
+            
+            for(let [index, sceneElement] of this.sceneElements.entries()){
+                if(sceneElement.name == 'streetlight-off'){
+                    this.sceneElements.splice(index, 1);
+                }
+            }
+
+            this.scene.remove(child);
+            let streetlightUpdated = toReplace.clone();
+            streetlightUpdated.position.x -= 0.4;
+            streetlightUpdated.position.y -= 0.02;
+            streetlightUpdated.rotation.z = Math.PI;
+
+            streetlightUpdated.name = 'streetlight-on';
+
+            this.sceneElements.push(streetlightUpdated);
+
+            this.scene.add(streetlightUpdated);
+        }
+    }
+}
+
+animateTraffic(){
+
+    if(this.trafficLightsTextures[1]){
+
+        this.trafficlights.material = this.trafficLightsTextures[animateTrafficCount];
+
+        if(animateTrafficCount < 1){
+            animateTrafficCount +=1
+        }else{
+            animateTrafficCount = 0;
+        }
+    }
+
+    setTimeout(() => {
+        this.animateTraffic();
+    }, 2000)
+}
+
+animateBoard(){
+    if(this.boardTextures[1]){
+        
+        if(animatBoardCount < 3){
+            animatBoardCount += 1;
+
+            this.board.material = this.boardTextures[0];
+        }else{
+            animatBoardCount = 0;
+            this.board.material = this.boardTextures[1];
+        }
+        
+
+    }
+
+    setTimeout(() => {
+        this.animateBoard();
+    }, (10 + (Math.random() * 1000)))
+    
+}
+
+animateBenches(){
+    if(this.benches[9]){
+
+        for(let bench of this.benches){
+            gsap.to(bench.position, {
+                y: bench.position.y + RandomNum(1, 4) / 80,
+                ease: Power1.easeInOut,
+                repeat: -1,
+                duration:  RandomNum(2, 5),
+                yoyo: true
+            });
+        }
+
+        
+    }
+}
+
+animateFountain(){
+
+    for(let i = 0; i < 100; i++){
+        setTimeout(() => {
+            let duration = RandomNum(2, 5);
+            let particleFountain = new Particle(duration);
+            this.scene.add(particleFountain)
+
+            setTimeout(() => {
+                this.scene.remove(particleFountain);
+
+                if(i == 99){
+                    this.animateFountain();
+                }
+            }, (duration * 1000));
+        }, (RandomNum(0, 5) * 1000))
+        
+    }
+}
+
 render() {
 
     if(loopCounter < 3){
@@ -332,10 +509,6 @@ render() {
         loopCounter = 0;
     }
 
-    window.addEventListener('mousemove', (e) => {
-        this.mouse.x = mouseX.value / sizes.w * 2 - 1
-        this.mouse.y = - (mouseY.value / sizes.h) * 2 + 1;
-    })
     this.raycaster.setFromCamera(this.mouse, this.camera)
     this.intersects = this.raycaster.intersectObjects(this.sceneElements)
 

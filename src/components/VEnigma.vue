@@ -1,43 +1,57 @@
 <template>
+  <VTutoDialog/>
+  <div class="topfunctions">
     <VMusicControl :music="playedMusic"/>
-    <VCodeOrder
-      v-if="canEnterCodeOrder == true"
-      @closeCode="canEnterCodeOrder = false"
-      :valid-code="[10, 16, 3, 7]"
-      @code-correct="verifyCodeOrder"
-    />
-    <VCodeInput
-      v-if="canEnterCode == true"
-      @closeCode="canEnterCode = false"
-      @code-attempt="{attemptedCode = $event; verifyCode()}"
-      :keyboardKeys="codeData.keyboardKeys"
-      :answer="codeData.answer"
-    />
+    <VButton class="tuto__openBtn" @click="openTuto = true" v-if="hideHover == false">Aide</VButton>
+  </div>
+  <VTuto
+    @closeTuto="openTuto = false"
+    v-if="openTuto == true"
+  />
+  <VCodeOrder
+    v-if="canEnterCodeOrder == true"
+    @closeCode="canEnterCodeOrder = false"
+    :valid-code="[10, 16, 3, 7]"
+    @code-correct="verifyCodeOrder"
+  />
+  <VCodeInput
+    v-if="canEnterCode == true"
+    @closeCode="canEnterCode = false"
+    @code-attempt="{attemptedCode = $event; verifyCode()}"
+    :keyboardKeys="codeData.keyboardKeys"
+    :answer="codeData.answer"
+  />
+  <Transition name="test" mode="out-in">
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
       @conversation-ended="selectedObject = null"
       @input-code="codeData = $event; inputCode()"
       @input-code-order="inputCodeOrder()"
+      @showTuto="openTuto = true"
       @changeLevel="changeLevelIndex = $event; changeLevel()"
       @change-music="playedMusic = $event;"
       @activate-switch="currentlyAddedSwitch = $event;activateSwitch();"
       class="dialog"
     />
-    <VInventory
-      @inventory-active="inventoryActive = $event"
-      @click-inspect="inspectItem"
-      @click-use="useSelectedItem()"
-      @clickCancel="isUsingItem = false"
-    />
-    <VThree
-      v-if="background3d"
-      @open-text-box="selectedObject = $event"
-      :dialogVisible="!!selectedObject"
-      :dialogList="levelDialogs"
-      :background="background3d"
-      @loadingFinished="loadIntro()"
-    />
+  </Transition>
+  
+  <VInventory
+    v-if="hideHover == false"
+    @inventory-active="inventoryActive = $event"
+    @click-inspect="inspectItem"
+    @click-use="useSelectedItem()"
+    @clickCancel="isUsingItem = false"
+  />
+  <VThree
+    v-if="background3d"
+    @open-text-box="selectedObject = $event"
+    :dialogVisible="hideHover"
+    :dialogList="levelDialogs"
+    :background="background3d"
+    @loadingFinished="loadIntro()"
+    :activatedSwitches="activatedSwitches"
+  />
 </template>
 
 <script setup>
@@ -47,6 +61,9 @@ import VDialog from './VDialog.vue';
 import VCodeInput from './VCodeInput.vue';
 import VCodeOrder from './VCodeOrder.vue';
 import VMusicControl from './VMusicControl.vue';
+import VButton from './VButton.vue';
+import VTuto from './VTuto.vue'
+import VTutoDialog from './VTutoDialog.vue'
 import { ref, inject, computed, watch } from 'vue';
 import itemsList from '../scripts/items.js'
 
@@ -78,11 +95,19 @@ const canEnterCodeOrder = ref(false);
 const attemptedCode = ref(undefined);
 const changeLevelIndex = ref(undefined);
 const isUsingItem = ref(false);
-const isCancelled = ref(false);
 const playedMusic = ref('no_music');
 const codeData = ref({});
 const activatedSwitches = ref([]);
 const currentlyAddedSwitch = ref();
+const openTuto = ref(false);
+
+const hideHover = computed(() => {
+  if(openTuto.value == false && !!selectedObject.value == false && canEnterCode.value == false && canEnterCodeOrder.value == false){
+    return false;
+  }
+
+  return true;
+})
 
 const useSelectedItem = () => {
   isUsingItem.value = true;
@@ -274,7 +299,6 @@ const activateSwitch = () => {
 
 
 watch(() => props.levelDialogs, () => {
-  console.log('change of dialogs')
   loadDefaultInteraction();
   for(let dialog of props.levelDialogs){
     dialog.checked = false;
@@ -289,5 +313,20 @@ watch(() => props.levelDialogs, () => {
 .dialog{
     position: relative;
     z-index: 1000;
+}
+
+.topfunctions{
+  position: fixed;
+  z-index: 1100;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 8px;
+  align-items: center;
+}
+
+.tuto__openBtn{
+  animation: .3s slideinLeft;
 }
 </style>

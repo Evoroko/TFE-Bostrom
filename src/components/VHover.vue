@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 
 const props = defineProps({
     mouseX: {
@@ -26,24 +26,26 @@ const props = defineProps({
     }
 })
 
+let mouseFollow;
+
+const definePosition = () => {
+    mouseFollow.style.cssText = `
+            left: ${props.mouseX + 18}px;
+            top:  ${props.mouseY - 40}px;
+            display: block;
+    `;
+}
+
 onMounted(() => {
-    const mouseFollow = document.getElementById('popup');
+    mouseFollow = document.getElementById('popup');
+    definePosition();
 
-    const definePosition = (x, y) => {
-        mouseFollow.style.cssText = `
-                left: ${x + 18}px;
-                top:  ${y - 40}px;
-                display: block;
-        `;
-    }
-
-    definePosition(props.mouseX, props.mouseY);
-
-    document.addEventListener('mousemove', (e) => {
-        definePosition(props.mouseX, props.mouseY);
-    });
+    document.addEventListener('mousemove', definePosition);
 });
 
+onUnmounted(() => {
+    document.removeEventListener('mousemove', definePosition);
+})
 
 
 </script>

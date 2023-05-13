@@ -1,330 +1,331 @@
 export default [
-    {
-        name: 'intro',
-        text: [
-            {
-                music: 'exploration_track',
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Hein ?"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Qu’est-ce que…"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "C’est quoi cet endroit ?"
-            },
-            {
-                spriteProta: 'none',
-                text: "J'ai regardé autour de moi, paniquée."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Mais qu’est-ce que c’est que ce délire…?"
-            },
-            {
-                spriteProta: 'none',
-                text: "En levant la tête, j’ai pu constater que je me trouvais dans un endroit qui ne m’était pas familier et qui ne m’évoquait rien de sain."
-            },
-            {
-                text: "J’ai tourné la tête, cherchant à faire sens de ce que j’observais."
-            },
-            {
-                text: "Des bâtiments tournés de manière anormale, des bancs au beau milieu des airs, une fontaine dont les couleurs apparaissaient comme une vidéo corrompue…"
-            },
-            {
-                text: "La route s’arrêtait au bout de quelques mètres, et au-delà, il n’y avait qu’un sol gris qui semblait s’étendre à perte de vue dans un désert monochrome."
-            },
-            {
-                text: "Je restais là, bouche bée, incapable de comprendre la situation dans laquelle je me trouvais."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Je… Je suis sûrement en train de rêver…"
-            },
-            {
-                spriteProta: 'none',
-                text: "C’était ce qui paraissait le plus évident. Je me suis alors pincé la joue, comme tout bon protagoniste qui chercherait désespérément à se sortir d’une situation infernale."
-            },
-            {
-                text: "…"
-            },
-            {
-                text: "J’ai pincé plus fort."
-            },
-            {
-                text: "…"
-            },
-            {
-                text: "Toujours rien. Je restais au même endroit, clouée sur place, sans signe d’un quelconque éveil dans mon lit au milieu de la nuit."
-            },
-            {
-                text: "Calme. Du calme. Il faut rester calme. Se calmer. Respirer. Ne pas paniquer."
-            },
-            {
-                text: "…Ne pas paniquer."
-            },
-            {
-                text: "J’ai pris une profonde inspiration, tentant de contenir au mieux l’agitation qui se réveillait en moi. Tout allait bien. Il fallait absolument que je garde mon sang-froid. Je n’étais a priori pas en danger—"
-            },
-            {
-                name: 'Voix',
-                text: "Votre attention s’il vous plait. Vous êtes en danger de mort."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "C’est une blague ?!"
-            },
-            {
-                name: 'Voix',
-                text: "Le taux en oxygène va graduellement baisser. Trouvez un moyen d’ouvrir la porte avant de rencontrer votre fin."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Qui parle ?! Qui ?"
-            },
-            {
-                spriteProta: 'none',
-                text: "…"
-            },
-            {
-                text: "Plus un bruit."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Eh ! Si c’est une blague, c’est vraiment pas drôle ! Montrez-vous, lâche !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Eh oh, je vous parle !"
-            },
-            {
-                spriteProta: 'none',
-                text: "…"
-            },
-            {
-                text: "Toujours rien."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…Bon sang."
-            },
-            {
-                spriteProta: 'none',
-                text: "J’ai mis une main sur mon front, fermant hermétiquement les yeux pour essayer de donner un sens à ma situation."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "C’est une caméra cachée…? Ou une hallucination ? Ça y est, je suis devenue folle ?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Moi j’ai pas vu de caméra."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Ah !!"
-            },
-            {
-                spriteProta: 'none',
-                text: "J’ai sursauté en entendant une voix féminine derrière moi."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Qu’est-ce que vous voulez ? Vous m’avez emmenée ici ?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Hein ? Moi ? Non non non, j’ai rien fait moi !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…Alors qu’est-ce qui se passe ?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Tu ne vas peut-être pas me croire, mais on a été enlevés par des extraterrestres."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Quoi…?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Oui ! C’est sûr ! Regarde, tout a bougé et tout flotte dans les airs ! Qui d’autre que des extraterrestres pourrait faire ça ?"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Ah… D’accord, je vois le genre…"
-            },
-            {
-                spriteProta: 'none',
-                text: "J’ai soupiré. Cette fille était probablement du genre à aller hâtivement vers les conclusions."
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Et puis tu as entendu la voix ?! Je ne savais pas que les extraterrestres parlaient français !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Moi non plus, première nouvelle."
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Tu ne me crois pas, c’est ça ? Alors comment tu expliques tout ce qui se passe, hein ? Les reptiliens ? Les illuminati ?"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…Je l’expliquerais si je savais, mais pas avec les reptiliens ou les illuminati en tout cas."
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Le gouvernement alors ! Bon sang, tu es trop futée pour moi, tu y as pensé directement."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Mais non mais—"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Laisse tomber. Tu as raison. C’est le méchant gouvernement qui a décidé de kidnapper deux pauvres jeunes filles tout à fait banales pour les mettre dans une situation absurde parce que… Parce que."
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Héhéhé… Toi, banale, peut-être, mais moi non."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Ton air fier m’inquiète."
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Figure-toi qu’ils auraient toutes les raisons de me kidnapper ! J’ai compris leurs secrets et j’en ai discuté sur Reddit… J’aurais sûrement dû être plus prudente."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Reddit ? L’espèce de forum en ligne..?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Ouais ! Récemment j’ai exposé leur secret sur la zone 51, j’aurais peut-être dû utiliser un code et ne pas parler directement d’extraterrestre, peut-être qu’ils n’auraient pas tenté de m’éliminer en m’amenant ici…"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "(Elle nage en plein délire, on dirait.)"
-            },
-            {
-                spriteProta: 'none',
-                sprite: 'none',
-                name: 'Voix',
-                text: "90% d’oxygène restant."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Hein…?"
-            },
-            {
-                spriteProta: 'none',
-                text: "Je ne savais pas si c’était l’angoisse ou si l’oxygène se raréfiait réellement, mais je commençais à avoir du mal à respirer."
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "(Ça ne doit pas être réel… C’est sûrement une espèce d’escape game en immersion, quelque chose du genre. On ne doit pas vraiment être en danger.)"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "(…Mais je ne sais toujours pas comment je me suis retrouvée là. Dans le doute, il faudrait peut-être…)"
-            },
-            {
-                sprite: 'roxy',
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "…! Hé, avec tes grands talents de détective ou je ne sais pas trop quoi, tu ne voudrais pas m’aider à chercher comment se sortir de cette situation ?"
-            },
-            {
-                sprite: 'roxy',
-                name: '???',
-                text: "Héhéhé… Mais bien sûr ma chère ! Je vais régler ça en un claquement de doigts. Le gouvernement avait raison de me craindre !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "Allez, au boulot madame la détective, je crois qu’on n’a pas trop le temps là."
-            },
-            {
-                sprite: 'roxy',
-                name: 'Roxy',
-                text: "Tu peux m’appeler Roxy !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "D’accord, Roxy. Je m’appelle Anaëlle. Mais dépêche-toi, on n’a pas le temps."
-            },
-            {
-                sprite: 'roxy',
-                name: 'Roxy',
-                text: "Reçu 5 sur 5 ! Anaëlle et Roxy, en mission pour échapper aux espions du gouvernement !"
-            },
-            {
-                spriteProta: 'anaelle',
-                name: 'Anaëlle',
-                text: "(Il y a des espions dans son délire maintenant…?)"
-            }
-        ],
-        defaultText: [
-            {
-                text: "texte défaut intro niveau déformé"
-            }
-        ]
-    },
+    // {
+    //     name: 'intro',
+    //     text: [
+    //         {
+    //             music: 'exploration_track',
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Hein ?"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Qu’est-ce que…"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "C’est quoi cet endroit ?"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "J'ai regardé autour de moi, paniquée."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Mais qu’est-ce que c’est que ce délire…?"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "En levant la tête, j’ai pu constater que je me trouvais dans un endroit qui ne m’était pas familier et qui ne m’évoquait rien de sain."
+    //         },
+    //         {
+    //             text: "J’ai tourné la tête, cherchant à faire sens de ce que j’observais."
+    //         },
+    //         {
+    //             text: "Des bâtiments tournés de manière anormale, des bancs au beau milieu des airs, une fontaine dont les couleurs apparaissaient comme une vidéo corrompue…"
+    //         },
+    //         {
+    //             text: "La route s’arrêtait au bout de quelques mètres, et au-delà, il n’y avait qu’un sol gris qui semblait s’étendre à perte de vue dans un désert monochrome."
+    //         },
+    //         {
+    //             text: "Je restais là, bouche bée, incapable de comprendre la situation dans laquelle je me trouvais."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Je… Je suis sûrement en train de rêver…"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "C’était ce qui paraissait le plus évident. Je me suis alors pincé la joue, comme tout bon protagoniste qui chercherait désespérément à se sortir d’une situation infernale."
+    //         },
+    //         {
+    //             text: "…"
+    //         },
+    //         {
+    //             text: "J’ai pincé plus fort."
+    //         },
+    //         {
+    //             text: "…"
+    //         },
+    //         {
+    //             text: "Toujours rien. Je restais au même endroit, clouée sur place, sans signe d’un quelconque éveil dans mon lit au milieu de la nuit."
+    //         },
+    //         {
+    //             text: "Calme. Du calme. Il faut rester calme. Se calmer. Respirer. Ne pas paniquer."
+    //         },
+    //         {
+    //             text: "…Ne pas paniquer."
+    //         },
+    //         {
+    //             text: "J’ai pris une profonde inspiration, tentant de contenir au mieux l’agitation qui se réveillait en moi. Tout allait bien. Il fallait absolument que je garde mon sang-froid. Je n’étais a priori pas en danger—"
+    //         },
+    //         {
+    //             name: 'Voix',
+    //             text: "Votre attention s’il vous plait. Vous êtes en danger de mort."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "C’est une blague ?!"
+    //         },
+    //         {
+    //             name: 'Voix',
+    //             text: "Le taux en oxygène va graduellement baisser. Trouvez un moyen d’ouvrir la porte avant de rencontrer votre fin."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Qui parle ?! Qui ?"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "…"
+    //         },
+    //         {
+    //             text: "Plus un bruit."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Eh ! Si c’est une blague, c’est vraiment pas drôle ! Montrez-vous, lâche !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Eh oh, je vous parle !"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "…"
+    //         },
+    //         {
+    //             text: "Toujours rien."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…Bon sang."
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "J’ai mis une main sur mon front, fermant hermétiquement les yeux pour essayer de donner un sens à ma situation."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "C’est une caméra cachée…? Ou une hallucination ? Ça y est, je suis devenue folle ?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Moi j’ai pas vu de caméra."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Ah !!"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "J’ai sursauté en entendant une voix féminine derrière moi."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Qu’est-ce que vous voulez ? Vous m’avez emmenée ici ?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Hein ? Moi ? Non non non, j’ai rien fait moi !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…Alors qu’est-ce qui se passe ?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Tu ne vas peut-être pas me croire, mais on a été enlevés par des extraterrestres."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Quoi…?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Oui ! C’est sûr ! Regarde, tout a bougé et tout flotte dans les airs ! Qui d’autre que des extraterrestres pourrait faire ça ?"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Ah… D’accord, je vois le genre…"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "J’ai soupiré. Cette fille était probablement du genre à aller hâtivement vers les conclusions."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Et puis tu as entendu la voix ?! Je ne savais pas que les extraterrestres parlaient français !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Moi non plus, première nouvelle."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Tu ne me crois pas, c’est ça ? Alors comment tu expliques tout ce qui se passe, hein ? Les reptiliens ? Les illuminati ?"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…Je l’expliquerais si je savais, mais pas avec les reptiliens ou les illuminati en tout cas."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Le gouvernement alors ! Bon sang, tu es trop futée pour moi, tu y as pensé directement."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Mais non mais—"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Laisse tomber. Tu as raison. C’est le méchant gouvernement qui a décidé de kidnapper deux pauvres jeunes filles tout à fait banales pour les mettre dans une situation absurde parce que… Parce que."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Héhéhé… Toi, banale, peut-être, mais moi non."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Ton air fier m’inquiète."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Figure-toi qu’ils auraient toutes les raisons de me kidnapper ! J’ai compris leurs secrets et j’en ai discuté sur Reddit… J’aurais sûrement dû être plus prudente."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Reddit ? L’espèce de forum en ligne..?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Ouais ! Récemment j’ai exposé leur secret sur la zone 51, j’aurais peut-être dû utiliser un code et ne pas parler directement d’extraterrestre, peut-être qu’ils n’auraient pas tenté de m’éliminer en m’amenant ici…"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "(Elle nage en plein délire, on dirait.)"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             sprite: 'none',
+    //             name: 'Voix',
+    //             text: "90% d’oxygène restant."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Hein…?"
+    //         },
+    //         {
+    //             spriteProta: 'none',
+    //             text: "Je ne savais pas si c’était l’angoisse ou si l’oxygène se raréfiait réellement, mais je commençais à avoir du mal à respirer."
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "(Ça ne doit pas être réel… C’est sûrement une espèce d’escape game en immersion, quelque chose du genre. On ne doit pas vraiment être en danger.)"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "(…Mais je ne sais toujours pas comment je me suis retrouvée là. Dans le doute, il faudrait peut-être…)"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "…! Hé, avec tes grands talents de détective ou je ne sais pas trop quoi, tu ne voudrais pas m’aider à chercher comment se sortir de cette situation ?"
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: '???',
+    //             text: "Héhéhé… Mais bien sûr ma chère ! Je vais régler ça en un claquement de doigts. Le gouvernement avait raison de me craindre !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "Allez, au boulot madame la détective, je crois qu’on n’a pas trop le temps là."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: 'Roxy',
+    //             text: "Tu peux m’appeler Roxy !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "D’accord, Roxy. Je m’appelle Anaëlle. Mais dépêche-toi, on n’a pas le temps."
+    //         },
+    //         {
+    //             sprite: 'roxy',
+    //             name: 'Roxy',
+    //             text: "Reçu 5 sur 5 ! Anaëlle et Roxy, en mission pour échapper aux espions du gouvernement !"
+    //         },
+    //         {
+    //             spriteProta: 'anaelle',
+    //             name: 'Anaëlle',
+    //             text: "(Il y a des espions dans son délire maintenant…?)",
+    //             specialAction: 'showTuto'
+    //         }
+    //     ],
+    //     defaultText: [
+    //         {
+    //             text: "texte défaut intro niveau déformé"
+    //         }
+    //     ]
+    // },
     {
         name: 'bus',
         title: 'Arrêt de bus',
@@ -566,7 +567,7 @@ export default [
         ],
         defaultText: [
             {
-                text: "Des bancs flottent dans les airs au-dessus de la route."   
+                text: "Une dizaine de bancs flotte dans les airs au-dessus de la route."   
             }
         ]
     },
@@ -648,8 +649,43 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Je ne suis pas sûre…"
+                text: "Je ne suis pas sûre… Par contre, ce n'est pas la seule chose éteinte. Le clavier de la porte entre ces deux lampes l'est aussi."
+            },
+            {
+                sprite: 'roxy',
+                name: 'Roxy',
+                text: "Alors c'est sûrement lié !"
             }
+        ],
+        defaultText: [
+            {
+                text: "Un des deux lampadaires près de la porte est éteint."
+            }
+        ]
+    },
+    {
+        name: 'streetlight-on',
+        title: 'Lampadaire allumé',
+        conditions: {
+            requires: ['streetlight-off'],
+            text: [
+                {
+                    text: "(Les deux lampadaires sont allumés maintenant. On dirait que ça a permis d'activer le courant sur la porte, le clavier de saisie qui est dessus luit.)"
+                }
+            ],
+            defaultText: [
+                {
+                    text: "(Les deux lampadaires sont allumés maintenant. On dirait que ça a permis d'activer le courant sur la porte, le clavier de saisie qui est dessus luit.)"
+                }
+                
+            ]
+        },
+        text: [
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Ce lampadaire-ci est allumé, et pas l'autre... Hm..."
+            },
         ],
         defaultText: [
             {
@@ -863,7 +899,7 @@ export default [
         ],
         defaultText: [
             {
-                text: "Une dizaine de feux de signalisation sont plantés dans le sol derrière la fontaine."
+                text: "Huit feux de signalisation sont plantés dans le sol derrière la fontaine."
             }
         ]
     },
@@ -894,7 +930,7 @@ export default [
         ],
         defaultText: [
             {
-                text: "Une dizaine de feux de signalisation sont plantés dans le sol derrière la fontaine."
+                text: "Une dizaine d'antennes sont alignées devant la route."
             }
         ]
     },
@@ -938,8 +974,7 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "…! J’ai une idée. Roxy, laisse-moi monter sur tes épaules.",
-                activateSwitch: "streetlight-off"
+                text: "…! J’ai une idée. Roxy, laisse-moi monter sur tes épaules."
             },
             {
                 sprite: 'roxy',
@@ -1000,6 +1035,7 @@ export default [
                 name: 'none',
                 spriteProta: 'none',
                 text: "Après que Roxy ait suivi mes instructions, le lampadaire s’allume finalement.",
+                activateSwitch: "streetlight-off"
             },
             {
                 sprite: 'roxy',

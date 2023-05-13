@@ -47,6 +47,7 @@ const props = defineProps({
     left: 0;
     z-index: 100;
     user-select: none;
+    animation: slideinUp .3s;
 
     &__content{
         display: flex;

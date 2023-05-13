@@ -119,29 +119,6 @@ const props = defineProps({
     }
 }
 
-@keyframes slidein {
-  0% {
-    transform: translateX(-20%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-}
-
-@keyframes slideinLeft {
-  0% {
-    transform: translateX(20%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0%);
-    opacity: 1;
-  }
-}
 
 @keyframes scaleOpen {
   0% {

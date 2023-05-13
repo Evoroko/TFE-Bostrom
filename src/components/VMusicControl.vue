@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, inject, watch } from 'vue';
 const props = defineProps({
     music: {
         type: String,
@@ -17,6 +17,8 @@ const props = defineProps({
         default: 'no_music'
     }
 })
+
+const audioStatus = inject('audioStatus');
 
 onMounted(() => {
     const player = document.querySelector('.player');
@@ -31,10 +33,13 @@ onMounted(() => {
         let wasMuted = String(localStorage.getItem('muted'));
         if(previousVolume && wasMuted == 'false'){
             audio.volume = previousVolume;
+            audioStatus.value.volume = audio.volume;
+            audioStatus.value.mute = false;
             volumeSlider.value = previousVolume;
         }else if(wasMuted == 'true'){
             muteAudio();
             volumeSlider.value = 0;
+            audioStatus.value.volume = 0;
         }
         document.removeEventListener('click', musicPlay);
     }
@@ -62,6 +67,7 @@ onMounted(() => {
         muteButton.classList.add('volume__mute--muted');
         volumeSlider.value = 0;
         localStorage.setItem('muted', true);
+        audioStatus.value.mute = true;
     }
 
     const activateAudio = () => {
@@ -69,6 +75,8 @@ onMounted(() => {
         audio.muted = false;
         localStorage.setItem('muted', false);
         localStorage.setItem('volume', audio.volume);
+        audioStatus.value.mute = false;
+        audioStatus.value.volume = audio.volume;
     }
 })
 
@@ -78,7 +86,7 @@ onMounted(() => {
 <style lang="scss">
 
 .player{
-  position: fixed;
+//   position: fixed;
   width: 48px;
   height: 48px;
   z-index: 2000;

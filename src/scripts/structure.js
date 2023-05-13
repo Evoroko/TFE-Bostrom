@@ -4,11 +4,11 @@ import lvl1Dialog from "./lvl1-dialog.js";
 
 
 export default [
-    {
-        index: 0,
-        dialogs: intro,
-        items: 'items.js'
-    },
+    // {
+    //     index: 0,
+    //     dialogs: intro,
+    //     items: 'items.js'
+    // },
     {
         index: 1,
         dialogs: lvl1Dialog,

@@ -1,5 +1,5 @@
 <template>
-    <button class="button">
+    <button class="button" :class="{ 'button--small': small == true }">
         <span class="button__txt">
             <slot/>
 
@@ -8,6 +8,14 @@
 </template>
 
 <script setup>
+
+const props = defineProps({
+    small: {
+        type: Boolean,
+        required: false,
+        default: false
+    }
+})
 
 </script>
 
@@ -59,6 +67,13 @@
         &::after{
             left: auto;
             right: -12px;
+        }
+    }
+
+    &--small{
+        .button__txt{
+            width: 0;
+            padding: 0;
         }
     }
 }

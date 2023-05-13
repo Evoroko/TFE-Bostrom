@@ -1,14 +1,14 @@
 <template>
 
-<div v-if="isUsingItem == false" class="inventory inventory--close">
+<div class="inventory" :class="{'inventory--close': openInventory == false, 'inventory--inactive': isUsingItem == true}">
     <div class="inventory__icon">
+        <div class="inventory__status" v-if="inventory.items.length > 0">{{ inventory.items.length }}</div>
         <h2 class="title title--small">Sacoche</h2>
     </div>
     <div v-if="openInventory" class="inventory__content">
         <ul class="inventory__items">
             <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)">
                 <div class="item">
-                    <!-- {{ item.title }} -->
                     <img class="item__img" :src="'/img/items/' + item.name + '.png'" :alt="item.title">
                 </div>
             </li>
@@ -30,7 +30,7 @@
         
         
     </div>
-    <button @click="toggleInventory" class="inventory__toggle" :class="{ 'inventory__toggle--open': openInventory === true }"></button>
+    <button class="inventory__toggle" :class="{ 'inventory__toggle--open': openInventory === true }"></button>
 </div>
 
 <div v-if="activeIndex !== undefined && isUsingItem == true" class="useBanner">
@@ -42,7 +42,7 @@
 
 <script setup>
 import VButton from './VButton.vue'
-import { ref, inject, watch } from 'vue';
+import { ref, inject, watch, onMounted, onUnmounted } from 'vue';
 
 const inventory = inject('inventory');
 const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse', 'clickCancel']);
@@ -50,6 +50,31 @@ const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse', 'clickC
 const activeIndex = ref(undefined);
 const openInventory = ref(false);
 const isUsingItem = ref(false);
+
+
+
+let inventoryIcon;
+
+function changeClickZoneToggle(e){
+    if(isUsingItem.value == false){
+        if(inventoryIcon.classList.contains('inventory--close')){
+            toggleInventory();
+        }else if(e.target.classList.contains('inventory__toggle') || e.target.classList.contains('inventory__icon')){
+            toggleInventory();
+        }
+    }
+}
+
+onMounted(() => {
+    inventoryIcon = document.querySelector('.inventory');
+    inventoryIcon.addEventListener('click', changeClickZoneToggle)
+})
+
+onUnmounted(() => {
+    inventoryIcon.removeEventListener('click', changeClickZoneToggle)
+})
+
+
 
 function cancelUse(){
     isUsingItem.value = false;
@@ -65,9 +90,9 @@ function clickInspect(){
 
 function clickUse(){
     if(activeIndex.value !== undefined){
+        isUsingItem.value = true;
         emit('clickUse');
     }
-    isUsingItem.value = true;
 }
 
 function setActiveIndex(index) {
@@ -83,6 +108,7 @@ function setActiveIndex(index) {
 
 
 watch(inventory.value, (newVal, oldVal) => {
+
         let isItemActive = false;
         for(let item of inventory.value.items){
             if(item.status == 'active'){
@@ -101,9 +127,10 @@ watch(inventory.value, (newVal, oldVal) => {
     { immediate: true }
 );
 
-function toggleInventory(e){
+function toggleInventory(){
     openInventory.value = !openInventory.value;
 }
+
 
 </script>
 
@@ -114,7 +141,7 @@ function toggleInventory(e){
     top: 0;
     left: 0;
     width: max-content;
-    height: 100%;
+    height: auto;
     background-color: var(--transparent-black-80);
     z-index: 100;
     padding: 16px;
@@ -124,6 +151,8 @@ function toggleInventory(e){
     align-items: center;
     gap: 32px;
     user-select: none;
+    clip-path: polygon(0 0, 90% 0%, 100% 50%, 90% 100%, 0 100%, 0% 50%);
+    animation: .3s slidein;
 
     &__content{
         display: flex;
@@ -161,6 +190,22 @@ function toggleInventory(e){
         }
     }
 
+    &__status{
+        background-color: var(--c-txt);
+        color: var(--grey-1000);
+        width: 24px;
+        height: 24px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        position: absolute;
+        top: 16px;
+        left: 32px;
+        font: var(--exo-13px-medium);
+
+    }
+
     &__buttons{
         display: flex;
         flex-direction: column;
@@ -191,6 +236,15 @@ function toggleInventory(e){
 
     &--close{
         height: auto;
+        gap: 8px;
+        clip-path: polygon(0 0, 75% 0%, 100% 50%, 75% 100%, 0 100%, 0% 50%);
+        cursor: pointer;
+    }
+
+    &--inactive{
+        opacity: 0;
+        touch-action: none;
+        user-select: none;
     }
 
     &__icon{
@@ -203,6 +257,7 @@ function toggleInventory(e){
         display: flex;
         align-items: flex-end;
         justify-content: center;
+        cursor: pointer;
 
         @media(-webkit-device-pixel-ratio: 2){
             background-image: url(/img/items/bag@2x.png);

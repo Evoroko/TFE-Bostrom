@@ -12,10 +12,13 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, inject } from 'vue';
+import { ref, computed, watch, inject, onUnmounted } from 'vue';
 import VVNLayout from './VVNLayout.vue'
 
 const inventory = inject('inventory');
+const audioStatus = inject('audioStatus');
+let bopSound = new Audio('/audio/sounds/bop.wav');
+let getItemSound = new Audio('/audio/sounds/confusion-blip-6-3.wav');
 
 const props = defineProps({
     script: {
@@ -23,7 +26,7 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel', 'inputCodeOrder', 'changeMusic', 'activateSwitch']);
+const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel', 'inputCodeOrder', 'changeMusic', 'activateSwitch', 'showTuto']);
 
 const texts = ref(props.script);
 const isDialogFull = ref(false);
@@ -73,6 +76,13 @@ function testExisting(tested, previous) {
     }
 }
 
+function emitSound (sound) {
+    sound.volume = audioStatus.value.volume;
+    sound.muted = audioStatus.value.mute;
+    sound.currentTime = 0;
+    sound.play();
+}
+
 
 watch(i, (newVal, oldVal) => {
     if (newVal !== oldVal && texts.value[currentDialogIndex.value].text) {
@@ -89,36 +99,71 @@ watch(i, (newVal, oldVal) => {
 { immediate: true }
 );
 
-window.addEventListener('keydown', (e) => {
+const enterKey = (e) => {
+
     if(e.keyCode === 13){
         nextText();
     }
+}
+
+window.addEventListener('keydown', enterKey)
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', enterKey)
 })
 
 let isItACode = false;
 let isItACodeOrder = false;
+let isItATuto = false;
 let codeData;
 
 const nextText = () => {
+
+    
+
     if(texts.value[currentDialogIndex.value].text){
         if (i.value === texts.value[currentDialogIndex.value].text.length) {
+
+            if(texts.value[currentDialogIndex.value + 1]){
+                if(texts.value[currentDialogIndex.value + 1].inventory){
+                    if(texts.value[currentDialogIndex.value + 1].inventory == 'add'){
+                        emitSound(getItemSound);
+                        inventory.value.addItem(texts.value[currentDialogIndex.value + 1].targetItem);
+                    }else if(texts.value[currentDialogIndex.value + 1].inventory == 'remove'){
+                        inventory.value.removeItem(texts.value[currentDialogIndex.value + 1].targetItem);
+                    }
+                }
+            }
+            
+
             if(texts.value[currentDialogIndex.value].specialAction){
                 if(texts.value[currentDialogIndex.value].specialAction == 'code'){
                     isItACode = true;
                     codeData = texts.value[currentDialogIndex.value].code;
                 }else if(texts.value[currentDialogIndex.value].specialAction == 'code-order'){
                     isItACodeOrder = true;
+                }else if(texts.value[currentDialogIndex.value].specialAction == 'showTuto'){
+                    isItATuto = true;
                 }
             }
+
+            
+
+            
             
 
             if(texts.value[currentDialogIndex.value].music){
                 emit('changeMusic', texts.value[currentDialogIndex.value].music);
             }
             
-            isDialogFull.value = false;
-            currentDialogIndex.value++;
-            i.value = 0;
+            if(currentDialogIndex.value < texts.value.length){
+                isDialogFull.value = false;
+                currentDialogIndex.value++;
+                i.value = 0;
+                
+                emitSound(bopSound);
+            }
+            
         } else {
             i.value = texts.value[currentDialogIndex.value].text.length;
         }
@@ -129,23 +174,15 @@ const nextText = () => {
     
 
     if (currentDialogIndex.value >= texts.value.length) {
-        setTimeout(() => {
-            if(isItACode == true){
-                emit('inputCode', codeData);
-            }else if(isItACodeOrder == true){
-                emit('inputCodeOrder');
-            }
-            emit('conversation-ended');
-        }, 1) // Délai car sinon le dernier clic qui ferme le dialogue en déclenche un autre immédiatement / cause des conflits
-        currentDialogIndex.value = 0;
-    }
-
-    if(texts.value[currentDialogIndex.value].inventory){
-        if(texts.value[currentDialogIndex.value].inventory == 'add'){
-            inventory.value.addItem(texts.value[currentDialogIndex.value].targetItem);
-        }else if(texts.value[currentDialogIndex.value].inventory == 'remove'){
-            inventory.value.removeItem(texts.value[currentDialogIndex.value].targetItem);
+        if(isItACode == true){
+            emit('inputCode', codeData);
+        }else if(isItACodeOrder == true){
+            emit('inputCodeOrder');
+        }else if(isItATuto == true){
+            emit('showTuto');
         }
+        emit('conversation-ended');
+        currentDialogIndex.value = 0;
     }
 
     if(texts.value[currentDialogIndex.value].jump){
