@@ -1,331 +1,329 @@
 export default [
-    // {
-    //     name: 'intro',
-    //     text: [
-    //         {
-    //             music: 'exploration_track',
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Hein ?"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Qu’est-ce que…"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "C’est quoi cet endroit ?"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "J'ai regardé autour de moi, paniquée."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Mais qu’est-ce que c’est que ce délire…?"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "En levant la tête, j’ai pu constater que je me trouvais dans un endroit qui ne m’était pas familier et qui ne m’évoquait rien de sain."
-    //         },
-    //         {
-    //             text: "J’ai tourné la tête, cherchant à faire sens de ce que j’observais."
-    //         },
-    //         {
-    //             text: "Des bâtiments tournés de manière anormale, des bancs au beau milieu des airs, une fontaine dont les couleurs apparaissaient comme une vidéo corrompue…"
-    //         },
-    //         {
-    //             text: "La route s’arrêtait au bout de quelques mètres, et au-delà, il n’y avait qu’un sol gris qui semblait s’étendre à perte de vue dans un désert monochrome."
-    //         },
-    //         {
-    //             text: "Je restais là, bouche bée, incapable de comprendre la situation dans laquelle je me trouvais."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Je… Je suis sûrement en train de rêver…"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "C’était ce qui paraissait le plus évident. Je me suis alors pincé la joue, comme tout bon protagoniste qui chercherait désespérément à se sortir d’une situation infernale."
-    //         },
-    //         {
-    //             text: "…"
-    //         },
-    //         {
-    //             text: "J’ai pincé plus fort."
-    //         },
-    //         {
-    //             text: "…"
-    //         },
-    //         {
-    //             text: "Toujours rien. Je restais au même endroit, clouée sur place, sans signe d’un quelconque éveil dans mon lit au milieu de la nuit."
-    //         },
-    //         {
-    //             text: "Calme. Du calme. Il faut rester calme. Se calmer. Respirer. Ne pas paniquer."
-    //         },
-    //         {
-    //             text: "…Ne pas paniquer."
-    //         },
-    //         {
-    //             text: "J’ai pris une profonde inspiration, tentant de contenir au mieux l’agitation qui se réveillait en moi. Tout allait bien. Il fallait absolument que je garde mon sang-froid. Je n’étais a priori pas en danger—"
-    //         },
-    //         {
-    //             name: 'Voix',
-    //             text: "Votre attention s’il vous plait. Vous êtes en danger de mort."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "C’est une blague ?!"
-    //         },
-    //         {
-    //             name: 'Voix',
-    //             text: "Le taux en oxygène va graduellement baisser. Trouvez un moyen d’ouvrir la porte avant de rencontrer votre fin."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Qui parle ?! Qui ?"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "…"
-    //         },
-    //         {
-    //             text: "Plus un bruit."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Eh ! Si c’est une blague, c’est vraiment pas drôle ! Montrez-vous, lâche !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Eh oh, je vous parle !"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "…"
-    //         },
-    //         {
-    //             text: "Toujours rien."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…Bon sang."
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "J’ai mis une main sur mon front, fermant hermétiquement les yeux pour essayer de donner un sens à ma situation."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "C’est une caméra cachée…? Ou une hallucination ? Ça y est, je suis devenue folle ?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Moi j’ai pas vu de caméra."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Ah !!"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "J’ai sursauté en entendant une voix féminine derrière moi."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Qu’est-ce que vous voulez ? Vous m’avez emmenée ici ?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Hein ? Moi ? Non non non, j’ai rien fait moi !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…Alors qu’est-ce qui se passe ?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Tu ne vas peut-être pas me croire, mais on a été enlevés par des extraterrestres."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Quoi…?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Oui ! C’est sûr ! Regarde, tout a bougé et tout flotte dans les airs ! Qui d’autre que des extraterrestres pourrait faire ça ?"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Ah… D’accord, je vois le genre…"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "J’ai soupiré. Cette fille était probablement du genre à aller hâtivement vers les conclusions."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Et puis tu as entendu la voix ?! Je ne savais pas que les extraterrestres parlaient français !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Moi non plus, première nouvelle."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Tu ne me crois pas, c’est ça ? Alors comment tu expliques tout ce qui se passe, hein ? Les reptiliens ? Les illuminati ?"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…Je l’expliquerais si je savais, mais pas avec les reptiliens ou les illuminati en tout cas."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Le gouvernement alors ! Bon sang, tu es trop futée pour moi, tu y as pensé directement."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Mais non mais—"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Laisse tomber. Tu as raison. C’est le méchant gouvernement qui a décidé de kidnapper deux pauvres jeunes filles tout à fait banales pour les mettre dans une situation absurde parce que… Parce que."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Héhéhé… Toi, banale, peut-être, mais moi non."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Ton air fier m’inquiète."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Figure-toi qu’ils auraient toutes les raisons de me kidnapper ! J’ai compris leurs secrets et j’en ai discuté sur Reddit… J’aurais sûrement dû être plus prudente."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Reddit ? L’espèce de forum en ligne..?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Ouais ! Récemment j’ai exposé leur secret sur la zone 51, j’aurais peut-être dû utiliser un code et ne pas parler directement d’extraterrestre, peut-être qu’ils n’auraient pas tenté de m’éliminer en m’amenant ici…"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "(Elle nage en plein délire, on dirait.)"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             sprite: 'none',
-    //             name: 'Voix',
-    //             text: "90% d’oxygène restant."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Hein…?"
-    //         },
-    //         {
-    //             spriteProta: 'none',
-    //             text: "Je ne savais pas si c’était l’angoisse ou si l’oxygène se raréfiait réellement, mais je commençais à avoir du mal à respirer."
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "(Ça ne doit pas être réel… C’est sûrement une espèce d’escape game en immersion, quelque chose du genre. On ne doit pas vraiment être en danger.)"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "(…Mais je ne sais toujours pas comment je me suis retrouvée là. Dans le doute, il faudrait peut-être…)"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "…! Hé, avec tes grands talents de détective ou je ne sais pas trop quoi, tu ne voudrais pas m’aider à chercher comment se sortir de cette situation ?"
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: '???',
-    //             text: "Héhéhé… Mais bien sûr ma chère ! Je vais régler ça en un claquement de doigts. Le gouvernement avait raison de me craindre !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "Allez, au boulot madame la détective, je crois qu’on n’a pas trop le temps là."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: 'Roxy',
-    //             text: "Tu peux m’appeler Roxy !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "D’accord, Roxy. Je m’appelle Anaëlle. Mais dépêche-toi, on n’a pas le temps."
-    //         },
-    //         {
-    //             sprite: 'roxy',
-    //             name: 'Roxy',
-    //             text: "Reçu 5 sur 5 ! Anaëlle et Roxy, en mission pour échapper aux espions du gouvernement !"
-    //         },
-    //         {
-    //             spriteProta: 'anaelle',
-    //             name: 'Anaëlle',
-    //             text: "(Il y a des espions dans son délire maintenant…?)",
-    //             specialAction: 'showTuto'
-    //         }
-    //     ],
-    //     defaultText: [
-    //         {
-    //             text: "texte défaut intro niveau déformé"
-    //         }
-    //     ]
-    // },
+    {
+        name: 'intro',
+        text: [
+            {
+                music: 'exploration_track',
+                text: "…"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Hein ?"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Qu’est-ce que…"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "C’est quoi cet endroit ?"
+            },
+            {
+                spriteProta: 'none',
+                text: "J'ai regardé autour de moi, paniquée."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Mais qu’est-ce que c’est que ce délire…?"
+            },
+            {
+                spriteProta: 'none',
+                text: "En levant la tête, j’ai pu constater que je me trouvais dans un endroit qui ne m’était pas familier et qui ne m’évoquait rien de sain."
+            },
+            {
+                text: "J’ai tourné la tête, cherchant à faire sens de ce que j’observais."
+            },
+            {
+                text: "Des bâtiments tournés de manière anormale, des bancs au beau milieu des airs, une fontaine dont les couleurs apparaissaient comme une vidéo corrompue…"
+            },
+            {
+                text: "La route s’arrêtait au bout de quelques mètres, et au-delà, il n’y avait qu’un sol gris qui semblait s’étendre à perte de vue dans un désert monochrome."
+            },
+            {
+                text: "Je restais là, bouche bée, incapable de comprendre la situation dans laquelle je me trouvais."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Je… Je suis sûrement en train de rêver…"
+            },
+            {
+                spriteProta: 'none',
+                text: "C’était ce qui paraissait le plus évident. Je me suis alors pincé la joue, comme tout bon protagoniste qui chercherait désespérément à se sortir d’une situation infernale."
+            },
+            {
+                text: "…"
+            },
+            {
+                text: "J’ai pincé plus fort."
+            },
+            {
+                text: "…"
+            },
+            {
+                text: "Toujours rien. Je restais au même endroit, clouée sur place, sans signe d’un quelconque éveil dans mon lit au milieu de la nuit."
+            },
+            {
+                text: "Calme. Du calme. Il faut rester calme. Se calmer. Respirer. Ne pas paniquer."
+            },
+            {
+                text: "…Ne pas paniquer."
+            },
+            {
+                text: "J’ai pris une profonde inspiration, tentant de contenir au mieux l’agitation qui se réveillait en moi. Tout allait bien. Il fallait absolument que je garde mon sang-froid. Je n’étais a priori pas en danger—"
+            },
+            {
+                name: 'Voix',
+                text: "Votre attention s’il vous plait. Vous êtes en danger de mort."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "C’est une blague ?!"
+            },
+            {
+                name: 'Voix',
+                text: "Le taux en oxygène va graduellement baisser. Trouvez un moyen d’ouvrir la porte avant de rencontrer votre fin."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Qui parle ?! Qui ?"
+            },
+            {
+                spriteProta: 'none',
+                text: "…"
+            },
+            {
+                text: "Plus un bruit."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Eh ! Si c’est une blague, c’est vraiment pas drôle ! Montrez-vous, lâche !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Eh oh, je vous parle !"
+            },
+            {
+                spriteProta: 'none',
+                text: "…"
+            },
+            {
+                text: "Toujours rien."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "…Bon sang."
+            },
+            {
+                spriteProta: 'none',
+                text: "J’ai mis une main sur mon front, fermant hermétiquement les yeux pour essayer de donner un sens à ma situation."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "C’est une caméra cachée…? Ou une hallucination ? Ça y est, je suis devenue folle ?"
+            },
+            {
+                sprite: 'roxy-thinking',
+                name: '???',
+                text: "Moi j’ai pas vu de caméra."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Ah !!"
+            },
+            {
+                spriteProta: 'none',
+                text: "J’ai sursauté en entendant une voix féminine derrière moi."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Qu’est-ce que vous voulez ? Vous m’avez emmenée ici ?"
+            },
+            {
+                sprite: 'roxy-thinking',
+                name: '???',
+                text: "Hein ? Moi ? Non non non, j’ai rien fait moi !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "…Alors qu’est-ce qui se passe ?"
+            },
+            {
+                sprite: 'roxy-confident',
+                name: '???',
+                text: "Tu ne vas peut-être pas me croire, mais on a été enlevés par des extraterrestres."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Quoi…?"
+            },
+            {
+                sprite: 'roxy-overjoyed',
+                name: '???',
+                text: "Oui ! C’est sûr ! Regarde, tout a bougé et tout flotte dans les airs ! Qui d’autre que des extraterrestres pourrait faire ça ?"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Ah… D’accord, je vois le genre…"
+            },
+            {
+                spriteProta: 'none',
+                text: "J’ai soupiré. Cette fille était probablement du genre à aller hâtivement vers les conclusions."
+            },
+            {
+                sprite: 'roxy-thinking',
+                name: '???',
+                text: "Et puis tu as entendu la voix ?! Je ne savais pas que les extraterrestres parlaient français !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Moi non plus, première nouvelle."
+            },
+            {
+                sprite: 'roxy-confident',
+                name: '???',
+                text: "Tu ne me crois pas, c’est ça ? Alors comment tu expliques tout ce qui se passe, hein ? Les reptiliens ? Les illuminati ?"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "…Je l’expliquerais si je savais, mais pas avec les reptiliens ou les illuminati en tout cas."
+            },
+            {
+                sprite: 'roxy-thinking',
+                name: '???',
+                text: "Le gouvernement alors ! Bon sang, tu es trop futée pour moi, tu y as pensé directement."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Mais non mais—"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "…"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Laisse tomber. Tu as raison. C’est le méchant gouvernement qui a décidé de kidnapper deux pauvres jeunes filles tout à fait banales pour les mettre dans une situation absurde parce que… Parce que."
+            },
+            {
+                sprite: 'roxy-confident',
+                name: '???',
+                text: "Héhéhé… Toi, banale, peut-être, mais moi non."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Ton air fier m’inquiète."
+            },
+            {
+                sprite: 'roxy-overjoyed',
+                name: '???',
+                text: "Figure-toi qu’ils auraient toutes les raisons de me kidnapper ! J’ai compris leurs secrets et j’en ai discuté sur Reddit… J’aurais sûrement dû être plus prudente."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Reddit ? L’espèce de forum en ligne..?"
+            },
+            {
+                sprite: 'roxy-thinking',
+                name: '???',
+                text: "Ouais ! Récemment j’ai exposé leur secret sur la zone 51, j’aurais peut-être dû utiliser un code et ne pas parler directement d’extraterrestre, peut-être qu’ils n’auraient pas tenté de m’éliminer en m’amenant ici…"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "(Elle nage en plein délire, on dirait.)"
+            },
+            {
+                spriteProta: 'none',
+                sprite: 'none',
+                name: 'Voix',
+                text: "90% d’oxygène restant."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Hein…?"
+            },
+            {
+                spriteProta: 'none',
+                text: "Je ne savais pas si c’était l’angoisse ou si l’oxygène se raréfiait réellement, mais je commençais à avoir du mal à respirer."
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "(Ça ne doit pas être réel… C’est sûrement une espèce d’escape game en immersion, quelque chose du genre. On ne doit pas vraiment être en danger.)"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "(…Mais je ne sais toujours pas comment je me suis retrouvée là. Dans le doute, il faudrait peut-être…)"
+            },
+            {
+                sprite: 'roxy-thinking',
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "…! Hé, avec tes grands talents de détective ou je ne sais pas trop quoi, tu ne voudrais pas m’aider à chercher comment se sortir de cette situation ?"
+            },
+            {
+                sprite: 'roxy-confident',
+                name: '???',
+                text: "Héhéhé… Mais bien sûr ma chère ! Je vais régler ça en un claquement de doigts. Le gouvernement avait raison de me craindre !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "Allez, au boulot madame la détective, je crois qu’on n’a pas trop le temps là."
+            },
+            {
+                sprite: 'roxy-overjoyed',
+                name: 'Roxy',
+                text: "Tu peux m’appeler Roxy !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "D’accord, Roxy. Je m’appelle Anaëlle. Mais dépêche-toi, on n’a pas le temps."
+            },
+            {
+                sprite: 'roxy-confident',
+                name: 'Roxy',
+                text: "Reçu 5 sur 5 ! Anaëlle et Roxy, en mission pour échapper aux espions du gouvernement !"
+            },
+            {
+                spriteProta: 'anaelle',
+                name: 'Anaëlle',
+                text: "(Il y a des espions dans son délire maintenant…?)",
+                specialAction: 'showTuto'
+            }
+        ],
+        defaultText: [
+            {
+                text: "texte défaut intro niveau déformé"
+            }
+        ]
+    },
     {
         name: 'bus',
         title: 'Arrêt de bus',
@@ -338,7 +336,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Tu crois que si on attend un peu un bus va venir nous chercher ?"
+                text: "Tu crois que si on attend un peu un bus va venir nous chercher ?"
             },
             {
                 spriteProta: 'anaelle',
@@ -348,7 +346,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Et alors ? Il n’a qu’à rouler sur le trottoir ! Il n’y a que ça après !"
+                text: "Et alors ? Il n’a qu’à rouler sur le trottoir ! Il n’y a que ça après !"
             },
             {
                 spriteProta: 'anaelle',
@@ -363,12 +361,12 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Tu as vu d’autres gens aux alentours ? Moi non. Tu vas l’attendre longtemps ton chauffeur de bus."
+                text: "Tu as vu d’autres gens aux alentours ? Moi non. Tu vas l’attendre longtemps ton chauffeur de bus."
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "C’était juste une idée ! Et si des alliés parmi les rebelles qui s’opposent au gouvernement tyrannique viennent nous chercher ?"
+                text: "C’était juste une idée ! Et si des alliés parmi les rebelles qui s’opposent au gouvernement tyrannique viennent nous chercher ?"
             },
             {
                 spriteProta: 'anaelle',
@@ -394,17 +392,17 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Peut-être qu’on a été attaquées par une arme EMP en fait&nbsp;!"
+                text: "Peut-être qu’on a été attaquées par une arme EMP en fait  !"
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Une arme EMP&nbsp;?"
+                text: "Une arme EMP  ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "C’est une sorte de bombe qui peut paralyser un pays entier&nbsp;! Encore un coup du gouvernement…"
+                text: "C’est une sorte de bombe qui peut paralyser un pays entier  ! Encore un coup du gouvernement…"
             },
             {
                 name: 'Roxy',
@@ -413,7 +411,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "S’ils ont utilisé ça, ça explique tout&nbsp;!"
+                text: "S’ils ont utilisé ça, ça explique tout  !"
             },
             {
                 spriteProta: 'anaelle',
@@ -423,22 +421,22 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Mais qu’est-ce que tu racontes&nbsp;? Ça n’explique rien de tout ça."
+                text: "Mais qu’est-ce que tu racontes  ? Ça n’explique rien de tout ça."
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "…Tu as déjà entendu parler du sarcasme&nbsp;?"
+                text: "…Tu as déjà entendu parler du sarcasme  ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "...Ah !"
+                text: "...Ah !"
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Quoi&nbsp;?"
+                text: "Quoi  ?"
             },
             {
                 sprite: 'roxy',
@@ -455,7 +453,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Même les phrases sont pleines de bugs ! Ça donne la chair de poule."
+                text: "Même les phrases sont pleines de bugs ! Ça donne la chair de poule."
             },
             {
                 spriteProta: 'anaelle',
@@ -466,7 +464,7 @@ export default [
         defaultText: [
             {                
                 displayedItem: 'board',
-                text: "Par moments, l'affichage change et montre une publicité. On peut y lire «&nbsp;Pen□ez d□fférem□ent&nbsp;», c'est sûrement un slogan connu."
+                text: "Par moments, l'affichage change et montre une publicité. On peut y lire «  Pen□ez d□fférem□ent  », c'est sûrement un slogan connu."
             }
         ]
     },
@@ -477,17 +475,17 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "C’est… la fontaine du parc&nbsp;?"
+                text: "C’est… la fontaine du parc  ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Hmm, on dirait bien… Mais pourquoi l’eau monte dans les airs et est figée comme ça&nbsp;?"
+                text: "Hmm, on dirait bien… Mais pourquoi l’eau monte dans les airs et est figée comme ça  ?"
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Ce n’est pas toi qui es censée avoir la réponse à toute les questions&nbsp;?"
+                text: "Ce n’est pas toi qui es censée avoir la réponse à toute les questions  ?"
             }
         ],
         defaultText: [
@@ -503,7 +501,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Anaëlle&nbsp;!! Regarde ce que j’ai trouvé&nbsp;!'
+                text: 'Anaëlle  !! Regarde ce que j’ai trouvé  !'
             },
             {
                 sprite: 'none',
@@ -511,12 +509,13 @@ export default [
                 name: 'none',
                 text: 'Obtenu : Cône de circulation sale.',
                 inventory: 'add',
-                targetItem: 'cone-dirty'
+                targetItem: 'cone-dirty',
+                displayedItem: 'cone-dirty'
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Ugh, c’est répugnant. Il est plein de boue. Où est-ce que tu as trouvé ça ?"
+                text: "Ugh, c’est répugnant. Il est plein de boue. Où est-ce que tu as trouvé ça ?"
             },
             {
                 sprite: 'roxy',
@@ -526,12 +525,12 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Mais pourquoi tu me donnes ça&nbsp;? On ne t’a jamais appris à faire des cadeaux&nbsp;?"
+                text: "Mais pourquoi tu me donnes ça  ? On ne t’a jamais appris à faire des cadeaux  ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "J’en sais rien moi&nbsp;! Je me disais que ce serait utile&nbsp;!"
+                text: "J’en sais rien moi  ! Je me disais que ce serait utile  !"
             },
             {
                 spriteProta: 'anaelle',
@@ -552,7 +551,7 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Pourquoi est-ce qu’il y a des bancs qui flottent au-dessus de la route ? Je commence à avoir la migraine…"
+                text: "Pourquoi est-ce qu’il y a des bancs qui flottent au-dessus de la route ? Je commence à avoir la migraine…"
             },
             {
                 sprite: 'roxy',
@@ -595,7 +594,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Anaëlle ! Donne-moi de l’argent s’il te plait, j’ai soif !"
+                text: "Anaëlle ! Donne-moi de l’argent s’il te plait, j’ai soif !"
             },
             {
                 spriteProta: 'anaelle',
@@ -644,7 +643,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Ça me perturbe ! C’est peut-être un code, qui sait."
+                text: "Ça me perturbe ! C’est peut-être un code, qui sait."
             },
             {
                 spriteProta: 'anaelle',
@@ -654,7 +653,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Alors c'est sûrement lié !"
+                text: "Alors c'est sûrement lié !"
             }
         ],
         defaultText: [
@@ -707,7 +706,7 @@ export default [
                 {
                     sprite: 'roxy',
                     name: 'Roxy',
-                    text: "Pourvu que ce soit la sortie !"
+                    text: "Pourvu que ce soit la sortie !"
                 },
                 {
                     sprite: 'none',
@@ -739,12 +738,12 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Il y a une porte là, mais rien derrière… Est-ce que c’est celle que la voix a dit qu’on devait ouvrir ? Ça n’a pas de sens, ça devrait nous mener à la sortie. Là, c’est comme si elle était juste posée dans le vide."
+                text: "Il y a une porte là, mais rien derrière… Est-ce que c’est celle que la voix a dit qu’on devait ouvrir ? Ça n’a pas de sens, ça devrait nous mener à la sortie. Là, c’est comme si elle était juste posée dans le vide."
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Il y a une sorte de clavier dessus ! Tu crois qu’il y a un code secret à trouver ?"
+                text: "Il y a une sorte de clavier dessus ! Tu crois qu’il y a un code secret à trouver ?"
             },
             {
                 spriteProta: 'anaelle',
@@ -754,7 +753,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Tu es trop pessimiste ! Essaie haut-haut-bas-bas-gauche-droite-gauche-droite-B-A !"
+                text: "Tu es trop pessimiste ! Essaie haut-haut-bas-bas-gauche-droite-gauche-droite-B-A !"
             },
             {
                 spriteProta: 'anaelle',
@@ -795,7 +794,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Désolée, j’ai pas d’argent à te donner&nbsp;!"
+                text: "Désolée, j’ai pas d’argent à te donner  !"
             },
             {
                 spriteProta: 'anaelle',
@@ -805,7 +804,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Tiens&nbsp;? C’est bizarre. Regarde le clavier, il n’y a que des lettres, et elles sont réparties bizarrement."
+                text: "Tiens  ? C’est bizarre. Regarde le clavier, il n’y a que des lettres, et elles sont réparties bizarrement."
             },
             {
                 spriteProta: 'anaelle',
@@ -843,17 +842,17 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Regarde ! Il y a des fenêtres avec de la lumière colorée sur ce bâtiment qui vole. Il y a sûrement des gens !"
+                text: "Regarde ! Il y a des fenêtres avec de la lumière colorée sur ce bâtiment qui vole. Il y a sûrement des gens !"
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Et comment ils seraient montés là-haut ?"
+                text: "Et comment ils seraient montés là-haut ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Et comment nous on est arrivés ici, alors, hein ? Et toc !"
+                text: "Et comment nous on est arrivés ici, alors, hein ? Et toc !"
             },
             {
                 spriteProta: 'anaelle',
@@ -863,7 +862,7 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "En plus, tu as vu où est la porte ? Le bâtiment est à l’envers, on n’arrivera jamais à y accéder."
+                text: "En plus, tu as vu où est la porte ? Le bâtiment est à l’envers, on n’arrivera jamais à y accéder."
             },
             {
                 sprite: 'roxy',
@@ -884,17 +883,17 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "J’ai du mal à dire pourquoi, mais ça me donne la chair de poule… Pourquoi tous ces feux de signalisation sont amassés là ?"
+                text: "J’ai du mal à dire pourquoi, mais ça me donne la chair de poule… Pourquoi tous ces feux de signalisation sont amassés là ?"
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "La fontaine avait peut-être envie de traverser ?"
+                text: "La fontaine avait peut-être envie de traverser ?"
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Non mais tu t’entends parler ?"
+                text: "Non mais tu t’entends parler ?"
             },
         ],
         defaultText: [
@@ -925,7 +924,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Hey, tu as beau dire ça, c’est pas gentil du tout !"
+                text: "Hey, tu as beau dire ça, c’est pas gentil du tout !"
             }
         ],
         defaultText: [
@@ -949,7 +948,8 @@ export default [
                 spriteProta: 'none',
                 text: 'Utilisé : Cône de circulation sale.',
                 inventory: 'remove',
-                targetItem: 'cone-dirty'
+                targetItem: 'cone-dirty',
+                displayedItem: 'cone-dirty'
             },
             {
                 sprite: 'none',
@@ -957,12 +957,13 @@ export default [
                 spriteProta: 'none',
                 text: 'Obtenu : Cône de circulation.',
                 inventory: 'add',
-                targetItem: 'cone'
+                targetItem: 'cone',
+                displayedItem: 'cone-code'
             },
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: 'Mh&nbsp;? On dirait qu\'il y a quelque chose dessus.'
+                text: 'Mh  ? On dirait qu\'il y a quelque chose dessus.'
             }
             
         ]
@@ -979,7 +980,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Hein ?! Ah non non non, je ne vais pas pouvoir te porter ! Tu es clairement plus lourde que moi !"
+                text: "Hein ?! Ah non non non, je ne vais pas pouvoir te porter ! Tu es clairement plus lourde que moi !"
             },
             {
                 spriteProta: 'anaelle',
@@ -994,7 +995,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Euh, d’accord. Mais ne bouge pas trop sinon je vais tomber !"
+                text: "Euh, d’accord. Mais ne bouge pas trop sinon je vais tomber !"
             },
             {
                 sprite: 'none',
@@ -1013,12 +1014,13 @@ export default [
                 spriteProta: 'none',
                 text: 'Donné à Roxy : Lampe de poche',
                 inventory: 'remove',
-                targetItem: 'flashlight'
+                targetItem: 'flashlight',
+                displayedItem: 'flashlight'
             },
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Et après ?"
+                text: "Et après ?"
             },
             {
                 spriteProta: 'anaelle',
@@ -1028,7 +1030,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "D’accord !"
+                text: "D’accord !"
             },
             {
                 sprite: 'none',
@@ -1040,7 +1042,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Bon sang Anaëlle, tu sais vraiment tout, c’est du gâteau avec toi !"
+                text: "Bon sang Anaëlle, tu sais vraiment tout, c’est du gâteau avec toi !"
             },
             {
                 spriteProta: 'anaelle',
@@ -1050,7 +1052,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Hey ! Le clavier numérique de la porte brille, maintenant. Peut-être qu’on peut l’utiliser."
+                text: "Hey ! Le clavier numérique de la porte brille, maintenant. Peut-être qu’on peut l’utiliser."
             }
         ]
     },
@@ -1066,7 +1068,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Tu crois ?"
+                text: "Tu crois ?"
             },
             {
                 spriteProta: 'anaelle',
@@ -1076,7 +1078,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "C’est pas compliqué ! Il faut juste faire attention à l’ordre. D’abord on fait les multiplications, et ensuite les additions !"
+                text: "C’est pas compliqué ! Il faut juste faire attention à l’ordre. D’abord on fait les multiplications, et ensuite les additions !"
             }
         ]
     },
@@ -1102,7 +1104,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Réessayons quand on aura un peu plus réfléchi&nbsp;!'
+                text: 'Réessayons quand on aura un peu plus réfléchi  !'
             }
         ],
         defaultText: [
@@ -1125,7 +1127,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Super ! On gère la fougère !'
+                text: 'Super ! On gère la fougère !'
             },
             {
                 spriteProta: 'anaelle',
@@ -1146,7 +1148,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Tu attends quoi pour ouvrir ? Allez, on y va !'
+                text: 'Tu attends quoi pour ouvrir ? Allez, on y va !'
             },
             {
                 spriteProta: 'anaelle',
@@ -1165,7 +1167,8 @@ export default [
                 text: "En prenant une longue inspiration, j’ai exercé une pression et ai poussé la porte en avant."
             },
             {
-                text: "Et devant moi…"
+                text: "Et devant moi…",
+                music: 'horror_ambience'
             },
             {
                 jump: '2'
@@ -1188,14 +1191,14 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Compris chef !'
+                text: 'Compris chef !'
             }
         ],
         defaultText: [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "(Est-ce qu'on n'a pas vu quelque part quelque chose avec des lettres ?)"
+                text: "(Est-ce qu'on n'a pas vu quelque part quelque chose avec des lettres ?)"
             }
         ]
     },
@@ -1205,7 +1208,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Il y a un billet qui sort&nbsp;! Tu as tapé un truc au hasard et tu as fait apparaitre de l’argent&nbsp;? C’est fou ça.',
+                text: 'Il y a un billet qui sort  ! Tu as tapé un truc au hasard et tu as fait apparaitre de l’argent  ? C’est fou ça.',
                 activateSwitch: 'code-true-atm'
             },
             {
@@ -1227,7 +1230,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: 'Mais oui ! Quel cerveau Anaëlle, je suis impressionnée. Par contre euh… Désolée de te décevoir, mais ça ne vaut rien, c’est juste du papier…'
+                text: 'Mais oui ! Quel cerveau Anaëlle, je suis impressionnée. Par contre euh… Désolée de te décevoir, mais ça ne vaut rien, c’est juste du papier…'
             },
             {
                 sprite: 'none',
@@ -1261,7 +1264,7 @@ export default [
             {
                 sprite: 'roxy',
                 name: 'Roxy',
-                text: "Après ce que tu m’as dit tu achètes une boisson ?!"
+                text: "Après ce que tu m’as dit tu achètes une boisson ?!"
             },
             {
                 spriteProta: 'anaelle',
@@ -1279,7 +1282,7 @@ export default [
             {
                 spriteProta: 'anaelle',
                 name: 'Anaëlle',
-                text: "Une lampe de poche ? À quoi ça peut bien servir ? Il ne fait pas spécialement sombre."
+                text: "Une lampe de poche ? À quoi ça peut bien servir ? Il ne fait pas spécialement sombre."
             }
         ],
         defaultText: [

@@ -7,11 +7,24 @@
     <div class="wrapper" ref="wrapper">
         <VHover
             v-if="currentlyHovered && !props.dialogVisible"
+            :class="{ 'popup--checked': alreadyChecked == true }"
             :mouse-x="mouseX"
             :mouse-y="mouseY"
             >
             {{ currentlyHovered }}
         </VHover>
+        <ul class="directions">
+            <li class="directions__el directions__el--left" @touchstart="moveLeft" @touchend="stopMoveLeft" @mousedown="moveLeft" @mouseup="stopMoveLeft">
+                <svg width="64" height="67" viewBox="0 0 64 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.0028 9.74535V3.59613L61.8788 33.4743L32.0028 63.3524V57.1016V55.6016H30.5028H1.5V11.2453H30.5028H32.0028V9.74535Z" stroke="white" stroke-width="3"/>
+                </svg>
+            </li>
+            <li class="directions__el directions__el--right" @touchstart="moveRight" @touchend="stopMoveRight" @mousedown="moveRight" @mouseup="stopMoveRight">
+                <svg width="64" height="67" viewBox="0 0 64 67" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.0028 9.74535V3.59613L61.8788 33.4743L32.0028 63.3524V57.1016V55.6016H30.5028H1.5V11.2453H30.5028H32.0028V9.74535Z" stroke="white" stroke-width="3"/>
+                </svg>
+            </li>
+        </ul>
         <canvas class="canvas"></canvas>
     </div>
 </template>
@@ -45,9 +58,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['openTextBox', 'loadingFinished']);
 const currentlyHovered = ref('');
+const alreadyChecked = ref(false);
 const loadingFinished = ref(false);
 const loadingPercentage = ref(0);
 let loopCounter = 0;
+let previousHovered;
 
 // Random
 function RandomNum(min, max){
@@ -86,13 +101,22 @@ onMounted(() => {
     const myViewer = new Viewer(canvas.value, sizes);
     myViewer.populate();
     myViewer.animate();
-    myViewer.animateTraffic();
-    myViewer.animateBoard();
-    myViewer.animateBenches();
-    myViewer.animateFountain();
+    if(props.background == './3d/level-1-texture-2d-parallax-lvl1-edit.glb'){
+        myViewer.animateTraffic();
+        myViewer.animateBoard();
+        myViewer.animateBenches();
+        myViewer.animateFountain();
+    }
+
 
     watch(() => props.background, (first, second) => {
         myViewer.replaceAll();
+        if(props.background == './3d/level-1-texture-2d-parallax-lvl1-edit.glb'){
+            myViewer.animateTraffic();
+            myViewer.animateBoard();
+            myViewer.animateBenches();
+            myViewer.animateFountain();
+        }
     })
     
     watch(() => props.activatedSwitches.length, () => {
@@ -118,6 +142,7 @@ const loadingManager = new THREE.LoadingManager(
     // Progress
     (itemUrl, itemsLoaded, itemsTotal) => {
         loadingPercentage.value = Math.round(itemsLoaded / itemsTotal * 100);
+        loadingFinished.value = false;
     }
 );
 
@@ -127,18 +152,18 @@ const loadingManager = new THREE.LoadingManager(
 const gltfLoader = new GLTFLoader(loadingManager);
 const dracoLoader = new DRACOLoader(loadingManager);
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const textureGlitch = textureLoader.load('/3d/textures/glitch.png');
-const protaStill = textureLoader.load('/img/sprite-anim/0.png');
+const textureGlitch = textureLoader.load('./3d/textures/glitch.png');
+const protaStill = textureLoader.load('./img/sprite-anim/0.png');
 const protaRunning = 
     [
-        textureLoader.load('/img/sprite-anim/1.png'),
-        textureLoader.load('/img/sprite-anim/2.png'),
-        textureLoader.load('/img/sprite-anim/3.png'), 
-        textureLoader.load('/img/sprite-anim/4.png'),
-        textureLoader.load('/img/sprite-anim/5.png'),
-        textureLoader.load('/img/sprite-anim/6.png'),
-        textureLoader.load('/img/sprite-anim/7.png'),
-        textureLoader.load('/img/sprite-anim/8.png')
+        textureLoader.load('./img/sprite-anim/1.png'),
+        textureLoader.load('./img/sprite-anim/2.png'),
+        textureLoader.load('./img/sprite-anim/3.png'), 
+        textureLoader.load('./img/sprite-anim/4.png'),
+        textureLoader.load('./img/sprite-anim/5.png'),
+        textureLoader.load('./img/sprite-anim/6.png'),
+        textureLoader.load('./img/sprite-anim/7.png'),
+        textureLoader.load('./img/sprite-anim/8.png')
     ]
 const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
 const textureProtaStill = new THREE.MeshBasicMaterial({ map: protaStill, transparent: true, side: THREE.DoubleSide });
@@ -165,6 +190,21 @@ window.addEventListener('keyup',function(e){
     keyState[e.keyCode || e.which] = false;
 },true);
 
+const moveLeft = () => {
+    keyState[81] = true;
+}
+
+const moveRight = () => {
+    keyState[68] = true;
+}
+
+const stopMoveRight = () => {
+    keyState[68] = false;
+}
+
+const stopMoveLeft = () => {
+    keyState[81] = false;
+}
 
 
 class Glitch{
@@ -193,6 +233,7 @@ class Particle{
       particleFountainMesh,
       particleFountainMaterial
     );
+    this.mesh.name = "particleFountain";
     this.mesh.position.set((RandomNum(-10, -2) / 30), -0.2, 8.6);
     this.duration = animTime;
     this.changePosition();
@@ -211,6 +252,10 @@ class Particle{
             z: 0,
             duration: this.duration
         });
+    }
+
+    deleteParticle(){
+        this.mesh.scale.set(0, 0, 0);
     }
 }
 
@@ -238,7 +283,7 @@ setRenderer(sizes) {
     this.camera.position.z = 10.64;
 
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color('#ffffff');
+    this.scene.background = new THREE.Color('#929292');
     this.scene.add(this.camera);
 
     // Resize
@@ -269,7 +314,7 @@ populate() {
     this.scene.add(this.light, this.ambientLight);
 
     // Fog
-    this.fog = new THREE.Fog('#4E363A', 1, 225)
+    this.fog = new THREE.Fog('#929292', 1, 11)
     this.scene.fog = this.fog
 
 
@@ -282,7 +327,7 @@ populate() {
 
     // Model loader
     this.sceneElements = [];
-    dracoLoader.setDecoderPath('/draco/');
+    dracoLoader.setDecoderPath('./draco/');
     gltfLoader.setDRACOLoader(dracoLoader);
     gltfLoader.load(
         props.background,
@@ -346,14 +391,17 @@ populate() {
     this.raycaster = new THREE.Raycaster()
     this.currentIntersect = null;
 
-    // Add to inventory    
-    this.canvas.addEventListener('click', () => {
+    // Click effect
+
+    const clickOnCanvas = () => {
         this.currentIntersect = this.intersects[0];
-            if(this.currentIntersect && !props.dialogVisible){
-                emit('openTextBox', this.currentIntersect.object.name);
-            }
+        if(this.currentIntersect && !props.dialogVisible){
+            emit('openTextBox', this.currentIntersect.object.name);
         }
-    )
+    }
+    this.canvas.addEventListener('click', clickOnCanvas)
+    this.canvas.addEventListener('touchdown', clickOnCanvas)
+
 
     // Mouse
     this.mouse = new THREE.Vector2(300, 300);
@@ -384,6 +432,16 @@ animateSprite(direction) {
 replaceAll() {
     loadingPercentage.value = 0;
     loadingFinished.value = false;
+    
+    this.prota.position.set(0, -0.1, 9.2);
+    this.camera.position.x = 0;
+
+    for(let child of this.scene.children){
+        if(child.name == 'particleFountain'){
+            child.visible = false;
+        }
+    }
+
     setTimeout(() => {
         while (this.scene.children.length)
         {
@@ -483,22 +541,26 @@ animateBenches(){
 
 animateFountain(){
 
-    for(let i = 0; i < 100; i++){
-        setTimeout(() => {
-            let duration = RandomNum(2, 5);
-            let particleFountain = new Particle(duration);
-            this.scene.add(particleFountain)
-
+    if(props.background == './3d/level-1-texture-2d-parallax-lvl1-edit.glb'){
+        for(let i = 0; i < 100; i++){
             setTimeout(() => {
-                this.scene.remove(particleFountain);
+                if(props.background == './3d/level-1-texture-2d-parallax-lvl1-edit.glb'){ // Au cas-où on change de niveau au cours de la boucle
+                    let duration = RandomNum(2, 5);
+                    let particleFountain = new Particle(duration);
+                    this.scene.add(particleFountain)
 
-                if(i == 99){
-                    this.animateFountain();
+                    setTimeout(() => {
+                        this.scene.remove(particleFountain);
+                        if(i == 99){
+                            this.animateFountain();
+                        }
+                    }, (duration * 1000));
                 }
-            }, (duration * 1000));
-        }, (RandomNum(0, 5) * 1000))
-        
+            }, (RandomNum(0, 5) * 1000))
+            
+        }
     }
+    
 }
 
 render() {
@@ -512,19 +574,27 @@ render() {
     this.raycaster.setFromCamera(this.mouse, this.camera)
     this.intersects = this.raycaster.intersectObjects(this.sceneElements)
 
-    if(this.intersects.length !== 0){
+    if(this.intersects.length !== 0 && previousHovered != this.intersects[0].object.name){
+        alreadyChecked.value = false;
         this.currentIntersect = this.intersects[0];
         currentlyHovered.value = this.intersects[0].object.name;
+        previousHovered = this.intersects[0].object.name;
         let isExisting = false;
         for(let dialog of props.dialogList){
             if(this.intersects[0].object.name === dialog.name){
                 currentlyHovered.value = dialog.title;
+                if(dialog.checked){
+                    if(dialog.checked == true){
+                        alreadyChecked.value = true;
+                    }
+                }
                 isExisting = true;
                 this.canvas.style.cursor = 'pointer';
             }
         }
         if(isExisting == false){ // Masquer ce bloc pour checker le nom des objets 3D
             currentlyHovered.value = '';
+            alreadyChecked.value = false;
             this.canvas.style.cursor = 'auto';
         }
     }else{
@@ -572,6 +642,40 @@ render() {
     top: 0;
     left: 0;
     z-index: -1;
+}
+
+.directions{
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    display: flex;
+    gap: 16px;
+
+    @media (min-width: 992px) {
+        display: none;
+    }
+
+    &__el{
+        height: 32px;
+        width: 32px;
+        cursor: pointer;
+        
+
+        &:active{
+            path{
+                fill: var(--c-txt);
+            }
+        }
+
+        &--left{
+            transform: rotate(180deg);
+        }
+
+        svg{
+            width: 100%;
+            height: 100%;
+        }
+    }
 }
 
 </style>

@@ -1,15 +1,19 @@
 <template>
-    <div class="cursor__container" :style="cursorPos">
-        <div class="cursor">
-            <div class="cursor__effect cursor__effect--anim"></div>
-        </div>
-        <div v-if="itemUsed" class="inventory__item cursor__img">
-                <div class="item">
-                    <img class="item__img" :src="'/img/items/' + itemUsed.name + '.png'" :alt="itemUsed.title">
-                </div>
-                
-        </div>
-    </div>
+  <div class="cursor__container" :style="cursorPos">
+      <div class="cursor">
+          <div class="cursor__effect cursor__effect--anim"></div>
+      </div>
+      <div v-if="itemUsed" class="inventory__item cursor__img">
+              <div class="item">
+                  <img 
+                    class="item__img" 
+                    :src="'./img/items/' + itemUsed.name + '.webp'" 
+                    :srcset="'./img/items/' + itemUsed.name + '.webp 1x, ' + './img/items/' + itemUsed.name + '@2x.webp 2x'" 
+                    :alt="itemUsed.title">
+              </div>
+              
+      </div>
+  </div>
 
 </template>
 
@@ -99,6 +103,12 @@ onMounted(() => {
     align-content: center;
     justify-content: center;
     align-items: center;
+
+    display: none;
+  
+    @media (min-width: 992px) {
+      display: block;
+    }
   }
 
   rotate: 45deg;

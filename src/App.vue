@@ -2,15 +2,8 @@
 import VStructure from './components/VStructure.vue'
 import VCursor from './components/VCursor.vue'
 import Inventory from './scripts/Inventory.js'
-import { onMounted, ref, provide, watch } from 'vue';
+import { ref, provide, watch } from 'vue';
 
-const isDeviceMobile = ref(true);
-onMounted(() => {
-  // let deviceWidth = window.innerWidth;
-  if(window.innerWidth > 900){
-    isDeviceMobile.value = false;
-  }
-})
 const inventory = ref(new Inventory());
 const audioStatus = ref({
   volume: localStorage.getItem('volume'),
@@ -25,9 +18,11 @@ provide('audioStatus', audioStatus);
 <template>
   <h1 class="title--notdisplayed">BOSTROM — Le jeu</h1>
   <VCursor/>
-  <p v-if="isDeviceMobile == true">L'expérience sur téléphone ou tablette n'est pas optimale. Si malgré tout vous tenez à essayer sur téléphone, passez en mode paysage et actualisez la page.</p>
+  <div class="warning">
+    <p class="warning__message">L'expérience sur téléphone ou tablette n'est pas optimale. Si vous tenez malgré tout à essayer, passez en mode paysage.</p>
+  </div>
   
-  <VStructure v-if="isDeviceMobile == false"/>
+  <VStructure/>
   <!-- <VEnigma v-if="isDeviceMobile == false"/> -->
 </template>
 
@@ -37,5 +32,30 @@ provide('audioStatus', audioStatus);
   height: 0;
   touch-action: none;
   user-select: none;
+}
+
+.warning{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(13, 13, 13, .8);
+  z-index: 9999;
+
+  &__message{
+    max-width: 75ch;
+    text-align: center;
+    padding: 16px;
+  }
+
+  @media (orientation: landscape){
+    opacity: 0;
+    display: none;
+    touch-action: none;
+    user-select: none;
+    pointer-events: none;
+  }
 }
 </style>

@@ -3,6 +3,7 @@ import itemsList from "./items";
 export default class Inventory {
     constructor(){
         this.items = [];
+        this.opened = false;
     }
 
     addItem(currentItem){

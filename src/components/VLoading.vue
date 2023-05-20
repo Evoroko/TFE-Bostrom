@@ -36,7 +36,7 @@ onMounted(() => {
 
 
 .loading{
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     background-color: var(--grey-1000);
@@ -47,6 +47,8 @@ onMounted(() => {
     transition: .3s;
     z-index: 1000;
     font: var(--exo-31px-medium);
+    top: 0;
+    left: 0;
     
     & > * {
         user-select: none;

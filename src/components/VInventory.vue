@@ -1,36 +1,39 @@
 <template>
 
-<div class="inventory" :class="{'inventory--close': openInventory == false, 'inventory--inactive': isUsingItem == true}">
+<div class="inventory" :class="{'inventory--close': inventory.opened == false, 'inventory--inactive': isUsingItem == true}">
     <div class="inventory__icon">
         <div class="inventory__status" v-if="inventory.items.length > 0">{{ inventory.items.length }}</div>
         <h2 class="title title--small">Sacoche</h2>
     </div>
-    <div v-if="openInventory" class="inventory__content">
+    <div v-if="inventory.opened" class="inventory__content">
         <ul class="inventory__items">
             <li class="inventory__item" v-for="(item, index) in inventory.items" :key="index" :class="{ 'inventory__item--active': activeIndex === index }" @click="setActiveIndex(index)">
                 <div class="item">
-                    <img class="item__img" :src="'/img/items/' + item.name + '.png'" :alt="item.title">
+                    <img
+                        class="item__img"
+                        :src="'./img/items/' + item.name + '.webp'"
+                        :srcset="'./img/items/' + item.name + '.webp 1x, ' + './img/items/' + item.name + '@2x.webp 2x'" 
+                        :alt="item.title">
                 </div>
             </li>
         </ul>
         <ul class="inventory__buttons">
-            <li class="inventory__button">
+            <li class="inventory__button" v-if="inventory.items.length > 0">
                 <VButton
                     :class="{'inventory__button--inactive': activeIndex == undefined }"
                     @click="clickInspect()"
                 >Inspecter</VButton>
             </li>
-            <li class="inventory__button">
+            <li class="inventory__button" v-if="inventory.items.length > 0">
                 <VButton
                     :class="{'inventory__button--inactive': activeIndex == undefined }"
                     @click="clickUse()"
                 >Utiliser</VButton>
             </li>
+            <li class="inventory__button inventory__button--empty" v-if="inventory.items.length == 0">Aucun objet possédé.</li>
         </ul>
-        
-        
     </div>
-    <button class="inventory__toggle" :class="{ 'inventory__toggle--open': openInventory === true }"></button>
+    <button class="inventory__toggle" :class="{ 'inventory__toggle--open': inventory.opened === true }"></button>
 </div>
 
 <div v-if="activeIndex !== undefined && isUsingItem == true" class="useBanner">
@@ -48,10 +51,7 @@ const inventory = inject('inventory');
 const emit = defineEmits(['inventoryActive', 'clickInspect', 'clickUse', 'clickCancel']);
 
 const activeIndex = ref(undefined);
-const openInventory = ref(false);
 const isUsingItem = ref(false);
-
-
 
 let inventoryIcon;
 
@@ -79,6 +79,7 @@ onUnmounted(() => {
 function cancelUse(){
     isUsingItem.value = false;
     inventory.value.setAllUnused();
+    inventory.value.setAllInactive();
     emit('clickCancel');
 }
 
@@ -128,7 +129,8 @@ watch(inventory.value, (newVal, oldVal) => {
 );
 
 function toggleInventory(){
-    openInventory.value = !openInventory.value;
+    inventory.value.opened = !inventory.value.opened;
+    inventory.value.setAllInactive();
 }
 
 
@@ -232,6 +234,10 @@ function toggleInventory(){
                 }
             }
         }
+
+        &--empty{
+            color: var(--grey-300);
+        }
     }
 
     &--close{
@@ -248,7 +254,7 @@ function toggleInventory(){
     }
 
     &__icon{
-        background-image: url(/img/items/bag.png);
+        background-image: url(/img/items/bag.webp);
         background-size: 70%;
         background-repeat: no-repeat;
         background-position: center top;
@@ -260,7 +266,7 @@ function toggleInventory(){
         cursor: pointer;
 
         @media(-webkit-device-pixel-ratio: 2){
-            background-image: url(/img/items/bag@2x.png);
+            background-image: url(/img/items/bag@2x.webp);
         }
     }
 
@@ -284,7 +290,7 @@ function toggleInventory(){
     background-color: black;
     position: fixed;
     top: 0;
-    z-index: 1000;
+    z-index: 1101;
     padding: 16px 0;
     text-align: center;
     display: flex;

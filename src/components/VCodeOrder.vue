@@ -38,8 +38,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, inject } from 'vue'
 import VButton from './VButton.vue';
+import audioControl from '../scripts/audioControl.js'
 const emit = defineEmits(['codeCorrect', 'closeCode']);
 const props = defineProps({
     validCode: {
@@ -47,6 +48,12 @@ const props = defineProps({
         required: true
     }
 })
+
+const audioStatus = inject('audioStatus');
+let incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
+let correctSound = new Audio('./audio/sounds/weird-buttons.wav');
+let keySound = new Audio('./audio/sounds/bop.wav');
+
 let countSelected = 0;
 const codeResultDisplayed = ref(false);
 const codeResultTrueDisplayed = ref(false);
@@ -62,6 +69,7 @@ onMounted(() => {
 const activateKey = (e) => {
     countSelected += 1;
     let alreadySelected = false;
+    audioControl(audioStatus, keySound);
 
     for(let entry of enteredCode.entries()){
         if(entry == e.target.dataset.index){
@@ -90,6 +98,7 @@ const activateKey = (e) => {
 
         if(validEntries == 4){
             codeResultTrueDisplayed.value = true;
+            audioControl(audioStatus, correctSound);
             setTimeout(() => {
                 emit('codeCorrect');
                 codeResultTrueDisplayed.value = false;
@@ -97,6 +106,7 @@ const activateKey = (e) => {
             }, 1000)
         }else{
             codeResultDisplayed.value = true;
+            audioControl(audioStatus, incorrectSound);
             setTimeout(() => {
                 resetCode();
                 codeResultDisplayed.value = false;

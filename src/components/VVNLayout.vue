@@ -1,6 +1,11 @@
 <template>
-    <div class="vnlayout" :class="{'vnlayout--blurbg': name != undefined && name != 'none'}">
-        <img v-if="background != undefined && background != 'none'" class="vnlayout__bg" :src="'/img/backgrounds/' + background + '.jpg'" alt="">
+    <div class="vnlayout" :class="{'vnlayout--blurbg': sprite != undefined && sprite != 'none'}">
+        <img
+            v-if="background != undefined && background != 'none'"
+            class="vnlayout__bg"
+            :src="'./img/backgrounds/' + background + '.webp'"
+            :srcset="'./img/backgrounds/' + background + '.webp 1x, ' + './img/backgrounds/' + background + '@2x.webp 2x'" 
+            alt="Image de fond">
 
         <VTextBox
         :name="name"
@@ -8,11 +13,25 @@
         :is-dialog-full="isDialogFull"
         />
         
-        <img v-if="sprite !== 'none'" class="vnlayout__sprite" :src="'/img/sprites/' + sprite + '.webp'" :alt="'Sprite de ' + name">
+        <img
+            v-if="sprite !== 'none'"
+            class="vnlayout__sprite"
+            :src="'./img/sprites/' + sprite + '.webp'"
+            :srcset="'./img/sprites/' + sprite + '.webp 1x, ' + './img/sprites/' + sprite + '@2x.webp 2x'" 
+            :alt="'Sprite de ' + name"
+        >
         <div v-if="displayedItem" class="vnlayout__item">
-            <img :src="'/img/items/' + displayedItem + '.png'" :alt="'Item nommé ' + displayedItem">
+            <img
+                :src="'./img/items/' + displayedItem + '.png'"
+                :srcset="'./img/items/' + displayedItem + '.webp 1x, ' + './img/items/' + displayedItem + '@2x.webp 2x'" 
+                :alt="'Item nommé ' + displayedItem">
         </div>
-        <img v-if="spriteProta !== 'none'" class="vnlayout__prota" :src="'/img/sprites/' + spriteProta + '.webp'" alt="Sprite de la protagoniste, Anaëlle.">
+        <img
+            v-if="spriteProta !== 'none'"
+            class="vnlayout__prota"
+            :src="'./img/sprites/' + spriteProta + '.webp'"
+            :srcset="'./img/sprites/' + spriteProta + '.webp 1x, ' + './img/sprites/' + spriteProta + '@2x.webp 2x'" 
+            alt="Sprite de la protagoniste, Anaëlle.">
         
     </div>
     
@@ -61,6 +80,7 @@ const props = defineProps({
     justify-content: center;
     align-items: flex-end;
     user-select: none;
+    overflow: hidden;
 
     &--blurbg{
         backdrop-filter: blur(2px);
@@ -110,11 +130,19 @@ const props = defineProps({
         z-index: 101;
         max-width: calc((100vw - 650px) / 2);
         max-height: 60vh;
-        background-image: url(/img/backgrounds/background-prota.png);
+        background-image: url(/img/backgrounds/background-prota.webp);
+        @media (-webkit-device-pixel-ratio: 2) {
+            background-image: url(/img/backgrounds/background-prota@2x.webp);
+        }
         background-size: cover;
         background-position: center left;
         clip-path: polygon(0 0, 100% 0, 100% 100%, 33% 100%);
         animation: slideinLeft 0.3s ease-in-out;
+
+        @media(max-width: 1200px){
+            z-index: 99;
+            max-width: 50vw;
+        }
 
     }
 }

@@ -10,8 +10,8 @@
         </div>
         <div class="tutoDialog__el">
             <div class="tutoDialog__keys">
+                <p>Maintenir</p>
                 <img src="/assets/key_enter.svg" alt="Touche entrée">
-                <p>maintenu</p>
             </div>
             <p>Passer</p>
         </div>
@@ -21,13 +21,27 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 
+
+
 const isDisplayed = ref(true);
 
-onMounted(() => {
-    const tutoDialog = document.querySelector('.tutoDialog');
-    tutoDialog.addEventListener("animationend", () => {
+let vnlayout;
+const removeTuto = () => {
+    isDisplayed.value = false;
+    vnlayout.removeEventListener('click', removeTuto)
+}
+const removeTutoEnter = (e) => {
+    if(e.key == 'Enter'){
         isDisplayed.value = false;
-    })
+        document.removeEventListener('keydown', removeTutoEnter);
+    }
+}
+
+onMounted(() => {
+    vnlayout = document.querySelector('.vnlayout');
+    vnlayout.addEventListener('click', removeTuto);
+    document.addEventListener('keydown', removeTutoEnter);
+
 })
 </script>
 
@@ -43,9 +57,11 @@ onMounted(() => {
     gap: 48px;
     justify-content: center;
     align-items: center;
+    padding: 16px;
+    background-color: rgba(13, 13, 13, .4);
 
-    animation: .5s fadeOut forwards;
-    animation-delay: 5s;
+    // animation: .5s fadeOut forwards;
+    // animation-delay: 8s;
 
     &__el{
         display: flex;

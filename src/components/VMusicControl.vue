@@ -1,6 +1,6 @@
 <template>
     <div class="player">
-        <audio :src="'/audio/music/'+ music + '.mp3'" autoplay loop></audio>
+        <audio :src="'./audio/music/'+ music + '.mp3'" autoplay loop></audio>
         <div class="volume">
             <button class="volume__mute"></button>
             <input type="range" class="volume__slider" min="0" max="1" step="0.05" value="1">

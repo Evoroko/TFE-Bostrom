@@ -77,6 +77,10 @@ onUnmounted(() => {
         transform-origin: left top;
     }
 
+    &--checked{
+        color: var(--grey-300);
+    }
+
     &__text{
         display: flex;
         // background-color: var(--transparent-black-80);

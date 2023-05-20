@@ -9,12 +9,13 @@
 
 
             <div class="tuto__slide tuto__slide--active">
-                <p>Trouvez comment ouvrir la porte en résolvant les énigmes de ce monde.</p>
+                <p v-if="currentLevel == 1">Trouvez comment ouvrir la porte en résolvant les énigmes de ce monde.</p>
+                <p v-if="currentLevel !== 1">Découvrez les mystères de ce monde en interagissant avec celui-ci.</p>
             </div>
             
 
             <div class="tuto__slide">
-                <img class="tuto__img" src="/img/tuto-1.jpg" srcset="/img/tuto-1.jpg 1x, /img/tuto-1@2x.jpg 2x" alt="Démonstration du personnage en train de courir">
+                <img class="tuto__img" src="/img/tuto-1.webp" srcset="/img/tuto-1.webp 1x, /img/tuto-1@2x.webp 2x" alt="Démonstration du personnage en train de courir">
                 <div class="tuto__subslide">
                     <p>Déplacez-vous dans le décor grâce aux touches du clavier.</p>
                     <img src="/assets/keys.svg" alt="Appuyez sur Q pour aller à gauche, et sur D pour aller à droite.">
@@ -22,13 +23,13 @@
             </div>
 
             <div class="tuto__slide">
-                <img class="tuto__img" src="/img/tuto-2.jpg" srcset="/img/tuto-2.jpg 1x, /img/tuto-2@2x.jpg 2x" alt="Démonstration de l'affichage d'un nom d'objet du décor au survol.">
+                <img class="tuto__img" src="/img/tuto-2.webp" srcset="/img/tuto-2.webp 1x, /img/tuto-2@2x.webp 2x" alt="Démonstration de l'affichage d'un nom d'objet du décor au survol.">
                 <p>Utilisez votre souris pour survoler les éléments du décor et cliquez dessus pour interagir avec.</p>
             </div>
 
             <div class="tuto__slide">
-                <img class="tuto__img" src="/img/tuto-3.jpg" srcset="/img/tuto-3.jpg 1x, /img/tuto-3@2x.jpg 2x" alt="Démonstration de l'utilisation du bouton « Utiliser » et « Inspecter ».">
-                <p>Vous obtiendrez certains objets au cours de votre exploration. En en sélectionnant un, vous avez la possibilité de l’inspecter pour obtenir des informations, ou de l’utiliser sur un élément du décor.</p>
+                <img class="tuto__img" src="/img/tuto-3.webp" srcset="/img/tuto-3.webp 1x, /img/tuto-3@2x.webp 2x" alt="Démonstration de l'utilisation du bouton « Utiliser » et « Inspecter ».">
+                <p>Vous obtiendrez certains objets au cours de votre exploration. En en sélectionnant un, vous avez la possibilité de l’inspecter, ou de l’utiliser sur un élément du décor.</p>
             </div>
 
             <div class="tuto__status">
@@ -46,6 +47,13 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import VButton from './VButton.vue';
 
 const emit = defineEmits(['closeTuto']);
+
+const props = defineProps({
+    currentLevel: {
+        type: Number,
+        required: false
+    }
+})
 
 const hideTuto = () => {
     activeSlide.value = 0;
@@ -153,6 +161,10 @@ const updateSlide = (key) => {
     clip-path: polygon(20% 0, 80% 0, 100% 50%, 80% 100%, 20% 100%, 0% 50%);
     animation: openTuto .2s;
 
+    @media (max-width: 992px){
+        height: 95%;
+    }
+
     &__slide{
         display: none;
         height: 100%;
@@ -246,6 +258,10 @@ const updateSlide = (key) => {
 
     &__img{
         height: 160px;
+
+        @media (max-width: 992px){
+            height: 80px;
+        }
     }
 }
 

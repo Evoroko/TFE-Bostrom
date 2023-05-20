@@ -1,5 +1,5 @@
 <template>
-    <button class="button" :class="{ 'button--small': small == true }">
+    <button class="button" :class="{ 'button--small': small == true, 'button--big': big == true, 'button--secondary': reverse == true }">
         <span class="button__txt">
             <slot/>
 
@@ -11,6 +11,16 @@
 
 const props = defineProps({
     small: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    big: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    reverse: {
         type: Boolean,
         required: false,
         default: false
@@ -74,6 +84,58 @@ const props = defineProps({
         .button__txt{
             width: 0;
             padding: 0;
+        }
+    }
+
+    &--big{
+        width: 100%;
+        height: 48px;
+
+        .button__txt{
+            font: var(--exo-20px-medium);
+            text-transform: uppercase;
+            padding: 8px 24px;
+
+            &::after, &::before{
+                content: "";
+                position: absolute;
+                left: -17px;
+                top: 7px;
+                z-index: -1;
+                width: 34px;
+                height: 34px;
+                transform: rotate(45deg);
+                background-color: var(--c-txt);
+            }
+
+            &::after{
+                left: auto;
+                right: -17px;
+            }
+        }
+    }
+
+    &--secondary{
+        .button__txt{
+            background-color: var(--grey-1000);
+            color: var(--c-txt);
+            border-top: 1px solid var(--c-txt);
+            border-bottom: 1px solid var(--c-txt);
+
+            &::after, &::before{
+                background-color: var(--grey-1000);
+                box-sizing: border-box;
+            }
+
+            &::after{
+                border-top: 1px solid var(--c-txt);
+                border-right: 1px solid var(--c-txt);
+            }
+
+            &::before{
+                border-left: 1px solid var(--c-txt);
+                border-bottom: 1px solid var(--c-txt);
+            }
         }
     }
 }

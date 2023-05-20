@@ -14,11 +14,12 @@
 <script setup>
 import { ref, computed, watch, inject, onUnmounted } from 'vue';
 import VVNLayout from './VVNLayout.vue'
+import audioControl from '../scripts/audioControl.js'
 
 const inventory = inject('inventory');
 const audioStatus = inject('audioStatus');
-let bopSound = new Audio('/audio/sounds/bop.wav');
-let getItemSound = new Audio('/audio/sounds/confusion-blip-6-3.wav');
+let bopSound = new Audio('./audio/sounds/bop.wav');
+let getItemSound = new Audio('./audio/sounds/confusion-blip-6-3.wav');
 
 const props = defineProps({
     script: {
@@ -26,7 +27,7 @@ const props = defineProps({
         required: false
     }
 })
-const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel', 'inputCodeOrder', 'changeMusic', 'activateSwitch', 'showTuto']);
+const emit = defineEmits(['conversation-ended', 'inputCode', 'changeLevel', 'inputCodeOrder', 'changeMusic', 'activateSwitch', 'showTuto', 'showVote']);
 
 const texts = ref(props.script);
 const isDialogFull = ref(false);
@@ -76,13 +77,6 @@ function testExisting(tested, previous) {
     }
 }
 
-function emitSound (sound) {
-    sound.volume = audioStatus.value.volume;
-    sound.muted = audioStatus.value.mute;
-    sound.currentTime = 0;
-    sound.play();
-}
-
 
 watch(i, (newVal, oldVal) => {
     if (newVal !== oldVal && texts.value[currentDialogIndex.value].text) {
@@ -115,6 +109,7 @@ onUnmounted(() => {
 let isItACode = false;
 let isItACodeOrder = false;
 let isItATuto = false;
+let isItAVote = false;
 let codeData;
 
 const nextText = () => {
@@ -127,7 +122,7 @@ const nextText = () => {
             if(texts.value[currentDialogIndex.value + 1]){
                 if(texts.value[currentDialogIndex.value + 1].inventory){
                     if(texts.value[currentDialogIndex.value + 1].inventory == 'add'){
-                        emitSound(getItemSound);
+                        audioControl(audioStatus, getItemSound);
                         inventory.value.addItem(texts.value[currentDialogIndex.value + 1].targetItem);
                     }else if(texts.value[currentDialogIndex.value + 1].inventory == 'remove'){
                         inventory.value.removeItem(texts.value[currentDialogIndex.value + 1].targetItem);
@@ -135,6 +130,13 @@ const nextText = () => {
                 }
             }
             
+
+
+            
+
+            if(texts.value[currentDialogIndex.value].activateSwitch){
+                emit('activateSwitch', texts.value[currentDialogIndex.value].activateSwitch);
+            }
 
             if(texts.value[currentDialogIndex.value].specialAction){
                 if(texts.value[currentDialogIndex.value].specialAction == 'code'){
@@ -144,8 +146,11 @@ const nextText = () => {
                     isItACodeOrder = true;
                 }else if(texts.value[currentDialogIndex.value].specialAction == 'showTuto'){
                     isItATuto = true;
+                }else if(texts.value[currentDialogIndex.value].specialAction == 'showVote'){
+                    isItAVote = true;
                 }
             }
+
 
             
 
@@ -161,7 +166,7 @@ const nextText = () => {
                 currentDialogIndex.value++;
                 i.value = 0;
                 
-                emitSound(bopSound);
+                audioControl(audioStatus, bopSound);
             }
             
         } else {
@@ -180,6 +185,8 @@ const nextText = () => {
             emit('inputCodeOrder');
         }else if(isItATuto == true){
             emit('showTuto');
+        }else if(isItAVote == true){
+            emit('showVote');
         }
         emit('conversation-ended');
         currentDialogIndex.value = 0;
@@ -188,10 +195,6 @@ const nextText = () => {
     if(texts.value[currentDialogIndex.value].jump){
         emit('changeLevel', texts.value[currentDialogIndex.value].jump);
         nextText();
-    }
-
-    if(texts.value[currentDialogIndex.value].activateSwitch){
-        emit('activateSwitch', texts.value[currentDialogIndex.value].activateSwitch);
     }
 
 };

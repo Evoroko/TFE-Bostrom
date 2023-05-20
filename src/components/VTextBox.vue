@@ -67,7 +67,10 @@ const props = defineProps({
         top: -64px;
         left: 0;
         background-color: var(--transparent-black-80);
-        padding: 8px 16px 8px 0;
+        padding: 8px 32px;
+        @media (min-width: 864px){
+            padding: 8px 16px 8px 0;
+        }
         box-sizing: border-box;
         display: flex;
         align-items: center;
@@ -81,22 +84,33 @@ const props = defineProps({
 
         &--prota{
             position: fixed;
-            right: 0;
+            left: 0;
             bottom: 160px;
             top: auto;
-            left: auto;
-            padding: 8px 0 8px 16px;
-            z-index: 102;
-
-            &::before{
-                content: none;
+            padding: 8px 32px;
+            @media(min-width: 864px){
+                padding: 8px 16px 8px 0;
             }
 
-            &::after{
-                content: "";
-                height: 48px;
-                width: calc((100vw - 800px) / 2);
+            @media(min-width: 1200px){
+                right: 0;
+                left: auto;
+                padding: 8px 0 8px 16px;
+                z-index: 102;
+
+                &::before{
+                    content: none;
+                }
+
+                &::after{
+                    content: "";
+                    height: 48px;
+                    width: calc((100vw - 800px) / 2);
+                }
             }
+            
+
+
         }
     }
 

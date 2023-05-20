@@ -1,12 +1,17 @@
 <template>
   <VTutoDialog/>
+  <VVote 
+    v-if="openVote == true"
+    @close-vote="openVote = false"
+  />
   <div class="topfunctions">
     <VMusicControl :music="playedMusic"/>
-    <VButton class="tuto__openBtn" @click="openTuto = true" v-if="hideHover == false">Aide</VButton>
+    <VButton class="tuto__openBtn" @click="openTuto = true" v-if="hideHover == false">Tutoriel</VButton>
   </div>
   <VTuto
     @closeTuto="openTuto = false"
     v-if="openTuto == true"
+    :current-level="currentLevel"
   />
   <VCodeOrder
     v-if="canEnterCodeOrder == true"
@@ -25,10 +30,11 @@
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
-      @conversation-ended="selectedObject = null"
+      @conversation-ended="selectedObject = null; loadOutro();"
       @input-code="codeData = $event; inputCode()"
       @input-code-order="inputCodeOrder()"
       @showTuto="openTuto = true"
+      @showVote="openVote = true"
       @changeLevel="changeLevelIndex = $event; changeLevel()"
       @change-music="playedMusic = $event;"
       @activate-switch="currentlyAddedSwitch = $event;activateSwitch();"
@@ -64,6 +70,7 @@ import VMusicControl from './VMusicControl.vue';
 import VButton from './VButton.vue';
 import VTuto from './VTuto.vue'
 import VTutoDialog from './VTutoDialog.vue'
+import VVote from './VVote.vue'
 import { ref, inject, computed, watch } from 'vue';
 import itemsList from '../scripts/items.js'
 
@@ -100,9 +107,11 @@ const codeData = ref({});
 const activatedSwitches = ref([]);
 const currentlyAddedSwitch = ref();
 const openTuto = ref(false);
+const openVote = ref(false);
+const preventClickBg = ref(false);
 
 const hideHover = computed(() => {
-  if(openTuto.value == false && !!selectedObject.value == false && canEnterCode.value == false && canEnterCodeOrder.value == false){
+  if(openTuto.value == false && !!selectedObject.value == false && canEnterCode.value == false && canEnterCodeOrder.value == false && preventClickBg.value == false && openVote.value == false){
     return false;
   }
 
@@ -132,6 +141,27 @@ const loadIntro = () => {
   }
   selectedObject.value = 'intro';
 }
+
+const loadOutro = () => {
+  let countOutro = 0;
+
+  for(let activatedSwitch of activatedSwitches.value){
+    if(activatedSwitch.includes('convo')){
+      countOutro += 1;
+    }
+  }
+
+  if(countOutro == 4){
+    preventClickBg.value = true;
+    setTimeout(() => {
+      selectedObject.value = 'outro';
+      preventClickBg.value = false;
+    }, 300);
+    
+    activatedSwitches.value = [];
+  }  
+}
+
 
 loadDefaultInteraction();
 loadIntro();
@@ -285,6 +315,7 @@ const changeLevel = () => {
 
 const activateSwitch = () => {
   let alreadyExists = false;
+
   for(let activatedSwitch of activatedSwitches.value){
     if(activatedSwitch == currentlyAddedSwitch.value){
       alreadyExists = true;
@@ -294,6 +325,7 @@ const activateSwitch = () => {
   if(alreadyExists == false){
     activatedSwitches.value.push(currentlyAddedSwitch.value);
   }
+
   
 }
 

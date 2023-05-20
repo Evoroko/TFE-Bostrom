@@ -38,8 +38,9 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, inject } from 'vue'
 import VButton from './VButton.vue'
+import audioControl from '../scripts/audioControl.js'
 
 const props = defineProps({
     keyboardKeys: {
@@ -52,8 +53,16 @@ const props = defineProps({
         required: false
     }
 })
-
 const emit = defineEmits(['codeAttempt', 'closeCode']);
+
+
+
+
+const audioStatus = inject('audioStatus');
+let incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
+let correctSound = new Audio('./audio/sounds/weird-buttons.wav');
+let keySound = new Audio('./audio/sounds/bop.wav');
+
 const code = ref('---')
 const codeResultDisplayed = ref(false);
 const codeResultTrueDisplayed = ref(false);
@@ -80,6 +89,7 @@ const verifyCode = () => {
 
 const enterKey = (e) => {
     const input = document.querySelector('#code');
+    audioControl(audioStatus, keySound);
 
     const reset = () => {
         input.value = null;
@@ -98,12 +108,14 @@ const enterKey = (e) => {
 
         if(counter == 3 && code.value == props.answer){
             codeResultTrueDisplayed.value = true;
+            audioControl(audioStatus, correctSound);
             setTimeout(() => {
                 codeResultTrueDisplayed.value = false;
                 verifyCode();
             }, 1000)
         }else if(counter == 3){
             codeResultDisplayed.value = true;
+            audioControl(audioStatus, incorrectSound);
             setTimeout(() => {
                 codeResultDisplayed.value = false;
                 reset();
@@ -132,6 +144,8 @@ const closeCode = () => {
     z-index: 1000;
     font: var(--exo-16px-medium);
 
+
+
     &__container{
         position: absolute;
         left: 50%;
@@ -142,7 +156,12 @@ const closeCode = () => {
         flex-direction: column;
         gap: 24px;
         padding: 12px;
-        align-items: center
+        align-items: center;
+
+        @media (max-width: 992px){
+            gap: 16px;
+            transform: translate(-50%, -50%) scale(0.8) rotate(-45deg);
+        }
     }
     
 }
