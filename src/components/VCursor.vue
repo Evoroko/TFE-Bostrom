@@ -114,9 +114,9 @@ onMounted(() => {
   rotate: 45deg;
   transform: scale(.5);
   pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
   animation: cursorAnim2 6s infinite linear;
 
   &::after{

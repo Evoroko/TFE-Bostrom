@@ -67,6 +67,10 @@ const props = defineProps({
     isDialogFull: {
         type: Boolean,
         required: false
+    },
+    hasClicked: {
+        type: Boolean,
+        required: false
     }
 })
 
@@ -110,7 +114,7 @@ const props = defineProps({
         background-color: var(--transparent-black-60);
 
         img{
-            height: 80%;
+            height: 60%;
         }
 
     }
@@ -142,6 +146,11 @@ const props = defineProps({
         @media(max-width: 1200px){
             z-index: 99;
             max-width: 50vw;
+        }
+
+        @media(max-width: 992px){
+            z-index: 99;
+            max-height: 80vh;
         }
 
     }

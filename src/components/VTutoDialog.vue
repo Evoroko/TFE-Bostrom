@@ -50,8 +50,9 @@ onMounted(() => {
 .tutoDialog{
     position: absolute;
     top: 16px;
-    left: 16px;
+    left: 50%;
     z-index: 2000;
+    transform: translateX(-50%);
 
     display: flex;
     gap: 48px;

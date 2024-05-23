@@ -253,10 +253,6 @@ class Particle{
             duration: this.duration
         });
     }
-
-    deleteParticle(){
-        this.mesh.scale.set(0, 0, 0);
-    }
 }
 
 
@@ -394,9 +390,20 @@ populate() {
     // Click effect
 
     const clickOnCanvas = () => {
-        this.currentIntersect = this.intersects[0];
-        if(this.currentIntersect && !props.dialogVisible){
-            emit('openTextBox', this.currentIntersect.object.name);
+        
+        const clickOnCanvasAction = () => {
+            this.currentIntersect = this.intersects[0];
+            if(this.currentIntersect && !props.dialogVisible){
+                emit('openTextBox', this.currentIntersect.object.name);
+            }
+        }
+
+        if(window.innerWidth > 992){
+            clickOnCanvasAction();
+        }else{
+            setTimeout(() => {
+                clickOnCanvasAction();
+            }, 10)
         }
     }
     this.canvas.addEventListener('click', clickOnCanvas)

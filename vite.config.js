@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // base: "/",
-  base: "/projets/tfe/game",
+  base: "/",
+  // base: "/projets/tfe/game",
   plugins: [vue()],
 })

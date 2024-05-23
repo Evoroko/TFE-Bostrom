@@ -27,12 +27,12 @@ export default [
             {
                 name: 'Roxy',
                 sprite: 'roxy-thinking',
-                text: "Wow ! Qu’est-ce que c’est que cet endroit ? …Eh ! Anaëlle, regarde !"
+                text: "Wow ! Qu’est-ce que c’est que cet endroit ?"
             },
             {
                 name: 'Roxy',
                 sprite: 'roxy-overjoyed',
-                text: "Là ! Il y a des gens !"
+                text: "…Eh ! Anaëlle, regarde ! Là ! Il y a des gens !"
             },
             {
                 name: 'Anaëlle',
@@ -41,38 +41,38 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "Ils savent peut-être quelque chose. On devrait leur demander."
             },
             {
                 name: 'Roxy',
-                sprite: 'roxy-overjoyed',
+                sprite: 'roxy',
                 text: "Hey, vous là !"
             },
             {
                 spriteProta: 'none',
                 name: '???',
-                sprite: 'alden',
+                sprite: 'alden-suffering',
                 text: "Encore d'autres…"
             },
             {
                 name: '???',
-                sprite: 'eugene',
+                sprite: 'eugene-surprised',
                 text: "Mais combien sommes-nous, au juste ?"
             },
             {
                 name: '???',
-                sprite: 'helen',
+                sprite: 'helen-suspicious',
                 text: "Neuf, pour le moment. La situation semble se complexifier…"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Excusez-moi, mais où sommes-nous ?"
             },
             {
                 name: '???',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "Personne ne le sait ! On est tous dans le même pétrin, ici !"
             },
             {
@@ -83,12 +83,12 @@ export default [
             },
             {
                 name: '???',
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 text: "Tu aurais dû mieux écouter."
             },
             {
                 name: 'Roxy',
-                sprite: 'roxy-thinking',
+                sprite: 'roxy-anxious',
                 text: "Hein ?"
             },
             {
@@ -98,33 +98,33 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-afraid',
                 text: "Attendez. Vous aussi, vous avez dû résoudre une sorte d’énigme ?"
             },
             {
                 name: '???',
-                sprite: 'eugene',
+                sprite: 'eugene-sideye',
                 text: "C’était ce dont on discutait avant votre arrivée. On est tous passés par une situation similaire."
             },
             {
                 name: '???',
-                sprite: 'uriel',
+                sprite: 'uriel-crying',
                 text: "Je veux rentrer chez moi ! Laissez-moi partir !",
                 spriteProta: 'none'
             },
             {
                 name: '???',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "Toi la gamine, ferme-la, tu nous casses les oreilles ! C’est pareil pour tout le monde !"
             },
             {
                 name: '???',
-                sprite: 'helen',
+                sprite: 'helen-speaking',
                 text: "Assez. Elle ne maitrise pas ses émotions, mais tu nous prouves que toi non plus. Cesse de t’humilier ainsi en t’attaquant à plus petit que toi."
             },
             {
                 name: '???',
-                sprite: 'lio',
+                sprite: 'lio-panic',
                 text: "…!"
             },
             {
@@ -134,22 +134,22 @@ export default [
             },
             {
                 name: '???',
-                sprite: 'socrates',
+                sprite: 'socrates-serious',
                 text: "Elle les a calmés immédiatement..!"
             },
             {
                 name: '???',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "Toi, on t’a pas causé !"
             },
             {
                 name: '???',
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 text: "…"
             },
             {
                 name: '???',
-                sprite: 'eugene',
+                sprite: 'eugene-embarrassed',
                 text: "Allons, calmez-vous. Nous devons nous serrer les coudes pour comprendre ce qui se passe. On n’avancera pas en commençant à se battre."
             },
             {
@@ -159,12 +159,12 @@ export default [
             },
             {
                 name: '???',
-                sprite: 'lio',
+                sprite: 'lio-disappointed',
                 text: "Pff… Ça va, c’est bon, j’me tais."
             },
             {
                 name: '???',
-                sprite: 'eugene',
+                sprite: 'eugene-smiling',
                 text: "Vous deux, et si vous faisiez un peu le tour pour discuter avec tout le monde et pour vous présenter ?"
             },
             {
@@ -184,12 +184,12 @@ export default [
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-smiling',
                 text: "Haha, tu peux me tutoyer tu sais, on s’est mis d’accord pour tous le faire avant que vous n’arriviez. Tu peux m’appeler Eugene."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Quelque chose me dit que tu n’es pas la plus anxieuse ici, Roxy…"
             },
             {
@@ -199,22 +199,22 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "(À sa manière de parler… On dirait qu’il s’attend à ce que la situation empire.)"
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-sideye',
                 text: "Au fait, avant que vous n’arriviez, on a testé les limites de l’endroit en essayant de s’éloigner."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Et ?"
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-frown',
                 text: "Peu importe par où on va, on finit par se retrouver au point de départ. C’est inexplicable, mais on a décidé qu’il valait mieux rester ici pour trouver une solution plutôt que de se précipiter quand rien ne presse."
             },
             {
@@ -225,7 +225,7 @@ export default [
             {
                 sprite: 'none',
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "(Je devrais suivre son conseil et aller voir les autres tant que j’en ai l’occasion pour essayer d’en savoir plus sur la situation.)"
             },
         ]
@@ -235,18 +235,18 @@ export default [
         title: 'Hommes bruyants',
         text: [
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: '???',
                 text: "Mais ferme-la, t’es vraiment qu’un pauvre type ! Si t’avais pas fait ça j’en serais pas là !"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: '???',
                 text: "Pardonnez-moi, votre majesté ! Il semblerait que j’ai touché un point sensible."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "(Ils ont l’air de se disputer, je ne devrais pas m’approcher…)"
             },
             {
@@ -256,16 +256,16 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Ugh, quoi ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: '???',
                 text: "Hahaha, tu comptes sur une inconnue pour te sortir de là ? Mon pauvre, tu me fais pitié."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: '???',
                 text: "Mais t’as pas envie de la boucler à un moment ?!"
             },
@@ -275,32 +275,32 @@ export default [
                 text: "Vois-tu, ma chère, Lio insiste à taper du pied et à s’énerver sur tout ce qui bouge sans distinction. Le stress, sûrement. Mais je lui expliquais calmement que son attitude allait juste lui attirer des problèmes."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-panic',
                 name: 'Lio',
                 text: "C’est pas pour ça que je m’énerve ! Engel s’est servi de moi pour tester tout ce qui était dangereux dans la salle juste avant !"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: 'Engel',
                 text: "Ce n’est pas de ma faute si tu ne t’es pas posé de question quand je t’ai demandé de goûter une boisson vert fluo."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: 'Lio',
                 text: "Et c’est ma faute si tu m’as fait croire que c’était du pisang ?!"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Attendez, vous deviez résoudre des énigmes aussi ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 name: 'Engel',
                 text: "Au vu de notre conversation précédente, n’était-ce pas déjà une évidence ? Un peu de perspicacité ne te ferait pas de mal."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-disappointed',
                 name: 'Lio',
                 text: "Ignore-le, euh…"
             },
@@ -315,22 +315,22 @@ export default [
                 text: "Ignore-le Anaëlle, il est prétentieux et hautain. Je me suis retrouvé avec lui pour l’épreuve d’avant, un véritable enfer."
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 name: 'Engel',
                 text: "Et pour moi donc."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: 'Lio',
                 text: "Je t’ai pas sonné !"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "À quoi ressemblaient vos énigmes, au juste ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: 'Engel',
                 text: "Enfin une question sensée. Nous avons dû trouver des codes et des objets à utiliser dans une sorte de décharge étrange."
             },
@@ -340,13 +340,13 @@ export default [
                 text: "Une décharge ? Tu es sûr ?"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 name: 'Engel',
                 text: "Je ne peux pas affirmer à 100% que c’en était une au vu des choses bizarres qui s’y trouvaient, mais ça y ressemblait fort."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "Je vois…"
             },
             {
@@ -360,7 +360,7 @@ export default [
                 text: "Une rue de la ville… Avec un bout du parc, je crois."
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 name: 'Engel',
                 text: "Mmh…"
             },
@@ -371,11 +371,11 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Au fait, Lio, c’est ça ? Pourquoi est-ce que tu portes un masque et des lunettes de soleil ?"
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-panic',
                 name: 'Lio',
                 text: "Euh… Comment dire…"
             },
@@ -385,12 +385,12 @@ export default [
                 text: "Il probablement honte de son vis—"
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: 'Lio',
                 text: "C’est pas pour ça !! Tu peux pas être agréable une minute ?!"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: 'Engel',
                 text: "Je suppose qu’il ne souhaite pas qu’on le reconnaisse. Monsieur est probablement connu."
             },
@@ -401,7 +401,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "(Je suppose que son silence le confirme…)"
             },
             {
@@ -411,22 +411,22 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Ne me mêle pas à vos histoires."
             },
             {
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 name: 'Lio',
                 text: "Et ne te mêle pas de mes histoires non plus, Engel !"
             },
             {
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 name: 'Engel',
                 text: "Voyons, on ne fait que discuter."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-angry',
                 text: "(Je devrais m’éloigner d’eux, ils sont épuisants à se bagarrer.)",
                 activateSwitch: 'convo1'
             },
@@ -447,7 +447,7 @@ export default [
                 text: "Madame, comment on sort d’ici ? Vous devez savoir non ?"
             },
             {
-                sprite: 'helen',
+                sprite: 'helen-speaking',
                 name: 'Helen',
                 text: "On a déjà dit qu’on se tutoyait, Uriel. Appelle-moi Helen."
             },
@@ -458,7 +458,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Vous deux aussi, vous étiez ensemble ?"
             },
             {
@@ -472,32 +472,32 @@ export default [
                 text: "Tu peux m’appeler Anaëlle."
             },
             {
-                sprite: 'uriel',
+                sprite: 'uriel-talking',
                 name: 'Uriel',
                 text: "…"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Et toi, c’est Uriel, c’est ça ?"
             },
             {
-                sprite: 'uriel',
+                sprite: 'uriel-avoiding',
                 name: 'Uriel',
                 text: "…"
             },
             {
-                sprite: 'helen',
+                sprite: 'helen-uneasy',
                 name: 'Helen',
                 text: "Elle est… un peu étrange, il est difficile de communiquer avec elle. Avant que vous n’arriviez, elle pleurait toutes les larmes de son corps, mais depuis qu’elle me colle, ça a l’air d’aller mieux. Je ne comprends pas tout à fait."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "Elle a l’air jeune, peut-être qu’elle te prend pour sa mère, ou quelque chose du genre."
             },
             {
-                sprite: 'helen',
+                sprite: 'helen-suspicious',
                 name: 'Helen',
                 text: "J’ai du mal avec les adolescents… Je suis souvent enfermée dans mon laboratoire alors je n’en croise que très rarement."
             },
@@ -513,7 +513,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Ah, la question qui fâche… Je suis au repos pour le moment."
             },
             {
@@ -523,21 +523,21 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-angry',
                 text: "Pour ce genre de choses tu décides d’intervenir ? Tu es cruelle avec moi."
             },
             {
-                sprite: 'uriel',
+                sprite: 'uriel-talking',
                 name: 'Uriel',
                 text: "La paresse est un péché."
             },
             {
-                sprite: 'helen',
+                sprite: 'helen-uneasy',
                 name: 'Helen',
                 text: "Uriel, tu ne peux pas te permettre de dire ce genre de choses sans connaître les circonstances de la personne."
             },
             {
-                sprite: 'uriel',
+                sprite: 'uriel-avoiding',
                 name: 'Uriel',
                 text: "…"
             },
@@ -547,13 +547,13 @@ export default [
                 text: "Ce n’est rien, c’est le cas."
             },
             {
-                sprite: 'helen',
+                sprite: 'helen-speaking',
                 name: 'Helen',
                 text: "Tout de même… Il y a des règles de politesse à suivre. Maintenant que j’y pense, il y a des profils très variés ici. Physicienne, psychiatre, collégienne, ingénieur, architecte… Et toi, au repos."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Presque tous les profils que tu viens de citer sont plus prestigieux que le mien…"
             },
             {
@@ -563,7 +563,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "Je l’espère…",
                 activateSwitch: 'convo2'
             },
@@ -584,7 +584,7 @@ export default [
                 text: "Allez, allez, allez ! Répare mon téléphone !"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 name: '???',
                 text: "Je… Euh… Je n’ai pas les bons outils."
             },
@@ -595,7 +595,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Roxy, qu’est-ce que tu fais encore ?"
             },
             {
@@ -610,16 +610,16 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "…Parce qu’avec une boîte à outils tu aurais pu le faire ? Tu es quel genre d’ingénieur ?"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-sideglance',
                 name: 'Socrates',
                 text: "…"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 name: 'Socrates',
                 text: "C’est un secret."
             },
@@ -630,7 +630,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Mais bien sûr…"
             },
             {
@@ -639,13 +639,13 @@ export default [
                 text: "Nos téléphones ne s’allument plus depuis qu’on est arrivés ici, il faut qu’on lui trouve des outils pour pouvoir appeler les secours !"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-serious',
                 name: 'Socrates',
                 text: "Ah, euh, oui, tout à fait… Grâce à mon génie, les secours seront là en un rien de temps. Un rien de temps oui…"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "(Il est clairement louche… Ou stressé à en mourir.)"
             },
             {
@@ -664,23 +664,23 @@ export default [
                 text: "Comme le président ?!"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-serious',
                 name: 'Socrates',
                 text: "Exactement !"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Comme le philosophe, plutôt, non…?"
             },
             {
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 name: 'Socrates',
                 text: "…Ah ! Oui ! Comme le philosophe ! Décidément, mon génie m’embrouille !"
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "(Je n’ai clairement pas envie de rester près de ces deux-là, ils m’épuisent…)",
                 activateSwitch: 'convo3'
             }
@@ -691,7 +691,6 @@ export default [
             }
         ]
     },
-
     {
         name: 'eugene-alden',
         title: 'Duo nerveux',
@@ -702,7 +701,7 @@ export default [
                 text: "Non, ce n’est pas un rêve, malheureusement. Pince-toi la joue pour vérifier, tu le comprendras assez vite."
             },
             {
-                sprite: 'alden',
+                sprite: 'alden-lost',
                 name: '???',
                 text: "Ah… Mais je peux rêver de me pincer la joue non ?"
             },
@@ -712,17 +711,17 @@ export default [
                 text: "Oui, mais pas sentir de douleur, c’est le principe."
             },
             {
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 name: 'Anaëlle',
                 text: "Qu’est-ce qui se passe ?"
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-sideye',
                 name: 'Eugene',
                 text: "Eh bien… Alden semble dans un état étrange. Il peine à garder les pieds sur Terre, on dirait."
             },
             {
-                sprite: 'alden',
+                sprite: 'alden-suffering-2',
                 name: 'Alden',
                 text: "…"
             },
@@ -732,12 +731,12 @@ export default [
                 text: "Juste avant, il disait avoir l’impression qu’on l’avait forcé à boire, mais je pense qu’il est simplement dans un état d’anxiété intense, je ne retrouve pas assez de signes d’ivresse."
             },
             {
-                sprite: 'alden',
+                sprite: 'alden-suffering',
                 name: 'Alden',
                 text: "Peut-être que c’est arrivé ? Ou peut-être pas… Je ne sais pas…"
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-smiling',
                 name: 'Eugene',
                 text: "Reste assis ici, et prends le temps de souffler. Si ça ne va pas, tu peux m’appeler et je viendrai immédiatement."
             },
@@ -753,7 +752,7 @@ export default [
                 text: "Ne serait-il pas mieux que tu restes avec lui ?"
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-frown',
                 name: 'Eugene',
                 text: "Je suppose, si… Mais pour ne rien te cacher, je suis moi-même dans un état où j’aurais peur d’empirer les choses."
             },
@@ -764,27 +763,27 @@ export default [
                 text: "En l’observant plus attentivement, j’ai effectivement pu voir qu’il tremblait."
             },
             {
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 name: 'Anaëlle',
                 text: "Tu m’impressionnes, à garder ton sang-froid de la sorte en t’occupant des autres."
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-embarrassed',
                 name: 'Eugene',
                 text: "Je suis psychiatre, c’est mon boulot. Tu n’es pas mal dans le genre non plus, tu as la tête sur les épaules. Juste avant que tu n’arrives, tout le monde était très nerveux, certains au bord des larmes même. Toi, ça a l’air d’aller."
             },
             {
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-angry',
                 name: 'Anaëlle',
                 text: "Je… Je crois que je ne réalise juste pas encore bien ce qui se passe. Mais cette situation a tout pour être terrifiante."
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-frown',
                 name: 'Eugene',
                 text: "Je suis bien d’accord. Je ne peux pas rester coincé ici, mon fils m’attend dehors… Il faut à tout prix que je rentre au plus vite."
             },
             {
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 name: 'Anaëlle',
                 text: "(C’était donc ça, la source de son stress.)"
             },
@@ -794,12 +793,12 @@ export default [
                 text: "Il me semblait bien que tu avais un air de figure paternelle."
             },
             {
-                sprite: 'eugene',
+                sprite: 'eugene-embarrassed',
                 name: 'Eugene',
                 text: "A-Ah, tu trouves ? Hahaha, je le prends comme un compliment. Si vous avez besoin d’aide, comptez sur moi."
             },
             {
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 name: 'Anaëlle',
                 text: "(On dirait que j’ai renforcé son envie de s’occuper du groupe…)",
                 activateSwitch: 'convo4'
@@ -812,6 +811,77 @@ export default [
         ]
     },
 
+    {
+        name: 'pole',
+        title: 'Structure métallique',
+        text: [
+            {
+                text: "De grandes structures métalliques s'élèvent vers le ciel. Je n'en vois pas le haut…"
+            }
+        ],
+        defaultText: [
+            {
+                text: "De grandes structures métalliques s'élèvent vers le ciel. Je n'en vois pas le haut…"
+            }
+        ]
+    },
+
+    {
+        name: 'tv-pack',
+        title: 'Lot de télévisions',
+        text: [
+            {
+                text: "C'est un tas de télévisions cathodiques. Les câbles ne sont pas branchés, mais certains écrans affichent tout de même une image brouillée."
+            }
+        ],
+        defaultText: [
+            {
+                text: "C'est un tas de télévisions cathodiques. Les câbles ne sont pas branchés, mais certains écrans affichent tout de même une image brouillée."
+            }
+        ]
+    },
+    {
+        name: 'tv',
+        title: 'Télévision cathodique',
+        text: [
+            {
+                text: "C'est une télévision cathodique. Elle émet un bruit statique et affiche un écran par défaut malgré le fait que le câble ne soit pas branché."
+            }
+        ],
+        defaultText: [
+            {
+                text: "C'est une télévision cathodique. Elle émet un bruit statique et affiche un écran par défaut malgré le fait que le câble ne soit pas branché."
+            }
+        ]
+    },
+    {
+        name: 'door',
+        title: 'Porte',
+        text: [
+            {
+                text: "Il y a une porte placée au milieu du décor. Peu importe à quel point je tire sur la poignée, elle ne s'ouvre pas."
+            }
+        ],
+        defaultText: [
+            {
+                text: "Il y a une porte placée au milieu du décor. Peu importe à quel point je tire sur la poignée, elle ne s'ouvre pas."
+            }
+        ]
+    },
+    {
+        name: 'sign',
+        title: 'Panneau de signalisation',
+        text: [
+            {
+                text: "C'est un panneau de signalisation. Il y en a plusieurs un peu partout, mais ils ne semblent pas donner de réelle indication."
+            }
+        ],
+        defaultText: [
+            {
+                text: "C'est un panneau de signalisation. Il y en a plusieurs un peu partout, mais ils ne semblent pas donner de réelle indication."
+            }
+        ]
+    },
 
     {
         name: 'outro',
@@ -831,18 +901,18 @@ export default [
             },
             {
                 name: 'Lio',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "C’est quoi ce bordel encore ?!"
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 text: "Ferme-la et écoute."
             },
             {
                 name: 'Anaëlle',
                 sprite: 'none',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-afraid',
                 text: "(Ce discours… Je le connais…)",
                 music: 'action_track'
             },
@@ -867,12 +937,12 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-irritated',
                 text: "Vraiment ?"
             },
             {
                 name: 'Helen',
-                sprite: 'helen',
+                sprite: 'helen-suspicious',
                 text: "Ce n’est pas lui. Le mien fonctionne aussi, soudainement."
             },
             {
@@ -882,12 +952,12 @@ export default [
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 text: "C’est donc avec ça qu’on doit voter…"
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 text: "On s’est fait pirater ?"
             },
             {
@@ -897,27 +967,27 @@ export default [
             },
             {
                 name: 'Alden',
-                sprite: 'alden',
+                sprite: 'alden-suffering-2',
                 text: "Je suis sûrement encore en train de rêver… Laissez-moi me réveiller, bon sang…"
             },
             {
                 name: 'Lio',
-                sprite: 'lio',
+                sprite: 'lio-panic',
                 text: "Hé, il vient de dire qu’on devait élire quelqu’un qui serait hors de danger, non ? On fait quoi, alors ?"
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-frown',
                 text: "Un dilemme pareil n’annonce rien de bon…"
             },
             {
                 name: 'Helen',
-                sprite: 'helen',
+                sprite: 'helen-speaking',
                 text: "La réponse me semble évidente. Il faut protéger les enfants."
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Tu suggères que l’on vote pour Uriel ?"
             },
             {
@@ -927,12 +997,12 @@ export default [
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-frown',
                 text: "Helen a raison, c’est ce qui me semble le plus sensé."
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-doubt',
                 text: "Un instant. Qu’est-ce que nous garantit que la mettre hors de danger maintenant est une bonne idée ?"
             },
             {
@@ -952,12 +1022,12 @@ export default [
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 text: "On ne sait pas s’il sera possible de l’élire deux fois. Ni si ce choix aura des conséquences vis-à-vis de ses responsabilités. Et puis, vous avez demandé son avis à l’intéressée ? Uriel, qu’en penses-tu ?"
             },
             {
                 name: 'Uriel',
-                sprite: 'uriel',
+                sprite: 'uriel-avoiding',
                 text: "…"
             },
             {
@@ -967,17 +1037,17 @@ export default [
             },
             {
                 name: 'Uriel',
-                sprite: 'uriel',
+                sprite: 'uriel-talking',
                 text: "En plus, la voix a parlé de superviser l'épreuve. Est-ce que vous souhaitez réellement me confier cette responsabilité ?"
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 text: "Elle est sensée, la gamine, purée…"
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-smiling',
                 text: "Je comprends que tu sois dans l’embarras, Uriel, mais en tant qu’adultes, nous avons une responsabilité de te protéger."
             },
             {
@@ -987,12 +1057,12 @@ export default [
             },
             {
                 name: 'Alden',
-                sprite: 'alden',
+                sprite: 'alden-lost',
                 text: "Personne ne l’écoute alors qu’elle vient de dire clairement de ne pas la favoriser…"
             },
             {
                 name: 'Helen',
-                sprite: 'helen',
+                sprite: 'helen-suspicious',
                 text: "Hmm…"
             },
             {
@@ -1007,12 +1077,12 @@ export default [
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-sideglance',
                 text: "Un tirage au sort, peut-être ?"
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 text: "Ce serait équitable, en effet, à condition que tout le monde suive bien le résultat."
             },
             {
@@ -1022,7 +1092,7 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking',
                 text: "Je suis pour le tirage au sort. Qui sait, peut-être qu’Uriel sera choisie et que le débat cessera."
             },
             {
@@ -1032,7 +1102,7 @@ export default [
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-serious',
                 text: "Comment on n’a pas de quoi écrire, utiliser du papier s’annonce compliqué…"
             },
             {
@@ -1042,7 +1112,7 @@ export default [
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-sideye',
                 text: "Je vais lui murmurer le numéro de chacun, et un volontaire donnera un chiffre. Celui qui sera désigné sera celui pour qui on votera."
             },
             {
@@ -1052,7 +1122,7 @@ export default [
             },
             {
                 name: 'Helen',
-                sprite: 'helen',
+                sprite: 'helen-speaking',
                 text: "Je suppose que je prends le rôle de complice, dans ce cas."
             },
             {
@@ -1075,7 +1145,7 @@ export default [
             },
             {
                 name: 'Alden',
-                sprite: 'alden',
+                sprite: 'alden-suffering',
                 text: "J’espère que vous n’êtes pas en train d’essayer de nous embrouiller…"
             },
             {
@@ -1085,12 +1155,12 @@ export default [
             },
             {
                 name: 'Anaëlle',
-                spriteProta: 'anaelle',
+                spriteProta: 'anaelle-thinking-2',
                 text: "Qu’est-ce que tu veux dire ?"
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 text: "Peut-être pourraient-ils essayer de forcer le destin en ayant fait une sorte d’arrangement. Je ne leur fais pas confiance."
             },
             {
@@ -1100,12 +1170,12 @@ export default [
             },
             {
                 name: 'Lio',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "J’espère que t’es fier de toi, tout le monde se met à douter maintenant."
             },
             {
                 name: 'Eugene',
-                sprite: 'eugene',
+                sprite: 'eugene-smiling',
                 text: "Non… Il a raison. Deux témoins en valent mieux qu’un. Viens ici dans ce cas."
             },
             {
@@ -1135,22 +1205,22 @@ export default [
             },
             {
                 name: 'Engel',
-                sprite: 'engel',
+                sprite: 'engel-talking',
                 text: "En effet, c’est bien lui."
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-sideglance',
                 text: "Hein ? Quoi ? Moi ? Euh… Écoutez, je suis flatté, et bien sûr je ne vais pas cracher contre une protection mais euh… Contre une enfant, quand même…"
             },
             {
                 name: 'Uriel',
-                sprite: 'uriel',
+                sprite: 'uriel-talking',
                 text: "Il va falloir cesser de me désigner ainsi."
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-stressed',
                 text: "Pardon Madame ! Désolé Madame !"
             },
             {
@@ -1160,12 +1230,12 @@ export default [
             },
             {
                 name: 'Socrates',
-                sprite: 'socrates',
+                sprite: 'socrates-serious',
                 text: "Malgré ça, je ne peux pas m’empêcher de me sentir coupable… Ne votez pas pour moi, votez pour elle ! Ça vaudra mieux. Tant pis pour le tirage au sort, on n’a qu’à dire qu’on suit mon avis parce que vous m’avez élu !"
             },
             {
                 name: 'Lio',
-                sprite: 'lio',
+                sprite: 'lio-angry',
                 text: "Abruti, tu es en train de foutre en l’air ce qu’on essayait de faire !"
             },
             {
@@ -1176,12 +1246,12 @@ export default [
             },
             {
                 name: 'Alden',
-                sprite: 'alden',
+                sprite: 'alden-lost',
                 text: "Pourquoi vous prendre la tête ? Au pire, ne votez pas… Ou votez pour qui vous voulez…"
             },
             {
                 name: 'Helen',
-                sprite: 'helen',
+                sprite: 'helen-suspicious',
                 text: "Qui sait ce qui nous arrivera si on ne suit pas les instructions ? Je ne prendrai pas ce risque."
             },
             {

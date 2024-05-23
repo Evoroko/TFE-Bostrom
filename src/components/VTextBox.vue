@@ -8,10 +8,13 @@
             <div class="textbox__text">
                 <p v-html="text"></p>
                 <VJumpText v-if="isDialogFull"/>
+
             </div>
         </div>
     </div>
-
+    
+    <p class="textbox__skip">Maintenir ⏎ pour passer.</p>
+    
     <div v-if="name !== 'none' && name && name == 'Anaëlle'" class="textbox__name textbox__name--prota">
             <p>{{ name }}</p>
     </div>
@@ -48,6 +51,18 @@ const props = defineProps({
     z-index: 100;
     user-select: none;
     animation: slideinUp .3s;
+
+    &__skip{
+        position: absolute;
+        left: 16px;
+        top: 16px;
+        font: var(--exo-13px-medium);
+        color: var(--c-txt);
+        border: none;
+        padding: 4px;
+        background-color: var(--transparent-black-60);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
 
     &__content{
         display: flex;
