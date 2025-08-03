@@ -1,5 +1,5 @@
 <template>
-  <div class="popup" id="popup">
+  <div id="popup" class="popup">
     <div class="popup__text">
       <p>
         <span>

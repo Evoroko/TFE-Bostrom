@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-const props = defineProps({
+defineProps({
   small: {
     type: Boolean,
     required: false,
@@ -43,7 +43,6 @@ const props = defineProps({
   box-sizing: border-box;
   transition: 0.2s;
   cursor: pointer;
-  // margin: 0 36px;
 
   &:hover {
     filter: drop-shadow(-2px -2px 0 var(--main-cyan))

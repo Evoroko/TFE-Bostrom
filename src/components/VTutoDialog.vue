@@ -1,5 +1,5 @@
 <template>
-  <div class="tutoDialog" v-if="isDisplayed">
+  <div v-if="isDisplayed" class="tutoDialog">
     <div class="tutoDialog__el">
       <div class="tutoDialog__keys">
         <img src="/assets/key_enter.svg" alt="Touche entrée" />

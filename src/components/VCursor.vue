@@ -30,10 +30,10 @@ const itemUsed = ref(undefined);
 
 const inventory = inject('inventory');
 
-watch(inventory.value, (newVal, oldVal) => {
+watch(inventory.value, () => {
   let isItemUsed = false;
   if (inventory.value) {
-    for (let item of inventory.value.items) {
+    for (const item of inventory.value.items) {
       if (item.isUsed == true) {
         itemUsed.value = item;
         isItemUsed = true;

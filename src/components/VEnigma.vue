@@ -1,42 +1,43 @@
 <template>
   <VTutoDialog />
-  <VVote v-if="openVote == true" @close-vote="openVote = false" />
+  <VVote v-if="openVote == true" />
   <div class="topfunctions">
     <VMusicControl :music="playedMusic" />
     <VButton
+      v-if="hideHover == false"
       class="tuto__openBtn"
       @click="openTuto = true"
-      v-if="hideHover == false"
       >Tutoriel</VButton
     >
   </div>
   <VTuto
-    @closeTuto="openTuto = false"
     v-if="openTuto == true"
     :current-level="currentLevel"
+    @close-tuto="openTuto = false"
   />
   <VCodeOrder
     v-if="canEnterCodeOrder == true"
-    @closeCode="canEnterCodeOrder = false"
     :valid-code="[10, 16, 3, 7]"
+    @close-code="canEnterCodeOrder = false"
     @code-correct="verifyCodeOrder"
   />
   <VCodeInput
     v-if="canEnterCode == true"
-    @closeCode="canEnterCode = false"
+    :keyboard-keys="codeData.keyboardKeys"
+    :answer="codeData.answer"
+    @close-code="canEnterCode = false"
     @code-attempt="
       {
         attemptedCode = $event;
         verifyCode();
       }
     "
-    :keyboardKeys="codeData.keyboardKeys"
-    :answer="codeData.answer"
   />
   <Transition name="test" mode="out-in">
     <VDialog
       v-if="selectedObject && isExisting == true"
       :script="script"
+      class="dialog"
       @conversation-ended="
         selectedObject = null;
         loadOutro();
@@ -46,9 +47,9 @@
         inputCode();
       "
       @input-code-order="inputCodeOrder()"
-      @showTuto="openTuto = true"
-      @showVote="openVote = true"
-      @changeLevel="
+      @show-tuto="openTuto = true"
+      @show-vote="openVote = true"
+      @change-level="
         changeLevelIndex = $event;
         changeLevel();
       "
@@ -57,7 +58,6 @@
         currentlyAddedSwitch = $event;
         activateSwitch();
       "
-      class="dialog"
     />
   </Transition>
 
@@ -66,16 +66,16 @@
     @inventory-active="inventoryActive = $event"
     @click-inspect="inspectItem"
     @click-use="useSelectedItem()"
-    @clickCancel="isUsingItem = false"
+    @click-cancel="isUsingItem = false"
   />
   <VThree
     v-if="background3d"
-    @open-text-box="selectedObject = $event"
-    :dialogVisible="hideHover"
-    :dialogList="levelDialogs"
+    :dialog-visible="hideHover"
+    :dialog-list="levelDialogs"
     :background="background3d"
-    @loadingFinished="loadIntro()"
-    :activatedSwitches="activatedSwitches"
+    :activated-switches="activatedSwitches"
+    @open-text-box="selectedObject = $event"
+    @loading-finished="loadIntro()"
   />
 </template>
 
@@ -149,17 +149,16 @@ const useSelectedItem = () => {
 };
 
 let defaultSpecialInteraction = [];
-let introDialog = [];
 
 const loadDefaultInteraction = () => {
-  for (let dialog of props.levelDialogs) {
+  for (const dialog of props.levelDialogs) {
     if (dialog.name == 'interaction-default') {
       defaultSpecialInteraction = dialog.text;
     }
   }
 };
 const loadIntro = () => {
-  for (let dialog of props.levelDialogs) {
+  for (const dialog of props.levelDialogs) {
     if (dialog.name == 'intro') {
       dialog.checked = false;
     }
@@ -170,7 +169,7 @@ const loadIntro = () => {
 const loadOutro = () => {
   let countOutro = 0;
 
-  for (let activatedSwitch of activatedSwitches.value) {
+  for (const activatedSwitch of activatedSwitches.value) {
     if (activatedSwitch.includes('convo')) {
       countOutro += 1;
     }
@@ -198,7 +197,7 @@ watch(
       isExisting.value = false;
       let isSpecialDialog = false;
 
-      for (let dialog of props.levelDialogs) {
+      for (const dialog of props.levelDialogs) {
         if (
           selectedObject.value === dialog.name &&
           isUsingItem.value == false
@@ -210,7 +209,7 @@ watch(
         ) {
           // si objet possède un dialogue quelconque et que qqch est actif dans l'inventaire
           isExisting.value = true;
-          for (let specialDialog of props.levelDialogs) {
+          for (const specialDialog of props.levelDialogs) {
             if ('interaction-' + selectedObject.value == specialDialog.name) {
               // s'il existe une interaction spéciale avec l'objet sélectionné
               isSpecialDialog = true;
@@ -219,10 +218,10 @@ watch(
                 if (specialDialog.conditions) {
                   // Y a-t-il un dialogue différent si on a déjà interagi avec certaines choses ?
                   let conditionsMet = 0;
-                  for (let condition of specialDialog.conditions.requires) {
+                  for (const condition of specialDialog.conditions.requires) {
                     // Pour chaque condition d'activation, vérifie ce qui a été activé ou non
                     if (activatedSwitches.value[0]) {
-                      for (let activatedSwitch of activatedSwitches.value) {
+                      for (const activatedSwitch of activatedSwitches.value) {
                         if (activatedSwitch == condition) {
                           conditionsMet += 1;
                         }
@@ -268,7 +267,7 @@ watch(
 );
 
 const script = computed(() => {
-  for (let dialog of props.levelDialogs) {
+  for (const dialog of props.levelDialogs) {
     if (selectedObject.value === dialog.name && isUsingItem.value == false) {
       const returnDialog = () => {
         if (dialog.checked == true) {
@@ -280,9 +279,9 @@ const script = computed(() => {
 
       if (dialog.conditions) {
         let conditionsMet = 0;
-        for (let condition of dialog.conditions.requires) {
+        for (const condition of dialog.conditions.requires) {
           if (activatedSwitches.value[0]) {
-            for (let activatedSwitch of activatedSwitches.value) {
+            for (const activatedSwitch of activatedSwitches.value) {
               if (condition == activatedSwitch) {
                 conditionsMet += 1;
               }
@@ -306,22 +305,24 @@ const script = computed(() => {
       isUsingItem.value == true
     ) {
       inventory.value.setAllInactive();
-      isUsingItem.value = false;
+      toggleIsUsingItem(false);
       return specialInteraction.value;
     }
   }
 
   if (selectedObject.value.includes('description-')) {
-    let selectedObjectInspect = selectedObject.value.replace(
+    const selectedObjectInspect = selectedObject.value.replace(
       'description-',
       '',
     );
-    for (let item of itemsList) {
+    for (const item of itemsList) {
       if (selectedObjectInspect == item.name) {
         return item.description;
       }
     }
   }
+
+  return '';
 });
 
 const inspectItem = () => {
@@ -334,6 +335,10 @@ const inputCode = () => {
 
 const inputCodeOrder = () => {
   canEnterCodeOrder.value = true;
+};
+
+const toggleIsUsingItem = (value) => {
+  isUsingItem.value = value;
 };
 
 const verifyCode = () => {
@@ -357,7 +362,7 @@ const changeLevel = () => {
 const activateSwitch = () => {
   let alreadyExists = false;
 
-  for (let activatedSwitch of activatedSwitches.value) {
+  for (const activatedSwitch of activatedSwitches.value) {
     if (activatedSwitch == currentlyAddedSwitch.value) {
       alreadyExists = true;
     }
@@ -372,7 +377,7 @@ watch(
   () => props.levelDialogs,
   () => {
     loadDefaultInteraction();
-    for (let dialog of props.levelDialogs) {
+    for (const dialog of props.levelDialogs) {
       dialog.checked = false;
       if (dialog.conditions) {
         dialog.conditions.checked = false;

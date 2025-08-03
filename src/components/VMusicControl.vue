@@ -16,8 +16,8 @@
 </template>
 
 <script setup>
-import { onMounted, inject, watch } from 'vue';
-const props = defineProps({
+import { onMounted, inject } from 'vue';
+defineProps({
   music: {
     type: String,
     required: false,
@@ -36,8 +36,8 @@ onMounted(() => {
   document.addEventListener('click', musicPlay); // Chrome n'autorise plus l'autoplay sur les sites web, nécessite interaction
   function musicPlay() {
     audio.play();
-    let previousVolume = Number(localStorage.getItem('volume'));
-    let wasMuted = String(localStorage.getItem('muted'));
+    const previousVolume = Number(localStorage.getItem('volume'));
+    const wasMuted = String(localStorage.getItem('muted'));
     if (previousVolume && wasMuted == 'false') {
       audio.volume = previousVolume;
       audioStatus.value.volume = audio.volume;
@@ -132,6 +132,7 @@ onMounted(() => {
     cursor: pointer;
     width: 100px;
     height: 8px;
+    appearance: none;
     -webkit-appearance: none;
     background-color: var(--grey-1000);
     opacity: 0;

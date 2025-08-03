@@ -1,5 +1,5 @@
 <template>
-  <div class="endscreen" v-if="hasChosen == true">
+  <div v-if="hasChosen == true" class="endscreen">
     <p class="endscreen__confirmation">Votre vote a bien été pris en compte.</p>
     <div class="endscreen__thanks">
       <h2 class="title title--big">Fin du prologue</h2>
@@ -63,21 +63,19 @@
 import { onMounted, ref } from 'vue';
 import VButton from './VButton.vue';
 
-const emit = defineEmits(['closeVote']);
-
 const isOneSelected = ref(false);
 const hasChosen = ref(false);
 
 onMounted(() => {
   const voteOptions = document.querySelectorAll('.vote__option-container');
-  for (let voteOption of voteOptions) {
+  for (const voteOption of voteOptions) {
     voteOption.addEventListener('click', () => {
       let isAlreadySelected = false;
       if (voteOption.classList.contains('vote__option-container--active')) {
         isAlreadySelected = true;
         isOneSelected.value = false;
       }
-      for (let allOptions of voteOptions) {
+      for (const allOptions of voteOptions) {
         allOptions.classList.remove('vote__option-container--active');
       }
       if (isAlreadySelected == false) {

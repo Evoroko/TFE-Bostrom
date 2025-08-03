@@ -25,7 +25,7 @@ onMounted(() => {
   const progressBar = document.querySelector('.loadingBar__progress');
   watch(
     () => props.percentage,
-    (first, second) => {
+    () => {
       progressBar.style.transform = `scaleX(${props.percentage / 100})`;
     },
   );

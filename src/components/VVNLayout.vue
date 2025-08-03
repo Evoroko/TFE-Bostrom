@@ -67,7 +67,7 @@
 
 <script setup>
 import VTextBox from '../components/VTextBox.vue';
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: false,

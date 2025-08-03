@@ -8,14 +8,14 @@
       "
     />
     <VEnigma
+      v-if="menuClosed"
       :background3d="levelBackground"
       :level-dialogs="levelDialogs"
-      :currentLevel="currentIndex"
+      :current-level="currentIndex"
       @change-level="
         currentLevelChange = $event;
         changeLevel();
       "
-      v-if="menuClosed"
     />
   </main>
 </template>

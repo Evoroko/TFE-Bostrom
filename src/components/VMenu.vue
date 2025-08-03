@@ -12,8 +12,8 @@
 
     <nav class="menu__content menu__content--space">
       <div
-        class="menu__content menu__content--section menu__content--animBackwards"
         v-if="chapterSelect == false"
+        class="menu__content menu__content--section menu__content--animBackwards"
       >
         <h2 class="menu__title">
           <span class="menu__title--txt">BOSTROM</span>
@@ -38,8 +38,8 @@
       </div>
 
       <div
-        class="options options--chapter menu__content menu__content--section menu__content--animBackwards"
         v-if="chapterSelect"
+        class="options options--chapter menu__content menu__content--section menu__content--animBackwards"
       >
         <h3 class="title title--space">Choix du niveau</h3>
         <div class="options__list options__list--levels">

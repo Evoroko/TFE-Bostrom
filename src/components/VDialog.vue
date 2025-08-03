@@ -1,13 +1,13 @@
 <template>
   <VVNLayout
-    @click="nextText"
     :name="currentName"
     :text="typedText"
     :sprite="currentSprite"
-    :spriteProta="currentSpriteProta"
-    :displayedItem="displayedItem"
+    :sprite-prota="currentSpriteProta"
+    :displayed-item="displayedItem"
     :background="currentBg"
     :is-dialog-full="isDialogFull"
+    @click="nextText"
   />
 </template>
 
@@ -18,8 +18,8 @@ import audioControl from '../scripts/audioControl.js';
 
 const inventory = inject('inventory');
 const audioStatus = inject('audioStatus');
-let bopSound = new Audio('./audio/sounds/bop.wav');
-let getItemSound = new Audio('./audio/sounds/confusion-blip-6-3.wav');
+const bopSound = new Audio('./audio/sounds/bop.wav');
+const getItemSound = new Audio('./audio/sounds/confusion-blip-6-3.wav');
 
 const props = defineProps({
   script: {

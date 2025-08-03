@@ -6,14 +6,14 @@
       <a
         href="#"
         class="tuto__change tuto__change--next"
-        @click.prevent="nextSlide"
         :class="{ 'tuto__change--hidden': activeSlide == slides.length - 1 }"
+        @click.prevent="nextSlide"
       ></a>
       <a
         href="#"
         class="tuto__change tuto__change--prev"
-        @click.prevent="prevSlide"
         :class="{ 'tuto__change--hidden': activeSlide == 0 }"
+        @click.prevent="prevSlide"
       ></a>
 
       <div class="tuto__slide tuto__slide--active">
@@ -77,7 +77,7 @@
         ></div>
       </div>
 
-      <VButton @click="hideTuto" class="tuto__close" :small="true">✖</VButton>
+      <VButton class="tuto__close" :small="true" @click="hideTuto">✖</VButton>
     </dialog>
   </div>
 </template>
@@ -97,7 +97,7 @@ const props = defineProps({
 
 const hideTuto = () => {
   activeSlide.value = 0;
-  for (let slide of slides.value) {
+  for (const slide of slides.value) {
     slide.classList.remove('tuto__slide--active');
   }
   slides.value[0].classList.add('tuto__slide--active');
@@ -112,8 +112,8 @@ const listenKeys = (e) => {
   }
 };
 
-let activeSlide = ref(0);
-let slides = ref([]);
+const activeSlide = ref(0);
+const slides = ref([]);
 
 onMounted(() => {
   slides.value = document.querySelectorAll('.tuto__slide');
@@ -159,7 +159,7 @@ const prevSlide = () => {
 
 const updateSlide = (key) => {
   activeSlide.value = key;
-  for (let slide of slides.value) {
+  for (const slide of slides.value) {
     slide.classList.remove('tuto__slide--active');
   }
   const currentSlide = slides.value[activeSlide.value];

@@ -4,35 +4,22 @@
       <div class="code__container">
         <p class="title title--medium">Tapez sur le clavier du distributeur</p>
         <ul class="keyboard keyboard--4columns">
-          <li @click="activateKey" class="keyboard__key" data-index="1"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="2"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="3"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="4"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="5"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="6"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="7"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="8"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="9"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="10"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="11"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="12"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="13"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="14"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="15"></li>
-          <li @click="activateKey" class="keyboard__key" data-index="16"></li>
+          <template v-for="n in 16" :key="n">
+            <li :data-index="n" class="keyboard__key" @click="activateKey"></li>
+          </template>
           <li
-            @click="activateKey"
             class="keyboard__key keyboard__key--back keyboard__key--full"
+            @click="activateKey"
           >
             Réinitialiser
           </li>
         </ul>
 
         <VButton @click="closeCode()">Retour</VButton>
-        <div class="result result--false" v-if="codeResultDisplayed">
+        <div v-if="codeResultDisplayed" class="result result--false">
           <p class="result__text">Code incorrect</p>
         </div>
-        <div class="result result--true" v-if="codeResultTrueDisplayed">
+        <div v-if="codeResultTrueDisplayed" class="result result--true">
           <p class="result__text">Code valide&nbsp;!</p>
         </div>
       </div>
@@ -53,16 +40,14 @@ const props = defineProps({
 });
 
 const audioStatus = inject('audioStatus');
-let incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
-let correctSound = new Audio('./audio/sounds/weird-buttons.wav');
-let keySound = new Audio('./audio/sounds/bop.wav');
+const incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
+const correctSound = new Audio('./audio/sounds/weird-buttons.wav');
+const keySound = new Audio('./audio/sounds/bop.wav');
 
 let countSelected = 0;
 const codeResultDisplayed = ref(false);
 const codeResultTrueDisplayed = ref(false);
 let keys;
-let lastSelected;
-let lastSelectedNumber;
 let enteredCode = [];
 
 onMounted(() => {
@@ -74,7 +59,7 @@ const activateKey = (e) => {
   let alreadySelected = false;
   audioControl(audioStatus, keySound);
 
-  for (let entry of enteredCode.entries()) {
+  for (const entry of enteredCode.entries()) {
     if (entry == e.target.dataset.index) {
       alreadySelected = true;
       countSelected -= 1;
@@ -86,14 +71,12 @@ const activateKey = (e) => {
   } else if (alreadySelected == false && codeResultDisplayed.value == false) {
     e.target.classList.add('keyboard__key--active');
     enteredCode.push(Number(e.target.dataset.index));
-    lastSelectedNumber = e.target.dataset.index;
     e.target.innerHTML = countSelected;
-    lastSelected = e.target;
   }
 
   if (countSelected >= 4) {
     let validEntries = 0;
-    for (let [index, codePart] of props.validCode.entries()) {
+    for (const [index, codePart] of props.validCode.entries()) {
       if (codePart == enteredCode[index]) {
         validEntries += 1;
       }
@@ -119,10 +102,9 @@ const activateKey = (e) => {
 };
 
 const resetCode = () => {
-  lastSelected = undefined;
   countSelected = 0;
   enteredCode = [];
-  for (let [index, key] of keys.entries()) {
+  for (const [index, key] of keys.entries()) {
     if (index !== keys.length - 1) {
       key.classList.remove('keyboard__key--active');
       key.innerHTML = '';

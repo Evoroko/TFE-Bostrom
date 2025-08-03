@@ -7,7 +7,7 @@
     }"
   >
     <div class="inventory__icon">
-      <div class="inventory__status" v-if="inventory.items.length > 0">
+      <div v-if="inventory.items.length > 0" class="inventory__status">
         {{ inventory.items.length }}
       </div>
       <h2 class="title title--small">Sacoche</h2>
@@ -15,9 +15,9 @@
     <div v-if="inventory.opened" class="inventory__content">
       <ul class="inventory__items">
         <li
-          class="inventory__item"
           v-for="(item, index) in inventory.items"
           :key="index"
+          class="inventory__item"
           :class="{ 'inventory__item--active': activeIndex === index }"
           @click="setActiveIndex(index)"
         >
@@ -39,14 +39,14 @@
         </li>
       </ul>
       <ul class="inventory__buttons">
-        <li class="inventory__button" v-if="inventory.items.length > 0">
+        <li v-if="inventory.items.length > 0" class="inventory__button">
           <VButton
             :class="{ 'inventory__button--inactive': activeIndex == undefined }"
             @click="clickInspect()"
             >Inspecter</VButton
           >
         </li>
-        <li class="inventory__button" v-if="inventory.items.length > 0">
+        <li v-if="inventory.items.length > 0" class="inventory__button">
           <VButton
             :class="{ 'inventory__button--inactive': activeIndex == undefined }"
             @click="clickUse()"
@@ -54,8 +54,8 @@
           >
         </li>
         <li
-          class="inventory__button inventory__button--empty"
           v-if="inventory.items.length == 0"
+          class="inventory__button inventory__button--empty"
         >
           Aucun objet possédé.
         </li>
@@ -152,9 +152,9 @@ function setActiveIndex(index) {
 
 watch(
   inventory.value,
-  (newVal, oldVal) => {
+  () => {
     let isItemActive = false;
-    for (let item of inventory.value.items) {
+    for (const item of inventory.value.items) {
       if (item.status == 'active') {
         activeIndex.value = item.id - 1;
         isItemActive = true;

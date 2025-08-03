@@ -6,35 +6,28 @@
 
         <div class="input">
           <input
+            id="code"
+            v-model="code"
             class="input__text"
             readonly
             type="text"
-            id="code"
             name="code"
-            v-model="code"
             maxlength="3"
           />
         </div>
 
         <ul class="keyboard">
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key"></li>
-          <li @click="enterKey" class="keyboard__key keyboard__key--back">←</li>
+          <template v-for="n in 10" :key="n">
+            <li class="keyboard__key" @click="enterKey"></li>
+          </template>
+          <li class="keyboard__key keyboard__key--back" @click="enterKey">←</li>
         </ul>
 
         <VButton @click="closeCode()">Retour</VButton>
-        <div class="result result--false" v-if="codeResultDisplayed">
+        <div v-if="codeResultDisplayed" class="result result--false">
           <p class="result__text">Code incorrect</p>
         </div>
-        <div class="result result--true" v-if="codeResultTrueDisplayed">
+        <div v-if="codeResultTrueDisplayed" class="result result--true">
           <p class="result__text">Code valide&nbsp;!</p>
         </div>
       </div>
@@ -51,19 +44,20 @@ const props = defineProps({
   keyboardKeys: {
     type: Array,
     required: false,
-    default: [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
+    default: () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
   },
   answer: {
     type: String,
     required: false,
+    default: '',
   },
 });
 const emit = defineEmits(['codeAttempt', 'closeCode']);
 
 const audioStatus = inject('audioStatus');
-let incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
-let correctSound = new Audio('./audio/sounds/weird-buttons.wav');
-let keySound = new Audio('./audio/sounds/bop.wav');
+const incorrectSound = new Audio('./audio/sounds/warning-ui.wav');
+const correctSound = new Audio('./audio/sounds/weird-buttons.wav');
+const keySound = new Audio('./audio/sounds/bop.wav');
 
 const code = ref('---');
 const codeResultDisplayed = ref(false);
@@ -73,8 +67,8 @@ let counter = 0;
 let prevNum = '';
 
 onMounted(() => {
-  let keys = document.querySelectorAll('.keyboard__key');
-  for (let [index, key] of keys.entries()) {
+  const keys = document.querySelectorAll('.keyboard__key');
+  for (const [index, key] of keys.entries()) {
     if (index < keys.length - 1) {
       key.innerHTML = props.keyboardKeys[index];
     }

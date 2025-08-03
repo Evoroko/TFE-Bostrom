@@ -3,7 +3,7 @@
     :class="{ 'loading--hide': loadingFinished == false }"
     :percentage="loadingPercentage"
   />
-  <div class="wrapper" ref="wrapper">
+  <div ref="wrapper" class="wrapper">
     <VHover
       v-if="currentlyHovered && !props.dialogVisible"
       :class="{ 'popup--checked': alreadyChecked == true }"
@@ -140,7 +140,7 @@ onMounted(() => {
 
   watch(
     () => props.background,
-    (first, second) => {
+    () => {
       myViewer.replaceAll();
       if (
         props.background == './3d/level-1-texture-2d-parallax-lvl1-edit.glb'
@@ -156,7 +156,7 @@ onMounted(() => {
   watch(
     () => props.activatedSwitches.length,
     () => {
-      for (let activatedSwitch of props.activatedSwitches) {
+      for (const activatedSwitch of props.activatedSwitches) {
         if (activatedSwitch == 'streetlight-off') {
           myViewer.updateStreetlight();
         }
@@ -184,7 +184,6 @@ const loadingManager = new THREE.LoadingManager(
 const gltfLoader = new GLTFLoader(loadingManager);
 const dracoLoader = new DRACOLoader(loadingManager);
 const textureLoader = new THREE.TextureLoader(loadingManager);
-const textureGlitch = textureLoader.load('./3d/textures/glitch.png');
 const protaStill = textureLoader.load('./img/sprite-anim/0.png');
 const protaRunning = [
   textureLoader.load('./img/sprite-anim/1.png'),
@@ -196,7 +195,6 @@ const protaRunning = [
   textureLoader.load('./img/sprite-anim/7.png'),
   textureLoader.load('./img/sprite-anim/8.png'),
 ];
-const planeMaterial = new THREE.MeshBasicMaterial({ map: textureGlitch });
 const textureProtaStill = new THREE.MeshBasicMaterial({
   map: protaStill,
   transparent: true,
@@ -244,13 +242,12 @@ const textureProtaRunning = [
     side: THREE.DoubleSide,
   }),
 ];
-const planeGeometry = new THREE.PlaneGeometry(1, 1);
 const particleFountainMesh = new THREE.SphereGeometry(0.02, 4, 4);
 const particleFountainMaterial = new THREE.MeshBasicMaterial({
   color: 0xffffff,
 });
 
-var keyState = {};
+const keyState = {};
 window.addEventListener(
   'keydown',
   function (e) {
@@ -281,31 +278,6 @@ const stopMoveRight = () => {
 const stopMoveLeft = () => {
   keyState[81] = false;
 };
-
-class Glitch {
-  constructor() {
-    this.mesh = new THREE.Mesh(planeGeometry, planeMaterial);
-    this.mesh.position.set(
-      RandomNum(0, 100),
-      RandomNum(0, 30),
-      RandomNum(2, 100),
-    );
-    this.mesh.scale.set(RandomNum(2, 3), RandomNum(2, 4));
-    this.emptyIndicator = false;
-    this.changePosition();
-    return this.mesh;
-  }
-  changePosition() {
-    setTimeout(() => {
-      this.mesh.position.set(
-        RandomNum(-10, 10),
-        RandomNum(0, 10),
-        RandomNum(-100, 100),
-      );
-      this.changePosition();
-    }, 1000);
-  }
-}
 
 class Particle {
   constructor(animTime) {
@@ -511,7 +483,7 @@ class Viewer {
     this.prota.position.set(0, -0.1, 9.2);
     this.camera.position.x = 0;
 
-    for (let child of this.scene.children) {
+    for (const child of this.scene.children) {
       if (child.name == 'particleFountain') {
         child.visible = false;
       }
@@ -527,21 +499,21 @@ class Viewer {
 
   updateStreetlight() {
     let toReplace;
-    for (let child of this.scene.children) {
+    for (const child of this.scene.children) {
       if (child.name == 'streetlight-on') {
         toReplace = child;
       }
     }
-    for (let child of this.scene.children) {
+    for (const child of this.scene.children) {
       if (child.name == 'streetlight-off') {
-        for (let [index, sceneElement] of this.sceneElements.entries()) {
+        for (const [index, sceneElement] of this.sceneElements.entries()) {
           if (sceneElement.name == 'streetlight-off') {
             this.sceneElements.splice(index, 1);
           }
         }
 
         this.scene.remove(child);
-        let streetlightUpdated = toReplace.clone();
+        const streetlightUpdated = toReplace.clone();
         streetlightUpdated.position.x -= 0.4;
         streetlightUpdated.position.y -= 0.02;
         streetlightUpdated.rotation.z = Math.PI;
@@ -594,7 +566,7 @@ class Viewer {
 
   animateBenches() {
     if (this.benches[9]) {
-      for (let bench of this.benches) {
+      for (const bench of this.benches) {
         gsap.to(bench.position, {
           y: bench.position.y + RandomNum(1, 4) / 80,
           ease: Power1.easeInOut,
@@ -616,8 +588,8 @@ class Viewer {
               './3d/level-1-texture-2d-parallax-lvl1-edit.glb'
             ) {
               // Au cas-où on change de niveau au cours de la boucle
-              let duration = RandomNum(2, 5);
-              let particleFountain = new Particle(duration);
+              const duration = RandomNum(2, 5);
+              const particleFountain = new Particle(duration);
               this.scene.add(particleFountain);
 
               setTimeout(() => {
@@ -653,7 +625,7 @@ class Viewer {
       currentlyHovered.value = this.intersects[0].object.name;
       previousHovered = this.intersects[0].object.name;
       let isExisting = false;
-      for (let dialog of props.dialogList) {
+      for (const dialog of props.dialogList) {
         if (this.intersects[0].object.name === dialog.name) {
           currentlyHovered.value = dialog.title;
           if (dialog.checked) {

@@ -2,7 +2,7 @@
 import VStructure from './components/VStructure.vue';
 import VCursor from './components/VCursor.vue';
 import Inventory from './scripts/Inventory.js';
-import { ref, provide, watch } from 'vue';
+import { ref, provide } from 'vue';
 
 const inventory = ref(new Inventory());
 const audioStatus = ref({

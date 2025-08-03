@@ -1,14 +1,14 @@
 <template>
   <div class="textbox">
     <div
-      class="textbox__name"
       v-if="name !== 'none' && name && name != 'Anaëlle'"
+      class="textbox__name"
     >
       <p>{{ name }}</p>
     </div>
     <div class="textbox__content">
       <div class="textbox__text">
-        <p v-html="text"></p>
+        <p>{{ text }}</p>
         <VJumpText v-if="isDialogFull" />
       </div>
     </div>
@@ -26,7 +26,7 @@
 
 <script setup>
 import VJumpText from './VJumpText.vue';
-const props = defineProps({
+defineProps({
   name: {
     type: String,
     required: false,
