@@ -19,10 +19,16 @@ export default typescriptEslint.config(
       globals: globals.browser,
       parserOptions: {
         parser: typescriptEslint.parser,
+        project: './tsconfig.json', 
       },
     },
     rules: {
-        'vue/require-default-prop': 'off'
+        'vue/require-default-prop': 'off',
+        '@typescript-eslint/no-explicit-any': 'error', // Disallow explicit 'any'
+        '@typescript-eslint/no-unsafe-assignment': 'error', // Disallow implicit 'any' in assignments
+        '@typescript-eslint/no-unsafe-member-access': 'error', // Disallow member access on variables typed as 'any'
+        '@typescript-eslint/no-unsafe-call': 'error', // Disallow calling functions with 'any' type
+        '@typescript-eslint/no-unsafe-return': 'error', // Disallow returning values with 'any' type
     },
   },
   eslintConfigPrettier

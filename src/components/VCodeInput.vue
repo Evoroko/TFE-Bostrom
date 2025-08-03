@@ -35,14 +35,14 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref, inject } from 'vue';
 import VButton from './VButton.vue';
-import audioControl from '../scripts/audioControl.js';
+import audioControl from '../scripts/audioControl';
 
 const props = defineProps({
   keyboardKeys: {
-    type: Array,
+    type: Array<number>,
     required: false,
     default: () => [1, 2, 3, 4, 5, 6, 7, 8, 9, 0],
   },
@@ -70,7 +70,7 @@ onMounted(() => {
   const keys = document.querySelectorAll('.keyboard__key');
   for (const [index, key] of keys.entries()) {
     if (index < keys.length - 1) {
-      key.innerHTML = props.keyboardKeys[index];
+      key.innerHTML = props.keyboardKeys[index].toString();
     }
   }
 });
@@ -83,7 +83,7 @@ const verifyCode = () => {
 };
 
 const enterKey = (e) => {
-  const input = document.querySelector('#code');
+  const input = <HTMLInputElement>document.querySelector('#code');
   audioControl(audioStatus, keySound);
 
   const reset = () => {

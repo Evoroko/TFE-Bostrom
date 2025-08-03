@@ -13,7 +13,8 @@
   </button>
 </template>
 
-<script setup>
+<script setup lang="ts">
+let x: any = 5;
 defineProps({
   small: {
     type: Boolean,
