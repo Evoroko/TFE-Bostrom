@@ -338,7 +338,7 @@ class Viewer {
       this.renderer.render(this.scene, this.camera);
     });
 
-    window.addEventListener('mousemove', (e) => {
+    window.addEventListener('mousemove', () => {
       this.mouse.x = (mouseX.value / sizes.w) * 2 - 1;
       this.mouse.y = -(mouseY.value / sizes.h) * 2 + 1;
     });
@@ -357,9 +357,9 @@ class Viewer {
     this.scene.fog = this.fog;
 
     // Animation data
-    this.trafficlights;
+    this.trafficlights = null;
     this.trafficLightsTextures = [];
-    this.board;
+    this.board = null;
     this.boardTextures = [];
     this.benches = [];
 
@@ -397,12 +397,6 @@ class Viewer {
       }
       this.animateBenches();
     });
-
-    // Glitches
-    // for(let i = 0; i<30; i++){
-    //   this.glitch = new Glitch();
-    //   this.scene.add(this.glitch);
-    // }
 
     // Model running
     this.prota = new THREE.Mesh(
@@ -453,7 +447,7 @@ class Viewer {
     });
   }
 
-  animateSprite(direction) {
+  animateSprite() {
     if (this.currentProtaSprite.running == false) {
       this.currentProtaSprite.running = true;
       this.prota.material = textureProtaRunning[0];
@@ -461,15 +455,15 @@ class Viewer {
 
     if (loopCounter == 0) {
       if (
-        (this.currentProtaSprite.running =
-          true && this.currentProtaSprite.status < textureProtaRunning.length)
+        this.currentProtaSprite.running == true &&
+        this.currentProtaSprite.status < textureProtaRunning.length
       ) {
         this.prota.material =
           textureProtaRunning[this.currentProtaSprite.status];
         this.currentProtaSprite.status += 1;
       } else if (
-        (this.currentProtaSprite.running =
-          true && this.currentProtaSprite.status == textureProtaRunning.length)
+        this.currentProtaSprite.running == true &&
+        this.currentProtaSprite.status == textureProtaRunning.length
       ) {
         this.currentProtaSprite.status = 0;
       }

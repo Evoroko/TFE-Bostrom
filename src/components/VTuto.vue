@@ -71,6 +71,7 @@
       <div class="tuto__status">
         <div
           v-for="(slide, key) in slides.length"
+          :key="key"
           class="tuto__status--index"
           :class="{ 'tuto__status--active': key == activeSlide }"
           @click="updateSlide(key)"
@@ -88,7 +89,7 @@ import VButton from './VButton.vue';
 
 const emit = defineEmits(['closeTuto']);
 
-const props = defineProps({
+defineProps({
   currentLevel: {
     type: Number,
     required: false,
